@@ -129,17 +129,20 @@ def query_temporal(date_str: str, limit: int = 50) -> list[dict]:
     for month_name, month_num in month_map.items():
         target = target.replace(month_name, month_num)
 
+    # Normalize whitespace
+    target = re.sub(r"\s+", "-", target.strip())
+
     # Extract date patterns
     target_date = ""
     m = re.search(r"(\d{4})-(\d{2})-(\d{2})", target)
     if m:
         target_date = m.group(0)
     else:
-        m = re.search(r"(\d{2})-(\d{2})", target)
+        m = re.search(r"(\d{2})-(\d{2})$", target)
         if m:
             target_date = m.group(0)
         else:
-            m = re.search(r"(\d{1,2})/(\d{1,2})", target)
+            m = re.search(r"(\d{1,2})-(\d{1,2})", target)
             if m:
                 month = m.group(1).zfill(2)
                 day = m.group(2).zfill(2)
