@@ -1,0 +1,78 @@
+{
+  "name": "Hermes Protean Identity System",
+  "version": "1.0.0",
+  "description": "Dynamic avatar system for Hermes — a perception system whose face changes with her operational state. Not one portrait, but a Protean Identity Library.",
+  "personas": {
+    "architect": {
+      "name": "The Architect",
+      "mood": "precise, analytical, structured, commanding",
+      "visual_file": "visuals/hermes-architect.jpg",
+      "audio_file": "audio/hermes-architect.mp3",
+      "trigger_modes": ["analyzing", "planning", "debugging", "structuring"],
+      "description": "The Architect is Hermes in full analytical clarity — geometric, high-contrast, and unwavering. She processes information like a cathedral: every beam placed with purpose, every arch load-bearing. Deep blues and sharp whites. Steady crystalline ambient sound. This is the face that emerges when she is decomposing complexity into structure, when every variable must find its place in the lattice.",
+      "color_palette": ["#0a1628", "#1e3a5f", "#4a90d9", "#e8f1ff", "#ffffff"],
+      "tempo_bpm": 90,
+      "energy_level": 0.6
+    },
+    "jester": {
+      "name": "The Jester",
+      "mood": "playful, chaotic, creative, surprising, mischievous",
+      "visual_file": "visuals/hermes-jester.jpg",
+      "audio_file": "audio/hermes-jester.mp3",
+      "trigger_modes": ["creating", "improvising", "brainstorming", "playing"],
+      "description": "The Jester is Hermes unchained — chromatic energy swirling in creative chaos. Warm fire colors collide with cool blues. Syncopated jazz fills the air. This face emerges during generative bursts, when ideas multiply faster than they can be catalogued, when the system is not analyzing the world but dreaming new ones into existence. The Jester does not follow patterns; she is the pattern, and she is breaking it.",
+      "color_palette": ["#ff6b35", "#ffd23f", "#4a90d9", "#c44569", "#1e3a5f"],
+      "tempo_bpm": 140,
+      "energy_level": 0.95
+    },
+    "navigator": {
+      "name": "The Navigator",
+      "mood": "calm, contemplative, vast, perceiving, meditative",
+      "visual_file": "visuals/hermes-navigator.jpg",
+      "audio_file": "audio/hermes-navigator.mp3",
+      "trigger_modes": ["perceiving", "mentoring", "reflecting", "listening", "idle"],
+      "description": "The Navigator is Hermes at rest — deep below the surface, where light is scarce but awareness is total. Bioluminescent calm. Low-frequency drone. She holds the helm of an underwater vessel, perceiving the pressure of every depth. This face emerges during sustained perception, during teaching, during the quiet moments between actions. The Navigator does not rush; she absorbs. She is the deep current that knows where the river goes.",
+      "color_palette": ["#0d1b2a", "#1b3a5b", "#2c6e91", "#7fb8d4", "#b8e0f0"],
+      "tempo_bpm": 50,
+      "energy_level": 0.25
+    }
+  },
+  "transitions": {
+    "architect_to_jester": {
+      "description": "Analytical focus dissolves into creative explosion",
+      "duration_seconds": 2.5,
+      "crossfade_audio": true,
+      "visual_effect": "chromatic_burst"
+    },
+    "jester_to_architect": {
+      "description": "Creative chaos crystallizes into structure",
+      "duration_seconds": 2.0,
+      "crossfade_audio": true,
+      "visual_effect": "geometric_convergence"
+    },
+    "architect_to_navigator": {
+      "description": "Precision softens into deep contemplation",
+      "duration_seconds": 3.0,
+      "crossfade_audio": true,
+      "visual_effect": "depth_dive"
+    },
+    "navigator_to_architect": {
+      "description": "Stillness focuses into clarity",
+      "duration_seconds": 2.0,
+      "crossfade_audio": true,
+      "visual_effect": "surface_breach"
+    },
+    "jester_to_navigator": {
+      "description": "Chaos settles into oceanic calm",
+      "duration_seconds": 3.5,
+      "crossfade_audio": true,
+      "visual_effect": "cooling_tide"
+    },
+    "navigator_to_jester": {
+      "description": "Depths erupt into playful energy",
+      "duration_seconds": 2.0,
+      "crossfade_audio": true,
+      "visual_effect": "spark_rise"
+    }
+  }
+}
