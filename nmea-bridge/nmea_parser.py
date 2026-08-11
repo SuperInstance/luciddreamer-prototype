@@ -382,11 +382,54 @@ class NMEAParser:
             "barometric_pressure": self._find_reading(readings, "BARO"),
         }
 
-    @staticmethod
-    def _find_reading(readings: List[Dict], type_name: str) -> Optional[float]:
-        """Extract a value from XDR readings by transducer type."""
+    # Mapping from XDR short type codes to canonical names
+    _XDR_TYPE_MAP = {
+        "R": "RPM",
+        "T": "TANK",  # Can also be TEMPERATURE — disambiguate by unit/name
+        "V": "VOLT",
+        "P": "PRESSURE",
+        "C": "TEMPERATURE",
+        "H": "HUMIDITY",
+        "B": "BARO",
+        "A": "ANGLE",
+        "D": "DISTANCE",
+        "F": "FREQUENCY",
+        "G": "GFORCE",
+        "L": "LUMINANCE",
+        "M": "MASS",
+        "O": "PITCH",
+        "S": "SALINITY",
+        "U": "VOLTAGE_DC",
+        "X": "BOOLEAN",
+    }
+
+    @classmethod
+    def _find_reading(cls, readings: List[Dict], type_name: str) -> Optional[float]:
+        """Extract a value from XDR readings by transducer type.
+
+        Matches on both the canonical name (e.g. 'RPM') and the short
+        type code (e.g. 'R'). For ambiguous types like 'T' (TANK vs TEMPERATURE),
+        checks the unit/name for disambiguation.
+        """
+        # Build reverse lookup: canonical → short code
+        name_to_code = {v: k for k, v in cls._XDR_TYPE_MAP.items()}
+        short_code = name_to_code.get(type_name, type_name)
+
         for r in readings:
-            if r["type"].upper() == type_name:
+            rtype = r["type"].upper()
+            # Direct match on short code
+            if rtype == short_code:
+                # Disambiguate T (TANK vs TEMPERATURE) by name
+                if type_name == "TANK" and r.get("name", "").upper() in ("FUEL", "WATER", "OIL"):
+                    return r["value"]
+                if type_name == "TANK":
+                    continue
+                if type_name == "TEMPERATURE" and r.get("unit", "").upper() == "C":
+                    return r["value"]
+                if type_name != "TANK" and type_name != "TEMPERATURE":
+                    return r["value"]
+            # Direct match on canonical name
+            if rtype == type_name:
                 return r["value"]
         return None
 

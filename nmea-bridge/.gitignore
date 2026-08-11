@@ -1,0 +1,5 @@
+# NMEA bridge test artifacts
+.pytest_cache/
+__pycache__/
+*.pyc
+*.jsonl
