@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FV Eileen — Acoustic Probe Demo</title>
+    <style>
+        :root {
+            --bg: #0a0e1a;
+            --panel: #121829;
+            --border: #1e2a44;
+            --text: #c8d6e5;
+            --text-dim: #5a6a80;
+            --accent: #00b894;
+            --accent-dim: #00a88450;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --sea: #0984e3;
+            --sea-dim: #0984e330;
+            --bass: #6c5ce7;
+            --rpm: #e17055;
+            --depth: #0984e3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 0.9em;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .header .status {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            background: var(--accent-dim);
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header .status.live { background: #00b89430; color: #00ff88; animation: pulse 2s infinite; }
+        .header .status.stale { background: #e74c3c30; color: var(--danger); }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .panel-value {
+            font-size: 2.2em;
+            font-weight: 200;
+            font-family: 'Courier New', monospace;
+        }
+
+        .panel-unit {
+            font-size: 0.5em;
+            color: var(--text-dim);
+            margin-left: 4px;
+        }
+
+        .panel-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .panel-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease, background 0.5s ease;
+        }
+
+        /* Chart Panel — spans all columns */
+        .chart-panel {
+            grid-column: 1 / -1;
+            min-height: 200px;
+        }
+
+        #chartCanvas {
+            width: 100%;
+            height: 200px;
+            display: block;
+        }
+
+        /* Music Panel — spans all columns */
+        .music-panel {
+            grid-column: 1 / -1;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .music-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+        }
+
+        .music-item-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .music-item-value {
+            font-size: 1.3em;
+            font-weight: 300;
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+        }
+
+        .sound-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 0.95em;
+            min-height: 60px;
+        }
+
+        .sound-display::before {
+            content: "🎵 ";
+            opacity: 0.5;
+        }
+
+        .mmx-prompt {
+            margin-top: 12px;
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 0.8em;
+            color: #a29bfe;
+            line-height: 1.5;
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .mmx-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            margin-top: 12px;
+        }
+
+        /* Phase timeline */
+        .timeline {
+            display: flex;
+            height: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .timeline-phase.active {
+            color: var(--bg);
+            font-weight: 600;
+        }
+
+        .timeline-phase[data-phase="departing"] { background: rgba(0, 184, 148, 0.15); }
+        .timeline-phase[data-phase="departing"].active { background: var(--accent); }
+        .timeline-phase[data-phase="transit"] { background: rgba(9, 132, 227, 0.15); }
+        .timeline-phase[data-phase="transit"].active { background: var(--sea); }
+        .timeline-phase[data-phase="fishing"] { background: rgba(108, 92, 231, 0.15); }
+        .timeline-phase[data-phase="fishing"].active { background: var(--bass); }
+        .timeline-phase[data-phase="returning"] { background: rgba(253, 203, 110, 0.15); }
+        .timeline-phase[data-phase="returning"].active { background: var(--warning); }
+
+        /* Gauges */
+        .gauge-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 10px;
+        }
+
+        .sea-icons {
+            font-size: 1.1em;
+            margin-top: 4px;
+            letter-spacing: 2px;
+        }
+
+        .position-label {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .elapsed {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.75em;
+            font-style: italic;
+        }
+
+        @media (max-width: 800px) {
+            .dashboard { grid-template-columns: 1fr 1fr; }
+            .music-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 500px) {
+            .dashboard { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>FV EILEEN</h1>
+    <div class="subtitle">Acoustic Probe — The Ship as Instrument</div>
+    <div class="status" id="statusBadge">WAITING</div>
+</div>
+
+<div class="dashboard">
+
+    <!-- Vessel Chart -->
+    <div class="panel chart-panel">
+        <div class="panel-title">Vessel Track — Kodiak Area</div>
+        <canvas id="chartCanvas"></canvas>
+        <div class="position-label" id="positionLabel">—</div>
+    </div>
+
+    <!-- RPM Gauge -->
+    <div class="panel">
+        <div class="panel-title">Engine RPM</div>
+        <div class="panel-value" id="rpmValue">—<span class="panel-unit">RPM</span></div>
+        <div class="panel-bar">
+            <div class="panel-fill" id="rpmBar" style="width:0%; background: var(--rpm);"></div>
+        </div>
+        <div class="gauge-wrap">
+            <div class="music-item-label">Bass Frequency</div>
+            <div class="music-item-value" id="bassFreq">— Hz</div>
+        </div>
+    </div>
+
+    <!-- Depth Gauge -->
+    <div class="panel">
+        <div class="panel-title">Depth</div>
+        <div class="panel-value" id="depthValue">—<span class="panel-unit">ftm</span></div>
+        <div class="panel-bar">
+            <div class="panel-fill" id="depthBar" style="width:0%; background: var(--depth);"></div>
+        </div>
+        <div class="gauge-wrap">
+            <div class="music-item-label">Harmony</div>
+            <div class="music-item-value" id="harmonyLabel" style="font-size: 0.85em;">—</div>
+        </div>
+    </div>
+
+    <!-- Sea State -->
+    <div class="panel">
+        <div class="panel-title">Sea State</div>
+        <div class="panel-value" id="seaValue">—<span class="panel-unit">Bft</span></div>
+        <div class="sea-icons" id="seaIcons"></div>
+        <div class="panel-bar">
+            <div class="panel-fill" id="seaBar" style="width:0%; background: var(--sea);"></div>
+        </div>
+        <div class="gauge-wrap">
+            <div class="music-item-label">Rhythm</div>
+            <div class="music-item-value" id="rhythmLabel" style="font-size: 0.85em;">—</div>
+        </div>
+    </div>
+
+    <!-- Speed -->
+    <div class="panel">
+        <div class="panel-title">Speed</div>
+        <div class="panel-value" id="speedValue">—<span class="panel-unit">kt</span></div>
+        <div class="panel-bar">
+            <div class="panel-fill" id="speedBar" style="width:0%; background: var(--accent);"></div>
+        </div>
+        <div class="gauge-wrap">
+            <div class="music-item-label">Tempo</div>
+            <div class="music-item-value" id="tempoValue">— BPM</div>
+        </div>
+    </div>
+
+    <!-- Heading -->
+    <div class="panel">
+        <div class="panel-title">Heading</div>
+        <div class="panel-value" id="headingValue">—<span class="panel-unit">°</span></div>
+        <div class="panel-bar">
+            <div class="panel-fill" id="headingBar" style="width:0%; background: var(--bass);"></div>
+        </div>
+        <div class="gauge-wrap">
+            <div class="music-item-label">Stereo Pan</div>
+            <div class="music-item-value" id="panLabel">—</div>
+        </div>
+    </div>
+
+    <!-- Phase / Progress -->
+    <div class="panel">
+        <div class="panel-title">Trip Phase</div>
+        <div class="panel-value" id="phaseValue" style="font-size: 1.4em; text-transform: uppercase; letter-spacing: 1px;">—</div>
+        <div class="elapsed" id="elapsedValue">— / —</div>
+        <div class="timeline">
+            <div class="timeline-phase" data-phase="departing">Depart</div>
+            <div class="timeline-phase" data-phase="transit">Transit</div>
+            <div class="timeline-phase" data-phase="fishing">Fish</div>
+            <div class="timeline-phase" data-phase="transit">Return</div>
+            <div class="timeline-phase" data-phase="returning">Home</div>
+        </div>
+    </div>
+
+    <!-- Musical Parameters + Sound Display -->
+    <div class="panel music-panel">
+        <div class="panel-title">Musical Parameters — Live Translation</div>
+        <div class="music-grid">
+            <div class="music-item">
+                <div class="music-item-label">Key</div>
+                <div class="music-item-value" id="keyLabel">—</div>
+            </div>
+            <div class="music-item">
+                <div class="music-item-label">Mode</div>
+                <div class="music-item-value" id="modeLabel">—</div>
+            </div>
+            <div class="music-item">
+                <div class="music-item-label">Time Sig</div>
+                <div class="music-item-value" id="timeSigLabel">—</div>
+            </div>
+            <div class="music-item">
+                <div class="music-item-label">Intensity</div>
+                <div class="music-item-value" id="intensityLabel">—</div>
+            </div>
+        </div>
+
+        <div class="panel-title" style="margin-top: 16px;">What the Ship Sounds Like Right Now</div>
+        <div class="sound-display" id="soundDisplay">
+            Waiting for telemetry...
+        </div>
+
+        <div class="mmx-label">Current MMX Music Generation Prompt</div>
+        <div class="mmx-prompt" id="mmxPrompt">
+            Waiting for first prompt generation...
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    Acoustic Probe Demo — FV Eileen · When Casey is fishing, the boat's telemetry generates the music.
+</div>
+
+<script>
+// ─── State ──────────────────────────────────────────────────────────────────
+
+let currentTelemetry = null;
+let currentMusical = null;
+let trackHistory = [];
+let lastUpdateTime = 0;
+
+const DURATION = 300; // 5 minutes
+const HARBOR = { lat: 57.79, lon: -152.40 };
+const GROUNDS = { lat: 57.55, lon: -151.80 };
+
+// ─── Polling ────────────────────────────────────────────────────────────────
+
+async function pollState() {
+    try {
+        // Fetch telemetry
+        const teleResp = await fetch('telemetry.json?ts=' + Date.now());
+        if (teleResp.ok) {
+            const tele = await teleResp.json();
+            currentTelemetry = tele;
+            lastUpdateTime = Date.now();
+
+            // Add to track history
+            trackHistory.push({ lat: tele.latitude, lon: tele.longitude, phase: tele.phase });
+            if (trackHistory.length > 200) trackHistory.shift();
+
+            updateDashboard();
+        }
+
+        // Fetch musical state
+        const musicResp = await fetch('musical_state.json?ts=' + Date.now());
+        if (musicResp.ok) {
+            currentMusical = await musicResp.json();
+            updateMusical();
+        }
+
+        // Fetch MMX prompt
+        const promptResp = await fetch('mmx_prompt.txt?ts=' + Date.now());
+        if (promptResp.ok) {
+            const prompt = await promptResp.text();
+            if (prompt.trim()) {
+                document.getElementById('mmxPrompt').textContent = prompt.trim();
+            }
+        }
+    } catch (e) {
+        // Offline / starting up
+    }
+
+    // Update status badge
+    const badge = document.getElementById('statusBadge');
+    const age = Date.now() - lastUpdateTime;
+    if (lastUpdateTime === 0) {
+        badge.textContent = 'WAITING';
+        badge.className = 'status';
+    } else if (age < 10000) {
+        badge.textContent = 'LIVE';
+        badge.className = 'status live';
+    } else {
+        badge.textContent = 'STALE';
+        badge.className = 'status stale';
+    }
+}
+
+// ─── Dashboard Update ───────────────────────────────────────────────────────
+
+function updateDashboard() {
+    const t = currentTelemetry;
+    if (!t) return;
+
+    // RPM
+    document.getElementById('rpmValue').innerHTML =
+        Math.round(t.rpm) + '<span class="panel-unit">RPM</span>';
+    document.getElementById('rpmBar').style.width = (t.rpm / 3000 * 100) + '%';
+
+    // Depth
+    document.getElementById('depthValue').innerHTML =
+        Math.round(t.depth_fathoms) + '<span class="panel-unit">ftm</span>';
+    document.getElementById('depthBar').style.width = Math.min(100, t.depth_fathoms / 100 * 100) + '%';
+
+    // Sea State
+    document.getElementById('seaValue').innerHTML =
+        t.sea_state.toFixed(1) + '<span class="panel-unit">Bft</span>';
+    document.getElementById('seaBar').style.width = (t.sea_state / 9 * 100) + '%';
+    const seaInt = Math.round(t.sea_state);
+    let icons = '';
+    for (let i = 0; i < seaInt; i++) icons += '🌊';
+    for (let i = seaInt; i < 5; i++) icons += '<span style="opacity:0.15">🌊</span>';
+    if (seaInt >= 7) icons = '🌊'.repeat(seaInt);
+    document.getElementById('seaIcons').innerHTML = icons;
+
+    // Speed
+    document.getElementById('speedValue').innerHTML =
+        t.speed_knots.toFixed(1) + '<span class="panel-unit">kt</span>';
+    document.getElementById('speedBar').style.width = (t.speed_knots / 10 * 100) + '%';
+
+    // Heading
+    document.getElementById('headingValue').innerHTML =
+        Math.round(t.heading) + '<span class="panel-unit">°</span>';
+    document.getElementById('headingBar').style.width = (t.heading / 360 * 100) + '%';
+
+    // Phase
+    document.getElementById('phaseValue').textContent = t.phase;
+    const elapsed = t.elapsed || 0;
+    document.getElementById('elapsedValue').textContent =
+        formatTime(elapsed) + ' / ' + formatTime(DURATION);
+
+    // Position
+    document.getElementById('positionLabel').textContent =
+        t.position_label || `${t.latitude.toFixed(4)}, ${t.longitude.toFixed(4)}`;
+
+    // Timeline
+    document.querySelectorAll('.timeline-phase').forEach(el => {
+        el.classList.toggle('active', el.dataset.phase === t.phase);
+    });
+
+    // Draw chart
+    drawChart();
+}
+
+function updateMusical() {
+    const m = currentMusical;
+    if (!m) return;
+
+    // Bass frequency
+    document.getElementById('bassFreq').textContent =
+        m.bass_frequency_hz.toFixed(1) + ' Hz';
+
+    // Harmony
+    document.getElementById('harmonyLabel').textContent = m.harmony_label;
+
+    // Rhythm
+    document.getElementById('rhythmLabel').textContent = m.rhythm_pattern;
+
+    // Tempo
+    document.getElementById('tempoValue').textContent =
+        m.tempo_bpm.toFixed(0) + ' BPM';
+
+    // Pan
+    document.getElementById('panLabel').textContent = m.pan_description;
+
+    // Key / Mode / Time Sig / Intensity
+    document.getElementById('keyLabel').textContent = m.key || m.root_key;
+    document.getElementById('modeLabel').textContent = m.mode;
+    document.getElementById('timeSigLabel').textContent = m.time_signature;
+    document.getElementById('intensityLabel').textContent =
+        Math.round(m.intensity * 100) + '%';
+
+    // Sound description
+    if (m.vessel_sound) {
+        document.getElementById('soundDisplay').textContent = m.vessel_sound;
+    }
+}
+
+// ─── Chart ──────────────────────────────────────────────────────────────────
+
+function drawChart() {
+    const canvas = document.getElementById('chartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Set canvas resolution
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const w = rect.width;
+    const h = rect.height;
+
+    // Clear
+    ctx.fillStyle = '#0a0e1a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Map bounds (add padding)
+    const minLat = Math.min(HARBOR.lat, GROUNDS.lat) - 0.05;
+    const maxLat = Math.max(HARBOR.lat, GROUNDS.lat) + 0.05;
+    const minLon = Math.min(HARBOR.lon, GROUNDS.lon) - 0.05;
+    const maxLon = Math.max(HARBOR.lon, GROUNDS.lon) + 0.05;
+
+    const latToY = lat => h - ((lat - minLat) / (maxLat - minLat)) * h;
+    const lonToX = lon => ((lon - minLon) / (maxLon - minLon)) * w;
+
+    // Draw grid
+    ctx.strokeStyle = '#1a2236';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 4; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, h * i / 4);
+        ctx.lineTo(w, h * i / 4);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(w * i / 4, 0);
+        ctx.lineTo(w * i / 4, h);
+        ctx.stroke();
+    }
+
+    // Draw harbor
+    const hx = lonToX(HARBOR.lon);
+    const hy = latToY(HARBOR.lat);
+    ctx.fillStyle = '#fdcb6e';
+    ctx.beginPath();
+    ctx.arc(hx, hy, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.font = '10px monospace';
+    ctx.fillStyle = '#fdcb6e';
+    ctx.fillText('⚓ Harbor', hx + 8, hy + 4);
+
+    // Draw fishing grounds
+    const gx = lonToX(GROUNDS.lon);
+    const gy = latToY(GROUNDS.lat);
+    ctx.fillStyle = '#6c5ce7';
+    ctx.beginPath();
+    ctx.arc(gx, gy, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#6c5ce7';
+    ctx.fillText('🎣 Grounds', gx + 8, gy + 4);
+
+    // Draw track history
+    if (trackHistory.length > 1) {
+        ctx.strokeStyle = '#00b89460';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let i = 0; i < trackHistory.length; i++) {
+            const x = lonToX(trackHistory[i].lon);
+            const y = latToY(trackHistory[i].lat);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+    }
+
+    // Draw vessel
+    if (currentTelemetry) {
+        const vx = lonToX(currentTelemetry.longitude);
+        const vy = latToY(currentTelemetry.latitude);
+
+        // Vessel triangle pointing in heading direction
+        const heading = currentTelemetry.heading * Math.PI / 180;
+        ctx.save();
+        ctx.translate(vx, vy);
+        ctx.rotate(-heading);
+
+        // Glow
+        ctx.shadowColor = '#00b894';
+        ctx.shadowBlur = 10;
+
+        ctx.fillStyle = '#00ff88';
+        ctx.beginPath();
+        ctx.moveTo(0, -8);       // Bow
+        ctx.lineTo(5, 5);        // Starboard
+        ctx.lineTo(-5, 5);       // Port
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.restore();
+
+        // Heading line
+        ctx.strokeStyle = '#00b89440';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(vx, vy);
+        ctx.lineTo(
+            vx + Math.sin(currentTelemetry.heading * Math.PI / 180) * 30,
+            vy - Math.cos(currentTelemetry.heading * Math.PI / 180) * 30
+        );
+        ctx.stroke();
+    }
+}
+
+// ─── Utilities ──────────────────────────────────────────────────────────────
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+// ─── Init ───────────────────────────────────────────────────────────────────
+
+pollState();
+setInterval(pollState, 2000); // Poll every 2 seconds
+setInterval(drawChart, 1000); // Redraw chart periodically for smooth animation
+</script>
+
+</body>
+</html>

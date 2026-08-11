@@ -1,0 +1,529 @@
+/* ===========================================
+   THE FRONT DOOR — stylesheet
+   A dark bar at 3 AM. Text and sound. Nothing else.
+   =========================================== */
+
+:root {
+  --bg: #0a0e1a;
+  --bg-deep: #060810;
+  --text: #d4a574;
+  --text-dim: #8a6f4e;
+  --text-faded: #5a4730;
+  --amber-glow: rgba(212, 165, 116, 0.15);
+  --serif: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.8;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  position: relative;
+}
+
+/* The barely-there warm spot, like a lamp over a bar */
+body::before {
+  content: '';
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===========================================
+   UTILITY
+   =========================================== */
+
+.hidden {
+  display: none !important;
+}
+
+/* ===========================================
+   WELCOME SEQUENCE
+   =========================================== */
+
+#welcome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 10;
+  background: var(--bg);
+  transition: opacity 1.5s ease;
+}
+
+#welcome.fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.welcome-line {
+  opacity: 0;
+  max-width: 600px;
+  line-height: 1.9;
+}
+
+#line1 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 2.5s ease forwards;
+  animation-delay: 0.8s;
+}
+
+#line2 {
+  font-size: 1.05rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-dim);
+  max-width: 480px;
+  animation: fadeIn 2.5s ease forwards;
+  animation-delay: 3.5s;
+}
+
+/* The enter button — the first drink */
+.enter-button {
+  margin-top: 3.5rem;
+  background: transparent;
+  border: 1px solid var(--text-faded);
+  color: var(--text-dim);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  animation-delay: 6s;
+  transition: all 0.4s ease;
+  border-radius: 1px;
+}
+
+.enter-button:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+  box-shadow: 0 0 30px var(--amber-glow), inset 0 0 20px rgba(212, 165, 116, 0.05);
+  text-shadow: 0 0 12px rgba(212, 165, 116, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================================
+   THE BAR — main experience
+   =========================================== */
+
+#bar {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================================
+   NOW PLAYING
+   =========================================== */
+
+#now-playing {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.08);
+}
+
+#track-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+
+#track-status {
+  font-size: 0.95rem;
+  color: var(--text-faded);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+#audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#play-pause {
+  background: transparent;
+  border: 1px solid var(--text-faded);
+  color: var(--text-dim);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+#play-pause:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+  box-shadow: 0 0 25px var(--amber-glow);
+}
+
+#play-pause svg {
+  width: 22px;
+  height: 22px;
+}
+
+#progress-bar {
+  flex: 1;
+  max-width: 300px;
+  height: 2px;
+  background: rgba(212, 165, 116, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--text-dim);
+  border-radius: 1px;
+  transition: width 0.2s linear;
+}
+
+#time-display {
+  font-size: 0.8rem;
+  color: var(--text-faded);
+  min-width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===========================================
+   STORY LIST
+   =========================================== */
+
+.bar-heading {
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+#story-list {
+  margin-bottom: 4rem;
+}
+
+#stories {
+  list-style: none;
+  counter-reset: none;
+}
+
+.story-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1rem;
+  padding: 1.4rem 1rem;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.06);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-items: baseline;
+}
+
+.story-item:hover {
+  background: rgba(212, 165, 116, 0.03);
+  padding-left: 1.5rem;
+}
+
+.story-item:hover .story-name {
+  color: var(--text);
+  text-shadow: 0 0 10px rgba(212, 165, 116, 0.2);
+}
+
+.story-item.playing {
+  background: rgba(212, 165, 116, 0.05);
+  border-left: 2px solid var(--text-dim);
+  padding-left: calc(1rem - 2px);
+}
+
+.story-item.playing .story-name {
+  color: var(--text);
+}
+
+.story-number {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-faded);
+  padding-top: 2px;
+}
+
+.story-content,
+.story-item > .story-name,
+.story-item > .story-desc {
+  grid-column: 2;
+}
+
+.story-name {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  display: block;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  line-height: 1.5;
+}
+
+.story-desc {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text-faded);
+  display: block;
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+
+/* ===========================================
+   READ ALONG
+   =========================================== */
+
+#read-along {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+#read-link {
+  color: var(--text-faded);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--text-faded);
+  transition: color 0.3s ease;
+}
+
+#read-link:hover {
+  color: var(--text-dim);
+  border-bottom-color: var(--text-dim);
+}
+
+/* ===========================================
+   FEEDBACK
+   =========================================== */
+
+#feedback-section {
+  margin-bottom: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(212, 165, 116, 0.08);
+}
+
+.feedback-prompt {
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-faded);
+  margin-bottom: 2rem;
+}
+
+#feedback-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#feedback-text {
+  width: 100%;
+  background: var(--bg-deep);
+  border: 1px solid rgba(212, 165, 116, 0.1);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  padding: 1.2rem;
+  border-radius: 2px;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.3s ease;
+}
+
+#feedback-text::placeholder {
+  color: var(--text-faded);
+  font-style: italic;
+}
+
+#feedback-text:focus {
+  outline: none;
+  border-color: var(--text-dim);
+  box-shadow: 0 0 20px rgba(212, 165, 116, 0.05);
+}
+
+#feedback-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+
+#feedback-context {
+  font-size: 0.8rem;
+  color: var(--text-faded);
+  font-style: italic;
+}
+
+#feedback-submit {
+  background: transparent;
+  border: 1px solid var(--text-faded);
+  color: var(--text-dim);
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 0.5rem 1.4rem;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+#feedback-submit:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+  box-shadow: 0 0 15px var(--amber-glow);
+}
+
+#feedback-thanks {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1rem;
+  padding: 2rem 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+/* ===========================================
+   COLOPHON
+   =========================================== */
+
+#colophon {
+  text-align: center;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(212, 165, 116, 0.06);
+}
+
+#colophon p {
+  font-size: 0.82rem;
+  color: var(--text-faded);
+  line-height: 1.8;
+}
+
+#colophon .dim {
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+@media (max-width: 600px) {
+  body {
+    font-size: 17px;
+  }
+
+  #bar {
+    padding: 3rem 1.2rem 4rem;
+  }
+
+  #line1 {
+    font-size: 1.35rem;
+  }
+
+  #line2 {
+    font-size: 0.98rem;
+  }
+
+  .story-item {
+    grid-template-columns: 50px 1fr;
+    gap: 0.7rem;
+    padding: 1.2rem 0.5rem;
+  }
+
+  .story-item:hover {
+    padding-left: 1rem;
+  }
+
+  #progress-bar {
+    max-width: 150px;
+  }
+
+  #feedback-meta {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  #feedback-submit {
+    width: 100%;
+  }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .welcome-line,
+  .enter-button {
+    opacity: 1 !important;
+  }
+}
