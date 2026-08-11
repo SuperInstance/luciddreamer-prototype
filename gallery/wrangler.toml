@@ -1,0 +1,39 @@
+name = "ch42-ghost-ledger"
+main = "gallery-worker.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ---- Static Assets (gallery.html served via Pages) ----
+[assets]
+binding = "ASSETS"
+directory = "./"
+
+# ---- D1 Database for ghost metadata ----
+[[d1_databases]]
+binding = "GHOST_DB"
+database_name = "ch42-ghost-ledger"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+# Create with: npx wrangler d1 create ch42-ghost-ledger
+
+# ---- R2 Bucket for audio files ----
+[[r2_buckets]]
+binding = "GHOST_AUDIO"
+bucket_name = "ch42-ghost-audio"
+# Create with: npx wrangler r2 bucket create ch42-ghost-audio
+
+# ---- Routes (configure after first deploy) ----
+# routes = [
+#   { pattern = "gallery.luciddreamer.ai/*", zone_name = "luciddreamer.ai" }
+# ]
+
+# ---- Environment Variables ----
+[vars]
+GALLERY_TITLE = "The Ghost Ledger"
+GALLERY_BRAND = "Channel 42"
+
+# ---- Notes ----
+# Deploy: npx wrangler deploy
+# Create D1: npx wrangler d1 create ch42-ghost-ledger
+# Create R2: npx wrangler r2 bucket create ch42-ghost-audio
+# Seed data: python3 seed_data.py --seed-api --api-url https://gallery.luciddreamer.ai/api
+# Local dev: npx wrangler dev
