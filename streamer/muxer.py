@@ -84,9 +84,33 @@ class Muxer:
     # ── Track Loading ────────────────────────────────────────
 
     def load_track(self, track: Track) -> AudioSegment:
-        """Load a Track into an AudioSegment."""
-        audio = AudioSegment.from_file(track.path)
-        return audio
+        """Load a Track into an AudioSegment.
+
+        Handles environments where ffprobe is unavailable by using
+        ffmpeg directly to convert to WAV first, then loading the WAV.
+        """
+        try:
+            audio = AudioSegment.from_file(track.path)
+            return audio
+        except (FileNotFoundError, OSError):
+            # ffprobe not available — use ffmpeg to convert to WAV first
+            import tempfile
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
+                tmp_wav = tmp.name
+            try:
+                subprocess.run(
+                    [self._ffmpeg_path, "-y", "-i", track.path, "-vn",
+                     "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "2",
+                     tmp_wav],
+                    capture_output=True,
+                    check=True,
+                    timeout=120,
+                )
+                audio = AudioSegment.from_wav(tmp_wav)
+                return audio
+            finally:
+                if os.path.exists(tmp_wav):
+                    os.unlink(tmp_wav)
 
     # ── Normalization ────────────────────────────────────────
 
