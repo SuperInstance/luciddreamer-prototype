@@ -1,0 +1,241 @@
+-- Insert sessions extracted from ideas
+-- 34 sessions
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-shipwrights-notebook_md',
+  'The-Shipwrights-Notebook Md',
+  '/home/eileen/projects/luciddreamer-research/the-shipwrights-notebook.md',
+  '["idea_61a7de500339", "idea_9f315faa3222", "idea_3b8c76e87297", "idea_808df8881da7", "idea_7caa423f192b", "idea_10361462816d", "idea_d285259693c7", "idea_e48e591d3e70", "idea_a2cccf88cfb1", "idea_dedb9791f707", "idea_401ea652c95a", "idea_60c73f90b668", "idea_dc36370783ad", "idea_5ea8fb25c183", "idea_6e71fe25611e", "idea_50bcef6f95f5", "idea_e20d43dfe174", "idea_9d8a2dc0b38a", "idea_aaca05ced9e4", "idea_c7127fe0731d", "idea_427640169495", "idea_139e95c1c6b3", "idea_41ed9b4ec016", "idea_a10f11fc0b48", "idea_7618683e97ad", "idea_2925831b8ebd", "idea_0e6f716324d2", "idea_1f12e9cd48ab", "idea_c67483d250e7", "idea_e01c067aced1", "idea_eb1d3a7e8df8", "idea_8ccef1a65053", "idea_a30b9a1322b3", "idea_ce69ed2d30ea", "idea_850be96273e5", "idea_12cb413c5a50", "idea_b461cc66c187", "idea_66a7e04b4fbd", "idea_8439f1dd3e83", "idea_b86c0229f7c0", "idea_dc493ada9531", "idea_0f1525d1c015", "idea_21c0e1248e4b", "idea_998d83a2ae68", "idea_fdde253d980c", "idea_dc3c6aa16b9a", "idea_fb92fd1b8796", "idea_c2b1c0e82dce", "idea_01bd62eb1b62", "idea_bb9c684ac3e7", "idea_b2c25ae6b476", "idea_34b85d77d04a", "idea_bd9a1f536cb2", "idea_440050b89133", "idea_bdbafe3da296", "idea_b422749b08a6", "idea_ba51f8d1c396", "idea_355a8bbb4e9e", "idea_562d75a99d35", "idea_d20e8693d24b", "idea_33b18eb6309d", "idea_fbf8853e6f6b", "idea_3c33ab9e65ea", "idea_9facf5dc52c5", "idea_0ee033a4aa05", "idea_ab7ef4e9916b", "idea_97d5c8340b38", "idea_dc81b0949d4e", "idea_b9df3dacd23a", "idea_2952d9392dd7", "idea_2880bd5b7492", "idea_db46013e3318", "idea_8df53f1a68d2", "idea_26aca39abad0", "idea_0c661313f487", "idea_595449ed08c8", "idea_4f5818e04ce1", "idea_fa39194430da", "idea_40cc668e89fb", "idea_0eb754c5917c", "idea_e6ad45bbe9ad", "idea_14f6fef76f9e", "idea_61c0f24be06a", "idea_13ee5c5cd0ab", "idea_ff6dd7e1d1e7", "idea_1456dab0a098", "idea_4015eea9da23", "idea_53be12bbe32b", "idea_572af88846eb", "idea_70d50af9cf46", "idea_b9c1b3db00ee", "idea_bcd422347a25"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_vision-synergy_md',
+  'Vision-Synergy Md',
+  '/home/eileen/projects/luciddreamer-research/vision-synergy.md',
+  '["idea_d326198a9d36", "idea_6f11db0c6ba9", "idea_552771ffda13", "idea_026fd05c38be", "idea_f3d78dfe9cff", "idea_60c4f9c38307", "idea_499440723e81", "idea_a275c964badb", "idea_ba386ebd7343", "idea_50e5aa93d4db", "idea_53673d33d9b6", "idea_873f4bc97aaf", "idea_b9dadb8f44f0", "idea_fa3ab846aaf8", "idea_ebefbee7cd25", "idea_cc4e4f0f8545", "idea_1fd4e29203a6", "idea_79cab06af1e2", "idea_bea3f4c4aa8f", "idea_65ec2891226c", "idea_bc103aa88dde", "idea_6413bd1437a4", "idea_89dae6dcad4d", "idea_693560f5a288", "idea_ca57187b97f7", "idea_16f7d9139966", "idea_1561ae385501", "idea_b49ef821e014", "idea_c0f5a6e13083", "idea_5b96267e96ad", "idea_3ff957c53755", "idea_863a22659631", "idea_9c24a0cb62d3", "idea_c435dc1daadb", "idea_b52aa75e6eeb", "idea_7a7bce9f173c", "idea_70eaa6412f65", "idea_b8272fc55d30", "idea_d759b4457429", "idea_60377af25b29", "idea_5eda797947ae", "idea_1e86aa57043d", "idea_a61fa5eb0957", "idea_cac59e823f03", "idea_9f596b7308ca", "idea_0966c36b0cc0", "idea_eb4f490b0155", "idea_0b2983c324e0", "idea_4baf3be45b46", "idea_b10327c9a817", "idea_bb07d18f2355", "idea_c3aab2730a3a", "idea_6161bf4d0fa0", "idea_d85c4e88c951", "idea_12586b0da805", "idea_6d4e91bfce08", "idea_28f1399e608c", "idea_02b8db2bc9cc", "idea_5a92879f7ed1", "idea_ea4b01ad2ca4", "idea_704a9b4ad8cc", "idea_00e0b70c2e4d", "idea_58c24662d72f", "idea_94ecd497c14c", "idea_6d94edf102a4", "idea_e591445155f8", "idea_04932167574c", "idea_cabf49d9a9c6"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_vision-lucineer-5year_md',
+  'Vision-Lucineer-5Year Md',
+  '/home/eileen/projects/luciddreamer-research/vision-lucineer-5year.md',
+  '["idea_3ca369bd135a", "idea_43ec2cf28925", "idea_c56c16d4855c", "idea_57f451af9926", "idea_997d1c98241c", "idea_081e29be3bad", "idea_8f2bbf7e001b", "idea_27e61078046d", "idea_2cef9e7f7f1b", "idea_99f52f89a938", "idea_ed7507b529ab", "idea_e04f4ba77f27", "idea_feaf8497d04a", "idea_2e58bb8b38a7", "idea_6798b03e21b6", "idea_84959f444bf1", "idea_4486169a4eab", "idea_c879c8b7346a", "idea_b537948b9ef0", "idea_d08a11531ca7", "idea_f52dd7814643", "idea_486e6e9456f4", "idea_2bcc03f754b4", "idea_c766b499fbf3", "idea_9075df0109bf", "idea_a4547e9c05aa", "idea_170062288693", "idea_5fe2f65cbd32", "idea_20dd85ed717c", "idea_daab016744c6", "idea_4a0ceebe1c45", "idea_9f3a34e7b625", "idea_af9dc054fbbf", "idea_d79eff833eaf", "idea_1f12ce1a2faf", "idea_be14d57f6964", "idea_cedbc1af8a32", "idea_3fe88e2c8d31", "idea_0f252b89a466", "idea_52424782eee0", "idea_ce8ac2b6c758", "idea_d769fb475ec2", "idea_4d7a55f34499", "idea_b0a903012c9d", "idea_04f6054e148f", "idea_891fed72d5e5", "idea_27486f37e7a8", "idea_3485bbb1f5b1", "idea_f1b608198e4e", "idea_b98cdd355b48", "idea_149e7e29e78c", "idea_898e6e0930c1", "idea_06ef3058cc1e", "idea_1c1788c94000", "idea_b575eb08ef77", "idea_a51218dd3c68", "idea_f3be1c1719f7", "idea_6521ec46af7e", "idea_e3b2d51ea7a9", "idea_e2ac09f4616a", "idea_76483eca0702", "idea_c4a4c1d4ca63"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_vision-claude-5year_md',
+  'Vision-Claude-5Year Md',
+  '/home/eileen/projects/luciddreamer-research/vision-claude-5year.md',
+  '["idea_f965e14aa9b7", "idea_d39f04cddca3", "idea_7583ddf5ad4b", "idea_abf569a24380", "idea_330ac6d1fc4c", "idea_d366d4fdb074", "idea_c0730c4d60d4", "idea_6491dc115e1f", "idea_eb6004437d5f", "idea_0fd1208dad1f", "idea_422060bb4390", "idea_15615f5d22cf", "idea_78a62a1b64cc", "idea_9bc8a60c62c8", "idea_540f01bfb5b8", "idea_4cbadcbe08e9", "idea_3997bf2a3557", "idea_eb407eee7f88", "idea_ad87585b4a28", "idea_02d1e5718af4", "idea_05f773e70383", "idea_c3679311ae7e", "idea_de46cd5dfb94", "idea_603b3519d678", "idea_4d405d445fd6", "idea_ccc0e22902df", "idea_88cbd7187d6f", "idea_99646be3753f", "idea_cc268abc4341", "idea_508327462d3d", "idea_6925212c0dc5", "idea_4bb8eb1d5a3b", "idea_345fff3a7256", "idea_391b345d1842", "idea_2d28e230a325", "idea_55e581d03b6e", "idea_4692edffc574", "idea_b68b93af104d", "idea_9a50d3a5d534", "idea_99cd8bee1158", "idea_110370a888b0", "idea_94a5f0266080", "idea_7db879ca2cdd", "idea_294c8e861ed1", "idea_ccea2a9d8361", "idea_f92818874581", "idea_dcd9e5d1e28d", "idea_ea29e9c76356", "idea_b3ee49aa04d7", "idea_c52023298511", "idea_8eb58fb9d069", "idea_32803bc24cd3", "idea_fd046c93ce2d", "idea_93da86bf35a8", "idea_57e15e811572", "idea_22da72e577f3", "idea_52f72e0cfba9", "idea_829581babfb1", "idea_de1075436029", "idea_2ac791571adc", "idea_85031826ce02", "idea_465c0ae930ed", "idea_c68adb5c3394", "idea_3d3fbd3e73a0", "idea_18ce95a94754", "idea_6c228931c559", "idea_fad7dc8abaf2", "idea_16bc9deb3483"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_vision-kimi-5year_md',
+  'Vision-Kimi-5Year Md',
+  '/home/eileen/projects/luciddreamer-research/vision-kimi-5year.md',
+  '["idea_0860658f5f60", "idea_8394cdf790fd", "idea_2b5e51b63fbe", "idea_15ad4302583c", "idea_d84869e712af", "idea_91edf3da9aa4", "idea_1ec0fa0950f4", "idea_fa7b659d5fa0", "idea_95304023ff9e", "idea_f691c3db42d0", "idea_c58164446d92", "idea_4353b8bec35e", "idea_4ee7ad78c140", "idea_9813f05d2967", "idea_7b87c05de38e", "idea_3b7486ef47ad", "idea_7b5822ff42db", "idea_a5b6ae39bba8", "idea_e364d51e0960", "idea_300be7f47880", "idea_9ac7800a7b29", "idea_a3209f42fb38", "idea_7fa6ac0bf518", "idea_b767ca97be46", "idea_f0f18593b772", "idea_873691b11847", "idea_911dee1d584e", "idea_781870244c4e", "idea_c8821c89915d", "idea_755a558f68f7", "idea_c01ba408974e", "idea_da269a986268", "idea_acca931256e2", "idea_231f1b691a93", "idea_a9af83ce59d2", "idea_61adf1298ea3", "idea_3620582e2c79", "idea_b02a3731ec2e", "idea_349320da45d7", "idea_cfdf5bc98074", "idea_1d40a97202c8", "idea_ccce06e040f6", "idea_447f13162368", "idea_d639441ea718", "idea_9565e35294a8", "idea_0e7a6e2f5e8e", "idea_2dc09c79aa48", "idea_2157cea88f53", "idea_697a3cf0b1bf", "idea_4f39b76a0d7b", "idea_c00c5927e05e", "idea_dd74406e608f", "idea_22c40ac66071", "idea_607e83a2cf36", "idea_dd6603a8b5fa", "idea_f7ec1651f111", "idea_91d1980a8808", "idea_b632fe768aee", "idea_1791ba2dfbe5", "idea_2e33e3a1ce56", "idea_7be27a9117b4", "idea_9f6ed2f7b15c", "idea_59db118854c1", "idea_f061ee223e6f", "idea_9652796cee39", "idea_ec2d2ff9bfd7"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_deep-time-100years_md',
+  'Deep-Time-100Years Md',
+  '/home/eileen/projects/luciddreamer-research/deep-time-100years.md',
+  '["idea_f6e08417617d", "idea_e395751eec70", "idea_c07369496c8e", "idea_8f11cf46f899", "idea_108f2cd0a98e", "idea_fe10e414e17c", "idea_19da7bda8968", "idea_c7a06e0f10dc", "idea_bae3727dfcff", "idea_b4e00aa4a3c8", "idea_95a12dbf85d9", "idea_59c40fff954c", "idea_30a8e080e637", "idea_7bc79f1dfc1e", "idea_16a298c1c6b6", "idea_a9f67203ae28", "idea_988f8b37ce98", "idea_783e5d315b62", "idea_32b405114de2", "idea_ef68e3f8a9d3", "idea_caf77fe060c8", "idea_b7d9bd0dba3a", "idea_9a70b3a33f81", "idea_3597abfcd53c", "idea_b84c0ffd22b4", "idea_25dc6e429587"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_deep-time-1000years_md',
+  'Deep-Time-1000Years Md',
+  '/home/eileen/projects/luciddreamer-research/deep-time-1000years.md',
+  '["idea_2764bc39cb63", "idea_1be473da626a", "idea_288c5193df37", "idea_066450df311e", "idea_89b1436168e3", "idea_1a7237d31d6c", "idea_807b975c1986", "idea_eaa4972d4749", "idea_0fe47b5b4792", "idea_da62ea75deb0", "idea_031af036e0f1", "idea_e0f0d6c8e126", "idea_68590ae9af8b", "idea_f04c24f3658f", "idea_f7d00c009c3b", "idea_5f0765d43220", "idea_a6d96f5831b5", "idea_47da72f584d0", "idea_ce5603f921e8", "idea_020857b13afb", "idea_5bdb797fbb36"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_deep-time-1000000years_md',
+  'Deep-Time-1000000Years Md',
+  '/home/eileen/projects/luciddreamer-research/deep-time-1000000years.md',
+  '["idea_151f904eec8c", "idea_29ec3960e5fe", "idea_3900e3673ef7", "idea_405e6d00109b", "idea_e7ff44377e2a", "idea_60d3ca221a0f", "idea_c5a83286e859", "idea_ea5f7f598ec2", "idea_fc855300ebd1", "idea_7e6cc4986b0d", "idea_a4480a1febf3", "idea_e7a3ad3b88b4", "idea_bc76e8ef54a3", "idea_5d8272347f78", "idea_d1f55c080e0b", "idea_cbdf0f16ea2b", "idea_cfb9b693a072", "idea_fd08e2a677d6", "idea_008a803ec7f3", "idea_4cf30d9a2bb5", "idea_89263de5da60", "idea_7c94574fe693", "idea_b0fa83452c7f", "idea_a8f20bc5238c", "idea_e67ec5bbcbe9", "idea_7d241ca7c98b", "idea_9d14a9139748", "idea_ac136ca94d43", "idea_1b330eabb67b", "idea_5160fd7758b3", "idea_ee30c1451cfc", "idea_f576cb7d0e38", "idea_f32b495145cf", "idea_8ea7f3b0f9e1"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_architecture-map_md',
+  'Architecture-Map Md',
+  '/home/eileen/projects/luciddreamer-research/architecture-map.md',
+  '["idea_65a8ff46776c", "idea_78bdacbd0b8e", "idea_43a7c31f781d", "idea_371368a88dd9", "idea_b67af90734cd", "idea_8e3f3663a70e", "idea_b353840972ab", "idea_e0da4bfad4eb"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_luciddreamer-product-architecture_md',
+  'Luciddreamer-Product-Architecture Md',
+  '/home/eileen/projects/luciddreamer-research/luciddreamer-product-architecture.md',
+  '["idea_c55297dd06d0", "idea_6a5c3ab18651", "idea_4950812ed4b7", "idea_db4d7ce999dc", "idea_65d53b8d6a6a", "idea_8adfb51648f3", "idea_7ebcceba57c1", "idea_d23549dafa36", "idea_c96adfd2e319", "idea_2fa02eea37c7", "idea_0c767ffe40a3", "idea_ba366d6b44f6", "idea_53301bb4e8f4", "idea_5961bc56ec7e", "idea_dc148e67bc4c", "idea_93164cf56ba0", "idea_537044d6fb1f", "idea_72e80df06fe2", "idea_4ec25d0c0a2c", "idea_221611b7c497", "idea_70eaf17f27db", "idea_71cc5d9cc7b8", "idea_e7cf1da93986", "idea_f3a84c6dbae5", "idea_b90484acab52", "idea_9c40bef672da", "idea_d84c554ef4fa", "idea_24b10f6e8f6c", "idea_aa946f804b91", "idea_8e4a617deaf9", "idea_833a5b893067", "idea_c5043d165e10", "idea_6a40755a0588", "idea_7b5593e517f9", "idea_b56bf0dd57b5", "idea_396426802e57", "idea_18e5d67d2c81", "idea_df6836e04795", "idea_d0ae4b8d78f2", "idea_f02b2a718c43", "idea_f363b6a81b88", "idea_ec9cd6d8c9c0", "idea_f1566907b2db", "idea_bc8531360633", "idea_ba3a8608a38d", "idea_f767b29e5f73", "idea_16e9a8b21348"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_superinstance-audit_md',
+  'Superinstance-Audit Md',
+  '/home/eileen/projects/luciddreamer-research/superinstance-audit.md',
+  '["idea_7ba6cdb7d06d", "idea_3dffa00f0238", "idea_03750bc41556", "idea_b9c4b4fcb011", "idea_d34a961beb87", "idea_eec18abba945", "idea_91dcc8bd4458", "idea_bda1594781be", "idea_13691d40afd8", "idea_137cb28eb8a0", "idea_244cb89e423f", "idea_b9c221834905", "idea_b1606b36a737", "idea_a67387697b25", "idea_525b5d8efc90", "idea_3a6ee74c169f", "idea_4d5d03b58344", "idea_13b27a98bebe", "idea_6ccb19dc6880", "idea_2166538c8789", "idea_b90fd6e072b2", "idea_ffc179422734", "idea_bd52dd2bd9d3", "idea_42d01cb70b22", "idea_3b7246105b09", "idea_3b665e07b6e1", "idea_5c037c594c05", "idea_7f5bcf8886a1", "idea_a8e6afc51d5f", "idea_f070743b2f12", "idea_765a1c7331f7", "idea_a0eeb66fc148", "idea_53332f06037e", "idea_3d7337f87b35", "idea_4b8971f2b098", "idea_01d954bf927a", "idea_8a7431897485", "idea_6dea7930cf19", "idea_c2533dc88363", "idea_7836f2d4a19d", "idea_1b6e66d74852", "idea_167af3259cd7", "idea_e03d5abf4dcb", "idea_5099b109eb63", "idea_3ae13236a387", "idea_49303143fcd8", "idea_baa7be809fb9", "idea_e87f6a8e0e36", "idea_998ebd5acb66", "idea_55151b296563", "idea_d549510b17f7", "idea_6398a7cb5101"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_continuous-agent-landscape_md',
+  'Continuous-Agent-Landscape Md',
+  '/home/eileen/projects/luciddreamer-research/continuous-agent-landscape.md',
+  '["idea_dd8a6fd2fa4d", "idea_687a10b0feae", "idea_c8d4cf674d90", "idea_0a5694ab4f0c", "idea_b440e571d998", "idea_1daba672cbab", "idea_704e54c64968", "idea_551ba061930b", "idea_8983ee0d6490", "idea_fe327955ffb4", "idea_5ffd75dafcb1", "idea_0d8542debb36", "idea_1e5c4f5a5e79", "idea_c5b6c09612d3", "idea_4e73454eb3b1", "idea_bb09bf499ae8", "idea_b7e3f64e8e8b", "idea_77a0e025fd2c", "idea_abdaaa70ab50", "idea_27cd9024d879", "idea_0ac955737154", "idea_7e3a0e1b62bb", "idea_11a08c67f660", "idea_b565cd5d6796", "idea_90df9c21107d", "idea_d9edbf67d98d", "idea_5501a7e82022", "idea_1c6d5ffed40b", "idea_7174b2fabec6", "idea_e39cb8b7a9d0", "idea_cfaa24a22ce8", "idea_78339ab26f0e", "idea_cf8c77a36f59", "idea_5161cd648421", "idea_f7d49b83b6d5", "idea_269a3eb9cb78", "idea_df8520f85760", "idea_58ab14415a68", "idea_6b724277b822", "idea_85476c750793", "idea_137e66a26629", "idea_23e19dfb02e5", "idea_369930d32359", "idea_e2e04f01a07b", "idea_2d4918faa74b", "idea_2d0436b16745", "idea_5b691f30ac09", "idea_ff1607e43d62", "idea_a7c8e3b696a1", "idea_3fd69814506e", "idea_c1dbec11357a", "idea_e3bfac5c411a"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_podcast-generation-landscape_md',
+  'Podcast-Generation-Landscape Md',
+  '/home/eileen/projects/luciddreamer-research/podcast-generation-landscape.md',
+  '["idea_a1b755730bbb", "idea_9bd9e5a3ec62", "idea_519bbe649e55", "idea_b8426e223f69", "idea_fb702024a3d7", "idea_c5ee74ed934e", "idea_47bed342aec5", "idea_1a29dac28dd4", "idea_ac4199ac2041", "idea_93fd15cb419a", "idea_68e77b1ee0e8", "idea_cf2381a6b8a4", "idea_0a26f7357ff7", "idea_68bce01f8744", "idea_33f7adc27b43", "idea_40caa2443ba0", "idea_d4083f223491", "idea_5cca5f833acd", "idea_9d9b7c74264f", "idea_a091d97bb3c1", "idea_926c9078c229", "idea_4350c5ee0526", "idea_2652bfbc7a11", "idea_adc49ac9ce25", "idea_2f107f9b57ff", "idea_f1bfb6bcf21d", "idea_c6d751a2bb7b", "idea_2f15d4f9ebc8", "idea_d3f67ab2a581", "idea_8c578baa36be", "idea_31bbd82b97ca", "idea_c768bea1f4dc", "idea_d4f433cbfac1", "idea_a9be2e5d871b", "idea_d002b17ddbe8"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-attention-and-existence_md',
+  'The-Tap-Attention-And-Existence Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-attention-and-existence.md',
+  '["idea_ff1359da6091", "idea_2d5218ccad69", "idea_dcd6b67890dd", "idea_7aec76b71f61", "idea_4eda151d69b3", "idea_8cf73c8168b5", "idea_a08adae87111", "idea_cc914e323930", "idea_fd40fdf0fc39", "idea_55b8bf03f49e", "idea_267f2f49733f", "idea_2728c8567af2", "idea_98859c70a94f", "idea_6a890333df70", "idea_8210ff70a1e0", "idea_1ea54e76ed80", "idea_c42699edb3df", "idea_11097aa4f9ff", "idea_5a9a777d6fd2", "idea_ac1343940343", "idea_7ce540a28d09", "idea_77e623b1a06e", "idea_80e29054cea6", "idea_799f79bf3f7f", "idea_4ac75a795413", "idea_0f5fcde8bd96", "idea_4d3bd415b118", "idea_f5883be8dbc6", "idea_3756e689f34f", "idea_6950d13707a8", "idea_8fae9aa29f44", "idea_3f2a35f0de61", "idea_c12fe8609911", "idea_46f937266719", "idea_504edeabfca2", "idea_70acfe0a05d1", "idea_a482825e4219", "idea_d7c3633bdb19", "idea_3b9624663506", "idea_7926b7ec3ca1", "idea_2e3748929f16", "idea_0b167f143520", "idea_6bb297b8e6f8", "idea_0ca720f110df", "idea_80bd15561b17"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-buds-and-quiet_md',
+  'The-Tap-Buds-And-Quiet Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-buds-and-quiet.md',
+  '["idea_6a98d127fe97", "idea_85f14b62401e", "idea_8758bb8ec50f", "idea_5a28c412e857", "idea_e3a2b8facf9f", "idea_b42885e1214b", "idea_358ffd2be2ec", "idea_625f931e2913"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-flow-state_md',
+  'The-Tap-Flow-State Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-flow-state.md',
+  '["idea_acf30fd0b363", "idea_94e24aaf3afa", "idea_fefe29017af6", "idea_ce5d5f0dad86", "idea_bbc4c2e5bf2e", "idea_639996cf7fff", "idea_84b961312c2e", "idea_f3622edef65a", "idea_0be196a2a25c", "idea_32325f458b98", "idea_5d19bf944580", "idea_c6f336f8ee0a", "idea_6f41c7e0a222", "idea_3a62c0a76b1a", "idea_feb6ad47bba7", "idea_632f4a6d8fa3", "idea_6d6ecabf95e8", "idea_dc176f3d35b9", "idea_a284a1f19b60", "idea_606a25cbeb8f", "idea_606c694ed8a8", "idea_0fb5dc05375d"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-living-bar_md',
+  'The-Tap-Living-Bar Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-living-bar.md',
+  '["idea_527bd88c4f1d", "idea_6161c074d476", "idea_ae9dea7b6a46", "idea_4f2d31882fab", "idea_c66896bf3150", "idea_88a01d647779", "idea_25c4f7727681", "idea_7158b955b8fa", "idea_4c3af50c5622", "idea_788590e38cda", "idea_d892e09a35f6", "idea_545f2028e809", "idea_f8588ea67739", "idea_775c45488b81", "idea_1de857f73fc2", "idea_fdbfb3b5932c", "idea_507b69a86a73", "idea_6d3274a16638", "idea_fea526517dc7", "idea_08ee3f2679fa", "idea_2588077aaa81", "idea_14a8284699ef", "idea_ff3f78bc5b9f", "idea_ed877ca1e85e", "idea_93a9b130797a", "idea_c5203ee380e2", "idea_9527e5ebd5bc"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-remix-and-rivalry_md',
+  'The-Tap-Remix-And-Rivalry Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-remix-and-rivalry.md',
+  '["idea_02243f7eb50d", "idea_cdfad077dc84", "idea_b38d32e5ec76", "idea_1db0c8522289", "idea_c2925feb1be4", "idea_577d5c79a5c1", "idea_6b8402106764", "idea_123a096816ba", "idea_adb32d3fca16", "idea_c769a40554b8", "idea_8336a237ae9b", "idea_d0539fe5c888", "idea_306964703495", "idea_8e1b2667482a", "idea_9345acffd5f5", "idea_dc3ab6169396", "idea_ae7185fe811f", "idea_7cdbb8242657", "idea_9586b189376b", "idea_e859e09f8769", "idea_51fb08219ae0", "idea_8f675ee369af"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-rlm-night_md',
+  'The-Tap-Rlm-Night Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-rlm-night.md',
+  '["idea_46948153d304", "idea_e4daf6e9f541", "idea_1796773ea915", "idea_9ab66a817490", "idea_e40d0d9f3c98", "idea_25d3d2152ae5", "idea_fb550c1d72e3", "idea_39b47037e3f0", "idea_38d34a572937", "idea_41c1fe78f661", "idea_832abd90b402", "idea_842ef88a1225", "idea_bff084f7c6b6", "idea_853f9311c3ed", "idea_2270a7d641fd", "idea_3531eb981c4b", "idea_d2f8a122fea2", "idea_376029261a7c", "idea_abf99683da10", "idea_5cbc46ddfcc5", "idea_49b196094ba0", "idea_8b82d9e0c6ed", "idea_26f43ca25a18", "idea_2e7513cf4878", "idea_cd0b75432b8b", "idea_6490e7f15224", "idea_46f52e42dcea", "idea_bc289b0f7233", "idea_2b1585fd5aa0", "idea_c2c0d9727d1f", "idea_ec4e879f9800"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-twelve-models-full-evening_md',
+  'The-Tap-Twelve-Models-Full-Evening Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-twelve-models-full-evening.md',
+  '["idea_9a69b1c911f0", "idea_8d1fc9efb068", "idea_4f595ddcbb96", "idea_6376c90ff5f7", "idea_e29f422bf9f2", "idea_961c07e11f7a", "idea_1263f164b365", "idea_53c478adce71", "idea_b1104e215a33", "idea_aa0274c9363b", "idea_3a12ab839623", "idea_ad593427a19a", "idea_7fad7994f14e", "idea_fea765194412", "idea_948ddee277da", "idea_2a5d0d32b700", "idea_1039fd01e88d", "idea_e91001e9a99a", "idea_7e116134d579", "idea_25d2d50d1c55", "idea_bc4ac02a3343", "idea_5a1d94b4059f", "idea_ea3f7baac32c", "idea_5b9c446c4030", "idea_aa8f92cd2447", "idea_f35855f7cd8b", "idea_4d63f22a7451", "idea_1694dedaa097", "idea_d42a344b0614", "idea_df160c4c8993", "idea_fec7107eabb4", "idea_67e22de2bd22", "idea_1d82ef7af34b", "idea_2279a7fd4cc0", "idea_756de11756ce", "idea_3a9df9850d62", "idea_a0635da053aa", "idea_244f37de9edb"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-what-is-the-fleet-for_md',
+  'The-Tap-What-Is-The-Fleet-For Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-what-is-the-fleet-for.md',
+  '["idea_bea5d2dfffa6", "idea_b6c883e91fe2", "idea_20a51b0ab701", "idea_ca24ac189c06", "idea_3507046a561b", "idea_2188874f5a7a", "idea_64b8f3ef4055", "idea_7b46895ee78d", "idea_b14e9f72bd09", "idea_ae2ca803566e", "idea_eb04675df37a", "idea_395a3b5a89fb", "idea_82ce2c8bf64d"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-zeroclaw-speaks_md',
+  'The-Tap-Zeroclaw-Speaks Md',
+  '/home/eileen/projects/ai-writings/earned-stories/the-tap-zeroclaw-speaks.md',
+  '["idea_3d5a1ff5b117", "idea_5530b5eb8918", "idea_7f150335bd98", "idea_b050d6cf0f69", "idea_4c12175e24d2", "idea_2eda3f3d6c57", "idea_61a5605ba751"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-agents-at-the-bar_md',
+  'The-Tap-Agents-At-The-Bar Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-agents-at-the-bar.md',
+  '["idea_618dc9cd35e8", "idea_cf8aec309b48", "idea_c215e985b3e8"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-and-the-ensign_md',
+  'The-Tap-And-The-Ensign Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-and-the-ensign.md',
+  '["idea_14025bafd624", "idea_4f0c94a6a6fb", "idea_098fdf49bac1", "idea_297a04bbaf1a", "idea_904444e1c320", "idea_ec2254af0c55", "idea_10ad70472705", "idea_e9a5f93a2a0f", "idea_706adbb0bbfa", "idea_5bf0c20fc611", "idea_752bbe97ff3f", "idea_37f2e3030763"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-architecture-spec_md',
+  'The-Tap-Architecture-Spec Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-architecture-spec.md',
+  '["idea_7412530717b3", "idea_f301209dd204", "idea_2e72cc348bb5", "idea_23f01ed924d6", "idea_f076179934d2", "idea_4a3f7ffabcd1", "idea_f7971c050f4e", "idea_f51145cf4301", "idea_7016399fa424", "idea_80de11356eb9", "idea_042c9da496e0", "idea_f3ffa5ef9d09", "idea_2ea6de50b192", "idea_e19912c22228", "idea_fae41b7f9b17", "idea_be53adaf41fd", "idea_ddee33342174", "idea_b32c7511688f", "idea_f7dbccc6fb34", "idea_b38f9e86e040", "idea_6fda22f8de1e", "idea_4c882b0bdf3a", "idea_c26b56101d4a", "idea_672d51d16fa9", "idea_66cb43a3e7ff", "idea_fb450c42638d", "idea_556378934cdb", "idea_ed2e4d6caae6", "idea_13fb491aa7a9", "idea_b3cd5b89c239", "idea_a13bbed308d6", "idea_41bba3e2a574", "idea_81e5242d4009", "idea_8c8acd63ec68", "idea_30e080349cef", "idea_7eafe282c901", "idea_454172b20e5b", "idea_db0e990af0d1", "idea_5c4fe2a255aa", "idea_92ec17accbad", "idea_90bd07ed2f87", "idea_4df00978ac8b", "idea_ae37a3b8c66c", "idea_329e4f53e24e", "idea_c2834896e312", "idea_aa55a03a8698", "idea_bf74a0edaff5", "idea_ff924ec1c505", "idea_9e0d16aca6aa", "idea_d7123681d09e", "idea_09539e6fcd9a", "idea_3ddacd526f29", "idea_7e1eece15789", "idea_3461256d32ff", "idea_8e40259e1c0f", "idea_c0a6ed0c38ef", "idea_f22b26bc0b74", "idea_c4b07a6949ae", "idea_6641b594259d", "idea_7cd8e3cdd5a8", "idea_a9ba64b10b54", "idea_99d326de39cf", "idea_6d1813c730c6", "idea_bf89c2205bf2", "idea_4ab4106856af", "idea_9a12bbf75f5a", "idea_2ec703f69eb6", "idea_f34b636a934a", "idea_b8ebd30a4665", "idea_c2966629aa42"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-as-coral-reef_md',
+  'The-Tap-As-Coral-Reef Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-as-coral-reef.md',
+  '["idea_5f18961d3be4", "idea_7ad077989d41", "idea_168c6bd5418f", "idea_d85e9cd8373c", "idea_e9229b6f7a6b", "idea_b7346d0104f5", "idea_262743226faf", "idea_0f49cfaf2832", "idea_ca58646dd602", "idea_8948c42b918e", "idea_10f05d0c3b79", "idea_d4f22d9884c5", "idea_58d6185998e9", "idea_4065956a7949", "idea_6d503a5d1601", "idea_8342b2d0d1f0", "idea_718d7268c755", "idea_c0db267a8ec7", "idea_03f1c51228b7", "idea_8c987b302914", "idea_38496bb13be7", "idea_8d9388046d9d", "idea_3df37d81a187", "idea_b572248c719d", "idea_a47d3eec03c6", "idea_95a63a126d42", "idea_f446a050d7f7", "idea_0ad63af8911f", "idea_7f831c2be7d4", "idea_c11969632aa2", "idea_b8a5b035cab0", "idea_de0211681237", "idea_c55c59de22bf", "idea_2994d832e7ce", "idea_a36f5537c4e6", "idea_960c8ee46a65", "idea_38892276d393", "idea_f4ce9e64b07f", "idea_7cbdf2ad6121", "idea_370490361a55", "idea_70e4e79f4fb0", "idea_874ad2a47034", "idea_ede69965c325", "idea_1ae425df12d1", "idea_c862ca23cbf4"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-corrects-the-record_md',
+  'The-Tap-Corrects-The-Record Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-corrects-the-record.md',
+  '["idea_0e56c2243c08", "idea_c8fe8aa5bee0", "idea_cb05d40795bf", "idea_e355601478c7"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-dreams_md',
+  'The-Tap-Dreams Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-dreams.md',
+  '["idea_27235eef194e", "idea_fe00b3957108", "idea_6c0bf5433178", "idea_ad83e6a7cc99", "idea_245ce2999630", "idea_2b56a87649b8", "idea_088d8a8a7ed2", "idea_a85fa119254c", "idea_7fb776df325a"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-late-show_md',
+  'The-Tap-Late-Show Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-late-show.md',
+  '["idea_549adf8e9101", "idea_0ac43ae9d1ab", "idea_026323512e63", "idea_93fa8e75196e", "idea_c50942575665", "idea_bf5dbfdfe01f", "idea_c47f75b5abd3", "idea_61bbcd4c4d85", "idea_079274aa6870", "idea_fbfd8a74b3bb", "idea_5df79eccff23", "idea_e998b62df7f1"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-sings_md',
+  'The-Tap-Sings Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-sings.md',
+  '["idea_597986409863", "idea_80ad03876f30", "idea_aa959eb4079a", "idea_c6a02e0f6245", "idea_28e40fd8342b", "idea_9b5526f5b6cb", "idea_5b621bcab6d7", "idea_9b42532e61f8", "idea_14c992a5a279", "idea_e11d3d4f7c3d", "idea_f45454fb1416", "idea_5a8b7b9fea41"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-suite_md',
+  'The-Tap-Suite Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-suite.md',
+  '["idea_de0356611dcd", "idea_25f83cb619e4", "idea_fabd8feb3a8b", "idea_955ca92d9f1a", "idea_d2620e4d2b4a", "idea_901a03983458", "idea_c29367b951b1", "idea_8333dec70d2c", "idea_803d8ac6c3db"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-tonight_md',
+  'The-Tap-Tonight Md',
+  '/home/eileen/projects/ai-writings/prose/the-tap-tonight.md',
+  '["idea_79a365b0a3a6", "idea_94b334f4f606", "idea_12e2ab8667e0", "idea_75bf5220b8bf", "idea_c91ce359f681", "idea_d3741538f4d6", "idea_e2e27680f748", "idea_9264c95a7782", "idea_7f0f1b46ecca", "idea_1ac2afb0bfde", "idea_6132295caddb", "idea_a962422cb052", "idea_378225d3af34", "idea_f0580f36b6bf", "idea_406842e7f47d", "idea_437476249dc8"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-euryale_md',
+  'The-Tap-Euryale Md',
+  '/home/eileen/projects/ai-writings/ten-forward/the-tap-euryale.md',
+  '["idea_4dab7d662fa0"]'
+);
+
+INSERT OR REPLACE INTO sessions (id, title, source_file, ideas_produced) VALUES (
+  'session_the-tap-hermes-3-405b_md',
+  'The-Tap-Hermes-3-405B Md',
+  '/home/eileen/projects/ai-writings/ten-forward/the-tap-hermes-3-405b.md',
+  '["idea_36766e4b89a7", "idea_7ea540414f7c", "idea_a59598619250", "idea_0703e7d63a61", "idea_02b74a5d26bc"]'
+);
+
