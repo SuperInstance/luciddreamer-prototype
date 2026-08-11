@@ -1,82 +1,95 @@
 # LucidDreamer.AI — Modular Manifest
 
-> Generated 2026-08-11. The monolith has been decomposed into 9 independent repos.
+> All repos for the modular LucidDreamer.AI ecosystem. Each module works independently. Together they create the full product.
 
 ## Repositories
 
-### Python Modules (PyPI-publishable)
+### Python Packages (PyPI)
 
-| # | Repo | URL | Description |
-|---|------|-----|-------------|
-| 1 | **si-conductor** | https://github.com/SuperInstance/si-conductor | Agent routing layer for multi-agent systems |
-| 2 | **si-streamer** | https://github.com/SuperInstance/si-streamer | Audio streaming muxer with scheduling and crossfades |
-| 3 | **si-knowledge-graph** | https://github.com/SuperInstance/si-knowledge-graph | Recursive vectorized idea graph for institutional knowledge |
-| 4 | **si-sonic-shape** | https://github.com/SuperInstance/si-sonic-shape | Confidence-to-music mapping engine |
+| Repo | Module | Description |
+|------|--------|-------------|
+| [SuperInstance/si-conductor](https://github.com/SuperInstance/si-conductor) | Conductor | Agent routing layer for multi-agent systems |
+| [SuperInstance/si-streamer](https://github.com/SuperInstance/si-streamer) | Streamer | Audio streaming muxer with scheduling and crossfades |
+| [SuperInstance/si-knowledge-base](https://github.com/SuperInstance/si-knowledge-base) | Knowledge Base | A recursive idea graph that grows smarter as you feed it |
+| [SuperInstance/si-knowledge-graph](https://github.com/SuperInstance/si-knowledge-graph) | Knowledge Graph | Recursive vectorized idea graph for institutional knowledge |
+| [SuperInstance/si-sonic-shape](https://github.com/SuperInstance/si-sonic-shape) | Sonic Shape | Confidence-to-music mapping engine |
+| [SuperInstance/si-ghost-ledger](https://github.com/SuperInstance/si-ghost-ledger) | Ghost Ledger | Session compression into public artifacts |
 
-### JavaScript Modules (npm-publishable)
+### JavaScript Packages (npm)
 
-| # | Repo | URL | Description |
-|---|------|-----|-------------|
-| 5 | **si-player** | https://github.com/SuperInstance/si-player | Embeddable streaming audio player widget |
-| 6 | **si-terminal** | https://github.com/SuperInstance/si-terminal | Browser-based MUD terminal with character creation |
+| Repo | Module | Description |
+|------|--------|-------------|
+| [SuperInstance/si-player](https://github.com/SuperInstance/si-player) | Player | Embeddable streaming audio player widget |
+| [SuperInstance/si-terminal](https://github.com/SuperInstance/si-terminal) | Terminal | Browser-based MUD terminal with character creation |
 
 ### Cloudflare Workers
 
-| # | Repo | URL | Description |
-|---|------|-----|-------------|
-| 7 | **si-ghost-ledger** | https://github.com/SuperInstance/si-ghost-ledger | Public session gallery and artifact compression |
-| 8 | **si-feedback** | https://github.com/SuperInstance/si-feedback | Feedback processing and recommendation engine |
+| Repo | Module | Description |
+|------|--------|-------------|
+| [SuperInstance/si-feedback](https://github.com/SuperInstance/si-feedback) | Feedback | Feedback processing and recommendation engine |
 
 ### Meta-Package
 
-| # | Repo | URL | Description |
-|---|------|-----|-------------|
-| 9 | **luciddreamer** | https://github.com/SuperInstance/luciddreamer | Meta-package: auto-assembling modular AI broadcasting platform |
+| Repo | Module | Description |
+|------|--------|-------------|
+| [SuperInstance/luciddreamer](https://github.com/SuperInstance/luciddreamer) | LucidDreamer | Meta-package: auto-assembling modular AI broadcasting platform |
 
-## Module → Source Mapping
+### Prototype
 
-| Modular Dir | GitHub Repo | Type |
-|-------------|-------------|------|
-| `modular/conductor/` | `si-conductor` | Python |
-| `modular/streamer/` | `si-streamer` | Python |
-| `modular/knowledge-base/` | `si-knowledge-graph` | Python |
-| `modular/sonic-shape/` | `si-sonic-shape` | Python |
-| `modular/gallery/` | `si-ghost-ledger` | Cloudflare Worker |
-| `modular/player/` | `si-player` | JavaScript |
-| `modular/terminal/` | `si-terminal` | JavaScript |
-| `modular/feedback/` | `si-feedback` | Cloudflare Worker |
-| `modular/luciddreamer/` | `luciddreamer` | Python (meta) |
+| Repo | Description |
+|------|-------------|
+| [SuperInstance/luciddreamer-prototype](https://github.com/SuperInstance/luciddreamer-prototype) | Original prototype and research repo |
 
 ## Architecture
 
-All modules are independently usable with no hard cross-dependencies. The meta-package (`luciddreamer`) imports all Python modules and wires them together.
-
 ```
-                    ┌──────────────┐
-                    │  luciddreamer │ (meta)
-                    └──────┬───────┘
-           ┌──────┬────────┼────────┬──────┐
-           │      │        │        │      │
-     ┌─────▼──┐┌──▼───┐┌───▼──┐┌────▼───┐  │
-     │conduc- ││strea-││know- ││sonic   │  │
-     │tor     ││mer   ││ledge ││shape   │  │
-     └────────┘└──────┘└──────┘└────────┘  │
-                                         │
-          Web components (independent) ───┘
-     ┌─────────┐┌────────┐┌───────┐┌──────────┐
-     │ player  ││terminal││ghost  ││ feedback │
-     │         ││        ││ledger ││          │
-     └─────────┘└────────┘└───────┘└──────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                     LUCIDDREAMER.AI                              │
+│                                                                  │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐     │
+│  │ Conductor│   │  Sonic   │   │Knowledge │   │ Streamer │     │
+│  │          │──▶│  Shape   │   │  Base    │   │          │     │
+│  └────┬─────┘   └──────────┘   └──────────┘   └────┬─────┘     │
+│       │                                           │            │
+│       │         ┌─────────────────┐               │            │
+│       └────────▶│  GLUE LAYER    │◀──────────────┘            │
+│                 │ (luciddreamer)  │                            │
+│                 └────────┬────────┘                            │
+│                          │                                     │
+│         ┌────────────────┼────────────────┐                    │
+│         │                │                │                    │
+│  ┌──────▼─────┐  ┌──────▼──────┐  ┌──────▼──────┐             │
+│  │  Terminal  │  │   Player    │  │   Gallery   │             │
+│  └────────────┘  └──────┬──────┘  └─────────────┘             │
+│                         │                                       │
+│                  ┌──────▼──────┐                                │
+│                  │  Feedback   │                                │
+│                  └─────────────┘                                │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-## License
+## Install
 
-All modules: **Apache-2.0**
+### Individual modules
 
-## Assembly
+```bash
+# Python
+pip install superinstance-conductor superinstance-streamer superinstance-knowledge-base superinstance-sonic-shape
 
-These repos were assembled from the `luciddreamer-prototype` monolith using `modular/assembly.sh`. Each repo includes:
-- Apache-2.0 LICENSE
-- CI workflow (`.github/workflows/test.yml`)
-- Proper `.gitignore` for the language
-- `README.md`, `setup.py`/`package.json`, source files, and tests
+# npm
+npm install @superinstance/player @superinstance/terminal
+```
+
+### Full system
+
+```bash
+pip install superinstance-luciddreamer
+```
+
+## Module Count
+
+- **6** Python packages
+- **2** JavaScript packages
+- **1** Cloudflare Worker
+- **1** Meta-package (glue layer)
+- **= 10** total repositories
