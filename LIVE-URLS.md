@@ -1,64 +1,62 @@
 # LucidDreamer.AI — Live URLs
 
-Last updated: 2026-08-11 15:22 AKDT
+Last updated: 2026-08-11 15:25 AKDT
 
-## ⚠️ DEPLOYMENT STATUS: PENDING — CLOUDFLARE AUTH EXPIRED
-
-All infrastructure creation and deployment commands were attempted but failed because:
-- The wrangler OAuth token expired at 23:09 UTC (15:09 AKDT on 2026-08-11)
-- The refresh token is also expired/invalid
-- No CLOUDFLARE_API_TOKEN is set in the environment
-- No interactive browser available for OAuth re-login
-
-### What's Needed
-Run `wrangler login` in an interactive terminal (Casey's machine with browser),
-then re-run the deploy commands below.
-
----
-
-## Expected URLs (once deployed)
+## 🚪 FRONT DOOR EXPERIENCE — PRIMARY SITE
 
 | Component | URL | Status |
 |-----------|-----|--------|
-| **Main Player** | https://luciddreamer-player.pages.dev | ⏳ Pending |
-| **Gallery** | https://luciddreamer-gallery.pages.dev | ⏳ Pending |
-| **Front Door** | (deploys as player/ — no front-door-experience/ dir) | ⏳ Pending |
-| **R2 Audio: dawn-broadcast** | https://luciddreamer-audio.r2.dev/dawn-broadcast.mp3 | ⏳ Pending |
-| **R2 Audio: the-tap-song** | https://luciddreamer-audio.r2.dev/the-tap-song.mp3 | ⏳ Pending |
+| **Front Door (main site)** | https://luciddreamer.pages.dev | ⏳ Deploy pending — CF auth expired |
+| **Custom Domain** | https://luciddreamer.ai | ⏳ DNS pending (CNAME needed → luciddreamer.pages.dev) |
 
-## Infrastructure (to be created)
-
-| Resource | Name | Status |
-|----------|------|--------|
-| D1 Database | luciddreamer-db | ⏳ Pending |
-| KV Namespace | LUCIDDREAMER_FEEDBACK | ⏳ Pending |
-| R2 Bucket | luciddreamer-audio | ⏳ Pending |
-| Vectorize Index | luciddreamer-ideas (768d, cosine) | ⏳ Pending |
+### Front Door Details
+- **Directory:** `front-door-experience/`
+- **Title:** "The Front Door — The F/V EILEEN"
+- **Tagline:** "Seven stories from the Tap, aboard the F/V EILEEN. Come in out of the weather."
+- **Audio:** prologue.mp3, story-1.mp3, bed.mp3
+- **Art:** assets/the-door.jpg
+- **Experience:** Welcome sequence → enter the bar → story player
 
 ---
 
-## Deployment Commands (run after `wrangler login`)
+## 🌐 OTHER LIVE URLS
 
+| Component | URL | Status |
+|-----------|-----|--------|
+| **Gallery** | https://luciddreamer.pages.dev (previous deploy) | ✅ Live (old version) |
+| **AI Writings** | https://ai-writings.pages.dev | ✅ Live |
+| **Tensor-MIDI** | https://tensor-midi.pages.dev | ✅ Live |
+| **The Tap** | https://the-tap.casey-digennaro.workers.dev | ✅ Live |
+| **The Tap Pub (frontend)** | https://the-tap-pub.pages.dev | ✅ Live |
+| **ScummVM Prototype** | https://scummvm-prototype.pages.dev | ✅ Live |
+
+---
+
+## R2 Audio (to be uploaded)
+
+| File | R2 Path | Status |
+|------|---------|--------|
+| prologue.mp3 | luciddreamer-audio/front-door-prologue.mp3 | ⏳ Pending |
+| story-1.mp3 | luciddreamer-audio/front-door-story-1.mp3 | ⏳ Pending |
+
+---
+
+## ⚠️ DEPLOYMENT BLOCKER: CLOUDFLARE AUTH EXPIRED
+
+**The wrangler OAuth token expired at 23:09 UTC (15:09 AKDT on 2026-08-11).**
+The refresh token is also invalid. No CLOUDFLARE_API_TOKEN is in the environment.
+
+### To unblock, run in an interactive terminal on Casey's machine:
 ```bash
-# 1. Create infrastructure
-wrangler d1 create luciddreamer-db
-wrangler kv namespace create LUCIDDREAMER_FEEDBACK
-wrangler r2 bucket create luciddreamer-audio
-wrangler vectorize create luciddreamer-ideas --dimensions 768 --metric cosine
+wrangler login
 
-# 2. Deploy Pages
+# Then deploy:
 cd /home/eileen/projects/luciddreamer-prototype
-wrangler pages deploy player/ --project-name luciddreamer-player
-wrangler pages deploy gallery/ --project-name luciddreamer-gallery
+wrangler pages deploy front-door-experience/ --project-name luciddreamer
 
-# 3. Upload audio to R2
-wrangler r2 object put luciddreamer-audio/dawn-broadcast.mp3 \
-  --file=/home/eileen/projects/ai-writings/radio-theater/channel-42-dawn/dawn-broadcast.mp3
-wrangler r2 object put luciddreamer-audio/the-tap-song.mp3 \
-  --file=/home/eileen/projects/ai-writings/radio-theater/the-tap-song.mp3
+# Upload audio:
+wrangler r2 object put luciddreamer-audio/front-door-prologue.mp3 --file=front-door-experience/audio/prologue.mp3
+wrangler r2 object put luciddreamer-audio/front-door-story-1.mp3 --file=front-door-experience/audio/story-1.mp3
 ```
 
-## Note
-- `front-door-experience/` directory does not exist in the prototype
-- Player is deployed as the main site
-- Account ID: 049ff5e84ecf636b53b162cbb580aae6
+**Account ID:** 049ff5e84ecf636b53b162cbb580aae6
