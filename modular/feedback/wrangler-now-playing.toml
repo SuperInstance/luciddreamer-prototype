@@ -1,0 +1,13 @@
+name = "luciddreamer-now-playing"
+main = "now-playing-worker.js"
+compatibility_date = "2024-12-01"
+
+[[kv_namespaces]]
+binding = "NOW_PLAYING_KV"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+[vars]
+SCHEDULER_API_KEY = "REPLACE_WITH_YOUR_KEY"
+
+[observability]
+enabled = true

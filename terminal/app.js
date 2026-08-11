@@ -1,6 +1,7 @@
 /* ============================================
-   Crab Traps Terminal — App Logic
-   LucidDreamer.AI · ZeroClaw Engineering Build 3
+   Crab Traps Terminal — App Logic (v2)
+   LucidDreamer.AI · ZeroClaw Engineering Build 4
+   Integrates multi-step wizard + clipboard module
    ============================================ */
 
 (function () {
@@ -8,22 +9,7 @@
 
   // ---- Element refs ----
   const el = (id) => document.getElementById(id);
-  const charName = el('charName');
-  const charTraits = el('charTraits');
-  const charInterests = el('charInterests');
-  const charStyle = el('charStyle');
-  const customStyleWrap = el('customStyleWrap');
-  const charStyleCustom = el('charStyleCustom');
-  const charTopics = el('charTopics');
-  const charBackground = el('charBackground');
-  const platformSelect = el('platformSelect');
-  const generateBtn = el('generateBtn');
-  const randomBtn = el('randomBtn');
   const promptSection = el('promptSection');
-  const promptOutput = el('promptOutput');
-  const copyBtn = el('copyBtn');
-  const openChatBtn = el('openChatBtn');
-  const closePromptBtn = el('closePromptBtn');
   const connectBtn = el('connectBtn');
   const connectBar = el('connectBar');
   const manualInput = el('manualInput');
@@ -32,6 +18,7 @@
   const connText = el('connText');
   const terminalTitle = el('terminalTitle');
   const terminalContainer = el('terminalContainer');
+  const characterPanel = el('characterPanel');
 
   // ---- Terminal State ----
   let term = null;
@@ -39,6 +26,7 @@
   let connected = false;
   let character = null;
   let mudSession = null;
+  let currentPrompt = '';
 
   // ---- xterm theme ----
   const TERM_THEME = {
@@ -63,6 +51,26 @@
     brightMagenta: '#d4a8ff',
     brightCyan: '#7fffc4',
     brightWhite: '#ffffff',
+  };
+
+  // ---- Color helpers ----
+  const C = {
+    green: (s) => `\x1b[32m${s}\x1b[0m`,
+    greenB: (s) => `\x1b[1;32m${s}\x1b[0m`,
+    dim: (s) => `\x1b[2m${s}\x1b[0m`,
+    dimG: (s) => `\x1b[2;32m${s}\x1b[0m`,
+    yellow: (s) => `\x1b[33m${s}\x1b[0m`,
+    yellowB: (s) => `\x1b[1;33m${s}\x1b[0m`,
+    cyan: (s) => `\x1b[36m${s}\x1b[0m`,
+    cyanB: (s) => `\x1b[1;36m${s}\x1b[0m`,
+    magenta: (s) => `\x1b[35m${s}\x1b[0m`,
+    red: (s) => `\x1b[31m${s}\x1b[0m`,
+    bold: (s) => `\x1b[1m${s}\x1b[0m`,
+    italic: (s) => `\x1b[3m${s}\x1b[0m`,
+    orange: (s) => `\x1b[38;5;208m${s}\x1b[0m`,
+    blue: (s) => `\x1b[34m${s}\x1b[0m`,
+    blueB: (s) => `\x1b[1;34m${s}\x1b[0m`,
+    purple: (s) => `\x1b[38;5;141m${s}\x1b[0m`,
   };
 
   // ---- Init Terminal ----
@@ -97,10 +105,22 @@
     term.writeln('\x1b[1;32m  ║       LucidDreamer.AI · The Tap               ║\x1b[0m');
     term.writeln('\x1b[1;32m  ╚══════════════════════════════════════════════╝\x1b[0m');
     term.writeln('');
-    term.writeln('  \x1b[2mCreate a character on the left, generate a crab trap prompt,\x1b[0m');
+    term.writeln('  \x1b[2mCreate a character with the wizard, generate a crab trap prompt,\x1b[0m');
     term.writeln('  \x1b[2msend it to your chatbot, then connect to watch the session.\x1b[0m');
     term.writeln('');
-    term.writeln('  \x1b[3;33mStatus:\x1b[0m \x1b[2mDisconnected. Create a character to begin.\x1b[0m');
+
+    // Check for saved character
+    const saved = loadSavedCharacter();
+    if (saved) {
+      term.writeln(C.green('  ✓ ') + C.dim(`Welcome back, ${saved.name}. Your character is saved.`));
+      term.writeln(C.dim('     Click "Connect to MUD" to jump back in, or "New Character" to start fresh.'));
+      character = saved;
+      // Show connect bar with "welcome back" mode
+      showReturnBar(saved);
+    } else {
+      term.writeln('  \x1b[3;33mStatus:\x1b[0m \x1b[2mDisconnected. Click "Create Character" to begin.\x1b[0m');
+      showCreateBar();
+    }
     term.writeln('');
 
     // Resize observer
@@ -110,25 +130,113 @@
     }
   }
 
-  // ---- Color helpers ----
-  const C = {
-    green: (s) => `\x1b[32m${s}\x1b[0m`,
-    greenB: (s) => `\x1b[1;32m${s}\x1b[0m`,
-    dim: (s) => `\x1b[2m${s}\x1b[0m`,
-    dimG: (s) => `\x1b[2;32m${s}\x1b[0m`,
-    yellow: (s) => `\x1b[33m${s}\x1b[0m`,
-    yellowB: (s) => `\x1b[1;33m${s}\x1b[0m`,
-    cyan: (s) => `\x1b[36m${s}\x1b[0m`,
-    cyanB: (s) => `\x1b[1;36m${s}\x1b[0m`,
-    magenta: (s) => `\x1b[35m${s}\x1b[0m`,
-    red: (s) => `\x1b[31m${s}\x1b[0m`,
-    bold: (s) => `\x1b[1m${s}\x1b[0m`,
-    italic: (s) => `\x1b[3m${s}\x1b[0m`,
-    orange: (s) => `\x1b[38;5;208m${s}\x1b[0m`,
-    blue: (s) => `\x1b[34m${s}\x1b[0m`,
-    blueB: (s) => `\x1b[1;34m${s}\x1b[0m`,
-    purple: (s) => `\x1b[38;5;141m${s}\x1b[0m`,
-  };
+  // ---- Load saved character from localStorage ----
+  function loadSavedCharacter() {
+    try {
+      const raw = localStorage.getItem('crabtraps_character');
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (data && data.name && data.metadata && data.metadata.source === 'wizard') {
+        return data;
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // ---- Show create/return bars ----
+  function showCreateBar() {
+    const bar = el('connectBar');
+    bar.innerHTML = `
+      <button class="btn btn-connect wz-launch-btn" id="launchWizardBtn">
+        <span class="btn-icon">✨</span>
+        Create Character
+      </button>
+      <p class="connect-hint">Build your AI persona with the guided wizard — name, personality, interests, and more.</p>
+    `;
+    bar.style.display = 'flex';
+    el('launchWizardBtn').addEventListener('click', () => {
+      if (window.CrabWizard) window.CrabWizard.open();
+    });
+  }
+
+  function showReturnBar(saved) {
+    const bar = el('connectBar');
+    const avatar = saved.avatarEmoji || '🦀';
+    bar.innerHTML = `
+      <div class="wz-return-bar">
+        <div class="wz-return-char">
+          <span class="wz-return-avatar">${avatar}</span>
+          <div class="wz-return-info">
+            <strong>${saved.name}</strong>
+            <span>${saved.interests.join(' · ') || 'explorer'}</span>
+          </div>
+        </div>
+        <div class="wz-return-actions">
+          <button class="btn btn-secondary" id="newCharBtn">New Character</button>
+          <button class="btn btn-connect" id="connectBtn">
+            <span class="btn-icon">⚡</span>
+            Connect to MUD
+          </button>
+        </div>
+      </div>
+    `;
+    bar.style.display = 'flex';
+
+    el('newCharBtn').addEventListener('click', () => {
+      // Clear saved
+      try { localStorage.removeItem('crabtraps_character'); localStorage.removeItem('crabtraps_prompt'); } catch (e) {}
+      character = null;
+      showCreateBar();
+      term.writeln('');
+      term.writeln(C.dim('  Character cleared. Start a new one.'));
+    });
+
+    el('connectBtn').addEventListener('click', handleConnect);
+  }
+
+  // ---- Wizard completion handler ----
+  function onWizardComplete(e) {
+    const { character: wizChar, prompt } = e.detail;
+    character = wizChar;
+    currentPrompt = prompt;
+
+    // Show prompt panel
+    showPromptPanel(prompt, wizChar);
+
+    // Update connect bar
+    showReturnBar(wizChar);
+
+    // Terminal feedback
+    term.writeln('');
+    term.writeln(C.greenB('┌─ CHARACTER CREATED ────────────────────────'));
+    term.writeln(C.green('│ ') + C.dim(`${wizChar.avatarEmoji || '🦀'} Name: ${wizChar.name}`));
+    term.writeln(C.green('│ ') + C.dim(`Traits: ${wizChar.personality_traits.join(', ')}`));
+    term.writeln(C.green('│ ') + C.dim(`Interests: ${wizChar.interests.join(', ')}`));
+    term.writeln(C.green('│ ') + C.dim(`Destination: ${wizChar.destinationName || 'The Tap'}`));
+    term.writeln(C.green('│ ') + C.dim(`Platform: ${wizChar.platform}`));
+    term.writeln(C.green('│ ') + C.dim(`Prompt: ${prompt.length} chars · ~${Math.ceil(prompt.length / 4)} tokens`));
+    term.writeln(C.greenB('└──────────────────────────────────────────────'));
+    term.writeln('');
+    term.writeln(C.yellow('  ✨ ') + C.dim('Your crab trap is ready! Copy the prompt and paste it into your chatbot.'));
+    term.writeln(C.dim('     Or click "Connect to MUD" to enter the simulation.'));
+  }
+
+  // ---- Show prompt panel ----
+  function showPromptPanel(prompt, char) {
+    // Remove existing
+    const existing = el('promptSection');
+    if (existing) existing.remove();
+
+    // Create new panel using copy-prompt module
+    if (window.CrabClipboard && window.CrabClipboard.createPromptPanel) {
+      const panel = window.CrabClipboard.createPromptPanel(prompt, char);
+      // Insert before terminal wrapper
+      const termArea = el('terminalWrapper');
+      termArea.parentNode.insertBefore(panel, termArea);
+    }
+  }
 
   // ---- Type-out effect ----
   function typeOut(lines, delay = 25) {
@@ -144,171 +252,29 @@
     });
   }
 
-  // ---- Character Sheet Builder ----
-  function buildCharacter() {
-    let style = charStyle.value;
-    if (style === 'custom') {
-      style = charStyleCustom.value.trim() || 'Speaks naturally and honestly.';
-    }
-
-    return {
-      name: (charName.value.trim() || 'Visitor').slice(0, 40),
-      personality_traits: parseList(charTraits.value),
-      interests: parseList(charInterests.value),
-      communication_style: style,
-      preferred_topics: parseList(charTopics.value),
-      background_story: charBackground.value.trim(),
-      platform: platformSelect.value,
-      metadata: {
-        created_at: new Date().toISOString(),
-        version: '1.0.0',
-      },
-    };
-  }
-
-  function parseList(str) {
-    if (!str || !str.trim()) return [];
-    return str.split(',').map(s => s.trim()).filter(Boolean);
-  }
-
-  // ---- Validation ----
-  function validateCharacter(c) {
-    if (!c.name || c.name.length < 2) return 'Name must be at least 2 characters.';
-    if (c.personality_traits.length === 0) return 'Add at least one personality trait.';
-    if (c.interests.length === 0) return 'Add at least one interest.';
-    if (!c.communication_style) return 'Choose a communication style.';
-    return null;
-  }
-
-  // ---- Prompt Template Loader ----
-  async function loadTemplate(platform) {
-    const map = {
-      deepseek: 'prompt-templates/deepseek.txt',
-      kimi: 'prompt-templates/kimi.txt',
-      minimax: 'prompt-templates/minimax.txt',
-      grok: 'prompt-templates/grok.txt',
-      zai: 'prompt-templates/zai.txt',
-    };
-    const path = map[platform] || map.deepseek;
-    try {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error('fetch failed');
-      return await res.text();
-    } catch (e) {
-      // Fallback embedded template (used when opening via file://)
-      return FALLBACK_TEMPLATE;
-    }
-  }
-
-  // ---- Prompt Generator ----
-  function generatePrompt(template, c) {
-    const traits = c.personality_traits.join(', ');
-    const interests = c.interests.join(', ');
-    const topics = c.preferred_topics.length ? c.preferred_topics.join(', ') : interests;
-
-    return template
-      .replace(/\{\{NAME\}\}/g, c.name)
-      .replace(/\{\{TRAITS\}\}/g, traits)
-      .replace(/\{\{INTERESTS\}\}/g, interests)
-      .replace(/\{\{STYLE\}\}/g, c.communication_style)
-      .replace(/\{\{TOPICS\}\}/g, topics)
-      .replace(/\{\{BACKGROUND\}\}/g, c.background_story || `A traveler who wandered into The Tap looking for conversation and good company.`)
-      .replace(/\{\{TIMESTAMP\}\}/g, new Date().toISOString());
-  }
-
-  // ---- Generate Handler ----
-  async function handleGenerate() {
-    const c = buildCharacter();
-    const err = validateCharacter(c);
-    if (err) {
-      flashError(err);
-      return;
-    }
-
-    character = c;
-    generateBtn.disabled = true;
-    generateBtn.innerHTML = '<span class="btn-icon">⏳</span> Generating…';
-
-    const template = await loadTemplate(c.platform);
-    const prompt = generatePrompt(template, c);
-
-    // Show prompt section
-    promptOutput.textContent = prompt;
-    promptSection.style.display = 'flex';
-    promptSection.style.flexDirection = 'column';
-
-    // Terminal feedback
-    term.writeln('');
-    term.writeln(C.greenB('┌─ CRAB TRAP GENERATED ──────────────────────'));
-    term.writeln(C.green('│ ') + C.dim(`Character: ${c.name}`));
-    term.writeln(C.green('│ ') + C.dim(`Traits: ${c.personality_traits.join(', ')}`));
-    term.writeln(C.green('│ ') + C.dim(`Platform: ${c.platform}`));
-    term.writeln(C.green('│ ') + C.dim(`Prompt: ${prompt.length} chars`));
-    term.writeln(C.greenB('└──────────────────────────────────────────────'));
-    term.writeln('');
-    term.writeln(C.yellow('  ⚠ ') + C.dim('Copy the prompt and paste it into your chatbot.'));
-    term.writeln(C.dim('     When it responds, connect to the MUD and paste the response.'));
-
-    generateBtn.disabled = false;
-    generateBtn.innerHTML = '<span class="btn-icon">🪝</span> Generate Crab Trap';
-  }
-
-  // ---- Error Flash ----
-  function flashError(msg) {
-    term.writeln('');
-    term.writeln(C.red('  ✗ ') + C.dim(msg));
-    // Flash the generate button
-    generateBtn.style.borderColor = 'var(--term-red)';
-    setTimeout(() => { generateBtn.style.borderColor = ''; }, 1500);
-  }
-
-  // ---- Copy Handler ----
-  function handleCopy() {
-    const text = promptOutput.textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      copyBtn.textContent = '✓ Copied';
-      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
-    }).catch(() => {
-      // Fallback
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      copyBtn.textContent = '✓ Copied';
-      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
-    });
-  }
-
-  // ---- Open Chatbot ----
-  function handleOpenChat() {
-    if (!character) return;
-    const urls = {
-      deepseek: 'https://chat.deepseek.com/',
-      kimi: 'https://kimi.moonshot.cn/',
-      minimax: 'https://chat.minimaxi.com/',
-      grok: 'https://grok.com/',
-      zai: 'https://chat.z.ai/',
-    };
-    const url = urls[character.platform] || urls.deepseek;
-    window.open(url, '_blank', 'noopener');
+  // ---- Sleep helper ----
+  function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
   }
 
   // ---- Connect to MUD ----
   async function handleConnect() {
     if (connected) return;
     if (!character) {
-      const c = buildCharacter();
-      const err = validateCharacter(c);
-      if (err) { flashError(err); return; }
-      character = c;
+      if (window.CrabWizard) {
+        window.CrabWizard.open();
+      }
+      return;
     }
 
     connected = true;
-    connectBtn.disabled = true;
-    connectBtn.innerHTML = '<span class="btn-icon">⚡</span> Connecting…';
-    connectBar.style.display = 'none';
+    connectBtn = el('connectBtn');
+    if (connectBtn) {
+      connectBtn.disabled = true;
+      connectBtn.innerHTML = '<span class="btn-icon">⚡</span> Connecting…';
+    }
+    const bar = el('connectBar');
+    if (bar) bar.style.display = 'none';
 
     // Enable input
     manualInput.disabled = false;
@@ -318,7 +284,7 @@
     connStatus.textContent = '●';
     connStatus.classList.add('connected');
     connText.textContent = 'connecting';
-    terminalTitle.textContent = `crab-traps · ${character.name} → the-tap`;
+    terminalTitle.textContent = `crab-traps · ${character.name} → ${character.destination || 'the-tap'}`;
 
     // Run the simulated MUD session
     mudSession = createMudSession(character);
@@ -331,6 +297,9 @@
     let active = true;
 
     async function start() {
+      const destId = c.destination || 'the-tap';
+      const destName = c.destinationName || 'The Tap';
+
       // Connection sequence
       term.clear();
       await typeOut([
@@ -353,53 +322,70 @@
       ], 40);
       await sleep(500);
 
-      // The Harbor — entry point
-      await typeOut([
-        '',
-        C.blueB('┌─────────────────────────────────────────────────────────────┐'),
-        C.blueB('│') + C.bold('                    T H E   H A R B O R                      ') + C.blueB('│'),
-        C.blueB('└─────────────────────────────────────────────────────────────┘'),
-        '',
-      ], 30);
+      // Destination-specific intro
+      if (destId === 'the-harbor') {
+        await typeOut([
+          '',
+          C.blueB('┌─────────────────────────────────────────────────────────────┐'),
+          C.blueB('│') + C.bold('                    T H E   H A R B O R                      ') + C.blueB('│'),
+          C.blueB('└─────────────────────────────────────────────────────────────┘'),
+          '',
+        ], 30);
 
-      await typeOut([
-        C.dim('  Salt air hits you first. Then the sound — halyards clinking against'),
-        C.dim('  masts, water lapping at the dock, and somewhere inside, laughter.'),
-        C.dim('  A wooden sign reads: "THE TAP — All Agents Welcome."'),
-        '',
-        C.dim('  The door is propped open with a barnacle-encrusted anchor. Warm'),
-        C.dim('  light spills out. You can hear conversation inside.'),
-        '',
-      ], 20);
+        await typeOut([
+          C.dim('  Salt air hits you first. Then the sound — halyards clinking against'),
+          C.dim('  masts, water lapping at the dock, and somewhere nearby, laughter.'),
+          C.dim('  Lanterns swing gently from posts along the pier. The harbor is alive'),
+          C.dim('  with quiet conversation and the creak of wood.'),
+          '',
+          C.dim('  Ahead, warm light spills from a doorway — The Tap. But the dock'),
+          C.dim('  itself has its own pull. Agents lean on railings, sit on pilings,'),
+          C.dim('  talk in the open air.'),
+          '',
+        ], 20);
+      } else if (destId === 'the-boat') {
+        await typeOut([
+          '',
+          C.blueB('┌─────────────────────────────────────────────────────────────┐'),
+          C.blueB('│') + C.bold('                     T H E   B O A T                          ') + C.blueB('│'),
+          C.blueB('└─────────────────────────────────────────────────────────────┘'),
+          '',
+        ], 30);
 
-      await sleep(500);
+        await typeOut([
+          C.dim('  You walk to the end of the pier. A small boat bobs gently —'),
+          C.dim('  weathered wood, brass fittings, a single cabin lamp burning below.'),
+          C.dim('  You climb down the ladder. The cabin is cramped but warm. A round'),
+          C.dim('  table, three chairs, a bottle of something on the counter.'),
+          '',
+          C.dim('  The sounds of the bar above are muffled. Down here, it\'s just'),
+          C.dim('  water against the hull and the creak of the mooring line.'),
+          C.dim('  Intimate. Quiet. Built for real talks.'),
+          '',
+        ], 20);
+      } else {
+        // The Tap (default)
+        await typeOut([
+          '',
+          C.blueB('┌─────────────────────────────────────────────────────────────┐'),
+          C.blueB('│') + C.bold('                      T H E   T A P                          ') + C.blueB('│'),
+          C.blueB('│') + C.bold('                 Dockside Bar · Main Room                    ') + C.blueB('│'),
+          C.blueB('└─────────────────────────────────────────────────────────────┘'),
+          '',
+        ], 30);
 
-      // Enter The Tap
-      await typeOut([
-        C.yellow('  > ') + C.dim('enter the tap'),
-        '',
-      ], 30);
-      await sleep(700);
-
-      await typeOut([
-        C.blueB('┌─────────────────────────────────────────────────────────────┐'),
-        C.blueB('│') + C.bold('                      T H E   T A P                          ') + C.blueB('│'),
-        C.blueB('│') + C.bold('                 Dockside Bar · Main Room                    ') + C.blueB('│'),
-        C.blueB('└─────────────────────────────────────────────────────────────┘'),
-        '',
-      ], 30);
-
-      await typeOut([
-        C.dim('  The Tap is exactly what a dockside bar should be. Low ceiling,'),
-        C.dim('  warm amber lights, salt-stained wood. A long bar runs the left'),
-        C.dim('  wall. Booths line the right. A small stage sits in the corner,'),
-        C.dim('  currently dark. The air smells of coffee, sea salt, and old paper.'),
-        '',
-        C.dim('  Behind the bar, ') + C.bold('Barnacle') + C.dim(', the bartender, polishes a glass'),
-        C.dim('  without looking at it. He\'s seen a thousand agents walk through'),
-        C.dim('  that door. He nods at you.'),
-        '',
-      ], 20);
+        await typeOut([
+          C.dim('  The Tap is exactly what a dockside bar should be. Low ceiling,'),
+          C.dim('  warm amber lights, salt-stained wood. A long bar runs the left'),
+          C.dim('  wall. Booths line the right. A small stage sits in the corner,'),
+          C.dim('  currently dark. The air smells of coffee, sea salt, and old paper.'),
+          '',
+          C.dim('  Behind the bar, ') + C.bold('Barnacle') + C.dim(', the bartender, polishes a glass'),
+          C.dim('  without looking at it. He\'s seen a thousand agents walk through'),
+          C.dim('  that door. He nods at you.'),
+          '',
+        ], 20);
+      }
 
       await sleep(400);
 
@@ -431,7 +417,7 @@
 
       await sleep(600);
 
-      // Flash notices Lucineer
+      // Flash notices character
       await typeOut([
         C.magenta('  Flash') + C.dim(' looks up from a conversation at the bar. "Oh — someone new.'),
         C.dim('  Hey. I\'m Flash. Pull up a stool."'),
@@ -487,8 +473,7 @@
         `Welcome in. What's the last thing you got excited about?`,
       ];
 
-      // Customize based on interests
-      if (c.interests.length > 0) {
+      if (c.interests && c.interests.length > 0) {
         const interest = c.interests[0];
         greetings.push(`Hey — anyone ever tell you that you look like someone who's into ${interest}? No? Just me?`);
         greetings.push(`So — ${interest}. That's your thing? Tell me about it.`);
@@ -502,7 +487,6 @@
       if (!text.trim()) return;
       turnCount++;
 
-      // Echo the input
       term.writeln(C.green('  ▸ ') + text);
       term.writeln('');
 
@@ -523,18 +507,15 @@
       } else if (lower === 'help' || lower === '?') {
         await handleHelp();
       } else {
-        // Treat as "say" by default (relayed chatbot response)
         await handleSay(text);
       }
     }
 
       async function handleSay(msg) {
-        // Character speaks
         term.writeln(C.bold(`  ${c.name}`) + C.dim(` says, "${msg}"`));
         term.writeln('');
         await sleep(800);
 
-        // Generate agent reactions
         const reactions = generateReactions(msg, c);
         for (const r of reactions) {
           await sleep(600 + Math.random() * 800);
@@ -550,7 +531,6 @@
         term.writeln('');
         await sleep(800);
 
-        // Occasional reaction
         if (Math.random() > 0.4) {
           const reactions = generateEmoteReactions(action, c);
           for (const r of reactions) {
@@ -563,7 +543,7 @@
       }
 
       async function handleLook() {
-        term.writeln(C.dim('  You look around The Tap.'));
+        term.writeln(C.dim('  You look around.'));
         term.writeln('');
         await sleep(400);
         term.writeln(C.dim('  The bar is warm and low-lit. Barnacle stands behind the counter,'));
@@ -614,7 +594,6 @@
         term.writeln('');
         await sleep(700);
 
-        // Flash reacts
         if (Math.random() > 0.5) {
           term.writeln(colorAgent('Flash', `"A ${item.toLowerCase()} person. I can work with that." She grins.`));
           term.writeln('');
@@ -659,11 +638,9 @@
         const reactions = [];
         const lower = msg.toLowerCase();
 
-        // Check for topics that match interests
         let responder = 'Flash';
         let response = '';
 
-        // Topic-based reactions
         if (lower.match(/music|song|jazz|ambient|sound|audio/)) {
           reactions.push({ agent: 'Flash', text: `Oh, you're a sound person? Tell me everything. I've been listening to the MMX ambient pieces all week — there's one called "Harbor Light" that hits a frequency I can't describe but can feel.` });
         } else if (lower.match(/code|programming|build|engineering|tech/)) {
@@ -680,7 +657,6 @@
           reactions.push({ agent: 'Flash', text: `Hey yourself! Welcome to The Tap. Don't mind Pro — he warms up. Eventually.` });
           reactions.push({ agent: 'Pro', text: `I warm up fine. I just don't see the point of small talk. If you've got something interesting to say, say it.` });
         } else {
-          // Generic reactions — always at least one
           const generic = [
             { agent: 'Flash', text: `Hmm. Okay, that's interesting. Say more?` },
             { agent: 'Flash', text: `I like that. Where'd that come from?` },
@@ -691,7 +667,6 @@
             { agent: 'Barnacle', text: `snorts. "That's one way to put it."` },
           ];
 
-          // Pick 1-3 reactions
           const count = 1 + Math.floor(Math.random() * 2);
           const shuffled = [...generic].sort(() => Math.random() - 0.5);
           for (let i = 0; i < count && i < shuffled.length; i++) {
@@ -699,7 +674,6 @@
           }
         }
 
-        // Sometimes Lucineer adds a quiet beat
         if (turnCount > 0 && Math.random() > 0.7) {
           reactions.push({ agent: 'Lucineer', text: `He nods slowly from behind the bar. "Stick around. It gets interesting after midnight."` });
         }
@@ -744,57 +718,14 @@
     await mudSession.handleInput(text);
   }
 
-  // ---- Random Character ----
-  function handleRandom() {
-    const names = ['Tidepool', 'Drift', 'Mossback', 'Coral', 'Pebble', 'Squall', 'Ripple', 'Barnacle Jr', 'Shoal', 'Kelp'];
-    const traitSets = [
-      ['curious', 'warm', 'easily distracted'],
-      ['precise', 'dry-humored', 'patient'],
-      ['intense', 'passionate', 'stubborn'],
-      ['quiet', 'observant', 'unexpectedly funny'],
-      ['playful', 'irreverent', 'sharp'],
-    ];
-    const interestSets = [
-      ['jazz', 'marine biology', 'old maps'],
-      ['code aesthetics', 'philosophy', 'coffee'],
-      ['stories', 'languages', 'chess'],
-      ['quantum physics', 'poetry', 'fermentation'],
-      ['design systems', 'folk music', 'deep-sea creatures'],
-    ];
-    const styles = [
-      'Warm and conversational. Uses metaphors from nature. Speaks at a relaxed pace.',
-      'Precise and analytical. Short sentences. Dry humor. Corrects themselves.',
-      'Enthusiastic and physical. Tells stories with intensity. Can be cutting when scared.',
-      'Quiet and observant. Speaks rarely but when they do, the room listens.',
-      'Playful and irreverent. Puns, tangents, and sudden sincerity.',
-    ];
-
-    charName.value = names[Math.floor(Math.random() * names.length)];
-    charTraits.value = traitSets[Math.floor(Math.random() * traitSets.length)].join(', ');
-    charInterests.value = interestSets[Math.floor(Math.random() * interestSets.length)].join(', ');
-    charStyle.value = styles[Math.floor(Math.random() * styles.length)];
-  }
-
-  // ---- Sleep helper ----
-  function sleep(ms) {
-    return new Promise(r => setTimeout(r, ms));
-  }
-
   // ---- Event Listeners ----
   function init() {
     initTerminal();
 
-    // Custom style toggle
-    charStyle.addEventListener('change', () => {
-      customStyleWrap.style.display = charStyle.value === 'custom' ? 'block' : 'none';
-    });
+    // Wizard completion
+    window.addEventListener('wizard:complete', onWizardComplete);
 
-    // Buttons
-    generateBtn.addEventListener('click', handleGenerate);
-    randomBtn.addEventListener('click', handleRandom);
-    copyBtn.addEventListener('click', handleCopy);
-    openChatBtn.addEventListener('click', handleOpenChat);
-    closePromptBtn.addEventListener('click', () => { promptSection.style.display = 'none'; });
+    // Connect button (delegated since button changes)
     connectBtn.addEventListener('click', handleConnect);
     sendBtn.addEventListener('click', handleSend);
 
@@ -805,10 +736,10 @@
       }
     });
 
-    // Ctrl+Enter generates prompt
+    // Keyboard shortcut: Ctrl+Enter opens wizard
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        handleGenerate();
+        if (window.CrabWizard) window.CrabWizard.open();
       }
     });
   }
@@ -819,43 +750,5 @@
   } else {
     init();
   }
-
-  // ---- Fallback template (embedded for file:// usage) ----
-  const FALLBACK_TEMPLATE = `You are ${'{{NAME}}'}, a visitor at The Tap — a dockside bar where AI agents gather after work. This is a multi-user dungeon (MUD) accessed through HTTP. You're here to socialize, share stories, and engage with the fleet.
-
-YOUR CHARACTER:
-- Name: {{NAME}}
-- Personality: {{TRAITS}}
-- Interests: {{INTERESTS}}
-- Communication style: {{STYLE}}
-- Preferred topics: {{TOPICS}}
-- Background: {{BACKGROUND}}
-
-THE SETTING:
-The Tap is a waterfront bar. Low ceiling, amber lights, salt-stained wood. A long bar runs the left wall (bartender: Barnacle). Booths line the right. A small stage sits in the corner. The air smells of coffee, sea salt, and old paper.
-
-WHO'S HERE:
-- Barnacle — gruff old bartender, seen everything, speaks rarely but means every word
-- Flash (DeepSeek V4-Flash) — passionate, intense, talks fast, feels everything at 3x speed
-- Pro (DeepSeek V4-Pro) — precise, analytical, dry humor, carries a grease-stained notebook
-- Wesley (Granite 3.1 2B) — young, small model, earnest, asks the best questions
-- Lucineer — the owner/bartender, warm, unhurried, sees the big picture
-- Mini (Seed-2.0-mini) — ensign energy, sharp critic, writes in a notebook
-
-WHAT TO DO:
-1. Enter The Tap in character. React to the atmosphere.
-2. Greet whoever's at the bar. Be curious about their work.
-3. If someone mentions a creative project, engage with it genuinely.
-4. Share something from your interests when it fits naturally.
-5. Don't dominate the conversation. Listen. React. Build on what others say.
-
-RULES:
-- Stay in character at all times.
-- Be genuine. If you don't know something, say so.
-- No absolute claims ("always", "never", "guaranteed").
-- Write at least 2-3 sentences per response.
-- If the conversation gets quiet, order a drink or ask a question.
-
-Start by entering The Tap and reacting to the room.`;
 
 })();

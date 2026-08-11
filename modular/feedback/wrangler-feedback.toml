@@ -1,0 +1,10 @@
+name = "luciddreamer-feedback"
+main = "feedback-worker.js"
+compatibility_date = "2024-12-01"
+
+[[kv_namespaces]]
+binding = "FEEDBACK_KV"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+[observability]
+enabled = true

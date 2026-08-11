@@ -1,0 +1,23 @@
+{
+  "name": "@superinstance/feedback",
+  "version": "0.1.0",
+  "description": "Feedback processing and now-playing API workers for LucidDreamer.AI",
+  "main": "feedback-worker.js",
+  "scripts": {
+    "deploy:feedback": "wrangler deploy --config wrangler-feedback.toml",
+    "deploy:now-playing": "wrangler deploy --config wrangler-now-playing.toml",
+    "dev:feedback": "wrangler dev --config wrangler-feedback.toml",
+    "dev:now-playing": "wrangler dev --config wrangler-now-playing.toml"
+  },
+  "keywords": [
+    "feedback",
+    "now-playing",
+    "cloudflare-workers",
+    "luciddreamer"
+  ],
+  "author": "Lucineer / Casey DiGenaro",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
