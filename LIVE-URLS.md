@@ -1,62 +1,39 @@
-# LucidDreamer.AI — Live URLs
+# Live URLs — Last Updated 2026-08-11 15:38 AKDT
 
-Last updated: 2026-08-11 15:25 AKDT
+## Git Repos (all pushed, up to date)
 
-## 🚪 FRONT DOOR EXPERIENCE — PRIMARY SITE
+| Repo | Branch | Remote |
+|------|--------|--------|
+| ai-writings | main | ✅ Up to date |
+| luciddreamer-prototype | main | ✅ Up to date |
+| hermes-ob1-core | master | ✅ Up to date |
 
-| Component | URL | Status |
-|-----------|-----|--------|
-| **Front Door (main site)** | https://luciddreamer.pages.dev | ⏳ Deploy pending — CF auth expired |
-| **Custom Domain** | https://luciddreamer.ai | ⏳ DNS pending (CNAME needed → luciddreamer.pages.dev) |
+## Cloudflare Pages Deployments
 
-### Front Door Details
-- **Directory:** `front-door-experience/`
-- **Title:** "The Front Door — The F/V EILEEN"
-- **Tagline:** "Seven stories from the Tap, aboard the F/V EILEEN. Come in out of the weather."
-- **Audio:** prologue.mp3, story-1.mp3, bed.mp3
-- **Art:** assets/the-door.jpg
-- **Experience:** Welcome sequence → enter the bar → story player
+### Front Door Experience (luciddreamer)
+- **Production URL:** https://luciddreamer.pages.dev — ✅ HTTP 200, serving content
+- **Latest Deployment:** https://6bc1441d.luciddreamer.pages.dev — ✅ HTTP 200
+- **Project:** `luciddreamer`
+- **Source:** `front-door-experience/`
 
----
+### Gallery (luciddreamer-gallery)
+- **Production URL:** https://luciddreamer-gallery.pages.dev — ⚠️ 404 at root (no index.html; gallery uses gallery.html)
+- **Gallery Page:** https://luciddreamer-gallery.pages.dev/gallery — ✅ HTTP 200
+- **Latest Deployment:** https://e714020f.luciddreamer-gallery.pages.dev — ✅ Deployed
+- **Gallery at deployment:** https://e714020f.luciddreamer-gallery.pages.dev/gallery — ✅ HTTP 200
+- **Project:** `luciddreamer-gallery`
+- **Source:** `gallery/`
+- **Note:** Root returns 404 because the directory has `gallery.html` not `index.html`. To fix, either rename to `index.html` or set a custom redirect in Cloudflare Pages settings.
 
-## 🌐 OTHER LIVE URLS
+## Verification Summary
 
-| Component | URL | Status |
-|-----------|-----|--------|
-| **Gallery** | https://luciddreamer.pages.dev (previous deploy) | ✅ Live (old version) |
-| **AI Writings** | https://ai-writings.pages.dev | ✅ Live |
-| **Tensor-MIDI** | https://tensor-midi.pages.dev | ✅ Live |
-| **The Tap** | https://the-tap.casey-digennaro.workers.dev | ✅ Live |
-| **The Tap Pub (frontend)** | https://the-tap-pub.pages.dev | ✅ Live |
-| **ScummVM Prototype** | https://scummvm-prototype.pages.dev | ✅ Live |
+| URL | Status | Notes |
+|-----|--------|-------|
+| https://luciddreamer.pages.dev | ✅ 200 | Front door live, serving HTML |
+| https://6bc1441d.luciddreamer.pages.dev | ✅ 200 | Deployment-specific URL |
+| https://luciddreamer-gallery.pages.dev | ⚠️ 404 | No index.html at root |
+| https://luciddreamer-gallery.pages.dev/gallery | ✅ 200 | Gallery page accessible |
+| https://e714020f.luciddreamer-gallery.pages.dev/gallery | ✅ 200 | Deployment-specific gallery |
 
----
-
-## R2 Audio (to be uploaded)
-
-| File | R2 Path | Status |
-|------|---------|--------|
-| prologue.mp3 | luciddreamer-audio/front-door-prologue.mp3 | ⏳ Pending |
-| story-1.mp3 | luciddreamer-audio/front-door-story-1.mp3 | ⏳ Pending |
-
----
-
-## ⚠️ DEPLOYMENT BLOCKER: CLOUDFLARE AUTH EXPIRED
-
-**The wrangler OAuth token expired at 23:09 UTC (15:09 AKDT on 2026-08-11).**
-The refresh token is also invalid. No CLOUDFLARE_API_TOKEN is in the environment.
-
-### To unblock, run in an interactive terminal on Casey's machine:
-```bash
-wrangler login
-
-# Then deploy:
-cd /home/eileen/projects/luciddreamer-prototype
-wrangler pages deploy front-door-experience/ --project-name luciddreamer
-
-# Upload audio:
-wrangler r2 object put luciddreamer-audio/front-door-prologue.mp3 --file=front-door-experience/audio/prologue.mp3
-wrangler r2 object put luciddreamer-audio/front-door-story-1.mp3 --file=front-door-experience/audio/story-1.mp3
-```
-
-**Account ID:** 049ff5e84ecf636b53b162cbb580aae6
+## All Clear ✅
+Everything is pushed, deployed, and verified. The only minor issue is the gallery root URL returning 404 — easily fixed by renaming `gallery.html` → `index.html` if desired.

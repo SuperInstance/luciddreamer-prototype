@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NMEA→SWMIDI Bridge — FV Eileen Dashboard</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --panel: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --accent: #06b6d4;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+  --green: #10b981;
+  --font: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+h2 { font-size: 0.75rem; font-weight: 600; color: var(--muted);
+     text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.header .subtitle { color: var(--muted); font-size: 0.8rem; }
+.status-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--danger); margin-right: 6px; vertical-align: middle;
+}
+.status-dot.connected { background: var(--green); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.panel-value {
+  font-size: 1.8rem; font-weight: 700; color: var(--accent);
+}
+.panel-unit { font-size: 0.8rem; color: var(--muted); }
+.panel-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+
+/* Compass */
+.compass-container {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.compass {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 2px solid var(--border); position: relative;
+  background: radial-gradient(circle at center, #0f172a 0%, #0a0e1a 100%);
+}
+.compass-marks {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; font-size: 0.6rem; color: var(--muted);
+}
+.compass-n { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); }
+.compass-s { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); }
+.compass-w { position: absolute; left: 6px; top: 50%; transform: translateY(-50%); }
+.compass-e { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+.compass-needle {
+  position: absolute; width: 3px; height: 50%;
+  left: 50%; bottom: 50%; transform-origin: bottom center;
+  background: linear-gradient(to top, transparent 20%, var(--danger) 50%, var(--accent) 100%);
+  border-radius: 2px; transition: transform 0.5s ease;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+/* Depth gauge */
+.gauge-bar {
+  height: 120px; width: 24px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 4px;
+  position: relative; overflow: hidden;
+}
+.gauge-fill {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, var(--accent), var(--warn), var(--danger));
+  transition: height 0.5s ease;
+}
+.gauge-container { display: flex; gap: 12px; align-items: flex-end; }
+
+/* Mode badge */
+.mode-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 12px;
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.mode-docked { background: #1e3a5f; color: #93c5fd; }
+.mode-departing { background: #1e3b32; color: #6ee7b7; }
+.mode-transit { background: #1e2d4f; color: #818cf8; }
+.mode-fishing { background: #3b2d12; color: #fcd34d; }
+.mode-hauling { background: #3b2412; color: #fdba74; }
+.mode-returning { background: #2d1e3b; color: #c4b5fd; }
+.mode-anchored { background: #1e3b50; color: #7dd3fc; }
+.mode-emergency { background: #3b1212; color: #fca5a5; animation: pulse 1s infinite; }
+.mode-unknown { background: var(--border); color: var(--muted); }
+
+@keyframes pulse { 50% { opacity: 0.5; } }
+
+/* SWMIDI Event Stream */
+.events-panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px; margin-bottom: 16px;
+}
+.event-stream {
+  height: 200px; overflow-y: auto; font-size: 0.7rem;
+  color: var(--muted); line-height: 1.6;
+}
+.event-line { display: flex; gap: 8px; padding: 1px 0; }
+.event-type { color: var(--accent); font-weight: 600; min-width: 90px; }
+.event-errors { color: var(--danger); }
+.event-flow { color: var(--green); }
+
+/* Musical parameters */
+.musical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+.musical-item {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px; text-align: center;
+}
+.musical-item .val { font-size: 1.1rem; font-weight: 600; color: var(--accent); }
+.musical-item .lbl { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
+
+/* Chart */
+.chart-container {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px; margin-bottom: 16px;
+}
+#chart-canvas {
+  width: 100%; height: 200px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 4px;
+}
+
+/* Connection controls */
+.controls {
+  display: flex; gap: 8px; align-items: center; margin-bottom: 16px;
+}
+.controls input {
+  background: var(--panel); border: 1px solid var(--border); color: var(--text);
+  padding: 6px 10px; border-radius: 4px; font-family: var(--font); font-size: 0.8rem;
+}
+.controls button {
+  background: var(--accent); color: var(--bg); border: none;
+  padding: 6px 16px; border-radius: 4px; font-family: var(--font);
+  font-size: 0.8rem; font-weight: 600; cursor: pointer;
+}
+.controls button:hover { opacity: 0.85; }
+.controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Error flags */
+.error-flags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.error-flag {
+  font-size: 0.6rem; padding: 2px 6px; border-radius: 3px;
+  background: var(--danger); color: white; font-weight: 600;
+}
+.error-flag.none { background: var(--green); }
+
+.timestamp { font-size: 0.6rem; color: var(--muted); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>FV Eileen — NMEA→SWMIDI Bridge</h1>
+    <div class="subtitle">The boat is a robot. Not metaphor. Measurement.</div>
+  </div>
+  <div>
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text" style="font-size:0.8rem;color:var(--muted)">Disconnected</span>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" id="ws-url" value="ws://localhost:8765" placeholder="WebSocket URL"
+         style="width:200px">
+  <button id="connect-btn" onclick="toggleConnection()">Connect</button>
+  <label style="font-size:0.7rem;color:var(--muted);margin-left:12px;">
+    <input type="checkbox" id="simulate" onchange="toggleSim()"> Use simulator
+  </label>
+</div>
+
+<!-- Vessel State Grid -->
+<div class="grid">
+  <div class="panel">
+    <h2>Vessel Mode</h2>
+    <span class="mode-badge mode-unknown" id="mode-badge">UNKNOWN</span>
+    <div style="margin-top:8px;">
+      <span class="panel-label">Intensity</span>
+      <div style="height:6px;background:var(--bg);border-radius:3px;margin-top:2px;">
+        <div id="intensity-bar" style="height:6px;background:var(--accent);border-radius:3px;width:0%;transition:width 0.5s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Speed Over Ground</h2>
+    <span class="panel-value" id="speed-val">0.0</span>
+    <span class="panel-unit">knots</span>
+  </div>
+
+  <div class="panel compass-container">
+    <h2 style="align-self:flex-start;">Heading</h2>
+    <div class="compass">
+      <span class="compass-n">N</span>
+      <span class="compass-e">E</span>
+      <span class="compass-s">S</span>
+      <span class="compass-w">W</span>
+      <div class="compass-needle" id="compass-needle"></div>
+    </div>
+    <div><span class="panel-value" style="font-size:1.2rem;" id="heading-val">000°</span></div>
+  </div>
+
+  <div class="panel">
+    <h2>Depth</h2>
+    <div class="gauge-container">
+      <div class="gauge-bar">
+        <div class="gauge-fill" id="depth-fill" style="height:5%;"></div>
+      </div>
+      <div>
+        <div><span class="panel-value" id="depth-val">0.0</span></div>
+        <div class="panel-unit">fathoms</div>
+        <div style="margin-top:4px;font-size:0.7rem;color:var(--muted);" id="depth-meters">0.0 m</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Engine</h2>
+    <span class="panel-value" id="rpm-val">0</span>
+    <span class="panel-unit">RPM</span>
+    <div style="margin-top:8px;">
+      <div style="height:6px;background:var(--bg);border-radius:3px;">
+        <div id="rpm-bar" style="height:6px;background:var(--warn);border-radius:3px;width:0%;transition:width 0.5s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Environment</h2>
+    <div style="display:flex;gap:16px;">
+      <div>
+        <div class="panel-label">Water Temp</div>
+        <div><span style="font-size:1.2rem;font-weight:600;color:var(--accent);" id="watertemp-val">--</span><span class="panel-unit">°C</span></div>
+      </div>
+      <div>
+        <div class="panel-label">Sea State</div>
+        <div style="font-size:1.2rem;font-weight:600;color:var(--accent);" id="seastate-val">--</div>
+      </div>
+    </div>
+    <div style="margin-top:8px;">
+      <div class="panel-label">Tank: <span id="tank-val">--</span>% | Battery: <span id="battery-val">--</span>V</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>GPS Position</h2>
+    <div style="font-size:0.8rem;color:var(--accent);" id="pos-val">No fix</div>
+    <div style="margin-top:4px;">
+      <span class="panel-label">Quality: </span>
+      <span id="fix-quality">No fix</span>
+    </div>
+    <div style="margin-top:4px;">
+      <span class="panel-label">Satellites: </span>
+      <span id="sat-count">--</span>
+    </div>
+  </div>
+</div>
+
+<!-- Chart -->
+<div class="chart-container">
+  <h2>Vessel Track</h2>
+  <canvas id="chart-canvas"></canvas>
+</div>
+
+<!-- SWMIDI Event Stream -->
+<div class="events-panel">
+  <h2>SWMIDI Event Stream</h2>
+  <div class="event-stream" id="event-stream">
+    <div style="color:var(--muted);padding:8px;">Waiting for events...</div>
+  </div>
+</div>
+
+<!-- Musical Parameters -->
+<div class="panel" style="margin-bottom:16px;">
+  <h2>Musical Parameters — Vessel as Instrument</h2>
+  <div class="musical-grid" id="musical-grid">
+    <div class="musical-item">
+      <div class="val" id="music-bpm">60</div><div class="lbl">Tempo BPM</div>
+    </div>
+    <div class="musical-item">
+      <div class="val" id="music-mood">neutral</div><div class="lbl">Mood</div>
+    </div>
+    <div class="musical-item">
+      <div class="val" id="music-harmony">Root drone</div><div class="lbl">Harmony</div>
+    </div>
+    <div class="musical-item">
+      <div class="val" id="music-pan">64</div><div class="lbl">Pan (L/R)</div>
+    </div>
+    <div class="musical-item">
+      <div class="val" id="music-density">25%</div><div class="lbl">Rhythm Density</div>
+    </div>
+    <div class="musical-item">
+      <div class="val" id="music-intensity">0%</div><div class="lbl">Intensity</div>
+    </div>
+  </div>
+</div>
+
+<div class="timestamp" id="last-update">Never updated</div>
+
+<script>
+// ─── State ──────────────────────────────────────────────────────────────
+let ws = null;
+let connected = false;
+let trackPoints = [];
+const MAX_TRACK_POINTS = 200;
+const MAX_EVENTS = 50;
+
+// ─── WebSocket ──────────────────────────────────────────────────────────
+function toggleConnection() {
+  if (connected) {
+    if (ws) ws.close();
+  } else {
+    const url = document.getElementById('ws-url').value;
+    connectWS(url);
+  }
+}
+
+function connectWS(url) {
+  try {
+    ws = new WebSocket(url);
+  } catch (e) {
+    setStatus(false, 'Connection failed');
+    return;
+  }
+
+  ws.onopen = () => {
+    setStatus(true, 'Connected');
+    document.getElementById('connect-btn').textContent = 'Disconnect';
+  };
+
+  ws.onclose = () => {
+    setStatus(false, 'Disconnected');
+    document.getElementById('connect-btn').textContent = 'Connect';
+  };
+
+  ws.onerror = () => {
+    setStatus(false, 'Connection error');
+  };
+
+  ws.onmessage = (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+      handleMessage(msg);
+    } catch (e) {
+      console.error('Parse error:', e);
+    }
+  };
+}
+
+function setStatus(conn, text) {
+  connected = conn;
+  document.getElementById('status-dot').className = 'status-dot' + (conn ? ' connected' : '');
+  document.getElementById('status-text').textContent = text;
+}
+
+function toggleSim() {
+  // When simulator checkbox changes, could restart connection with sim params
+  // For now just visual
+}
+
+// ─── Message Handling ───────────────────────────────────────────────────
+function handleMessage(msg) {
+  if (msg.type === 'vessel_state') {
+    updateVesselState(msg);
+  } else if (msg.type === 'swmidi_events') {
+    updateEventStream(msg.events);
+  }
+
+  document.getElementById('last-update').textContent =
+    'Last update: ' + new Date().toLocaleTimeString();
+}
+
+function updateVesselState(s) {
+  // Mode
+  const modeEl = document.getElementById('mode-badge');
+  const mode = s.mode || 'unknown';
+  modeEl.textContent = mode.toUpperCase();
+  modeEl.className = 'mode-badge mode-' + mode;
+
+  // Speed
+  document.getElementById('speed-val').textContent =
+    (s.speed_sog || 0).toFixed(1);
+
+  // Heading
+  const heading = s.heading || 0;
+  document.getElementById('heading-val').textContent =
+    heading.toFixed(0).padStart(3, '0') + '°';
+  document.getElementById('compass-needle').style.transform =
+    `translateX(-50%) rotate(${heading}deg)`;
+
+  // Depth
+  const depth = s.depth_fathoms || 0;
+  document.getElementById('depth-val').textContent = depth.toFixed(1);
+  document.getElementById('depth-meters').textContent =
+    (s.depth_meters || 0).toFixed(1) + ' m';
+  document.getElementById('depth-fill').style.height =
+    Math.min(100, (depth / 200) * 100) + '%';
+
+  // Engine
+  const rpm = s.engine_rpm || 0;
+  document.getElementById('rpm-val').textContent = Math.round(rpm);
+  document.getElementById('rpm-bar').style.width =
+    Math.min(100, (rpm / 2800) * 100) + '%';
+
+  // Environment
+  document.getElementById('watertemp-val').textContent =
+    s.water_temp_c != null ? s.water_temp_c.toFixed(1) : '--';
+  document.getElementById('seastate-val').textContent =
+    (s.sea_state_beaufort || 0).toFixed(0);
+  document.getElementById('tank-val').textContent =
+    s.tank_level_pct != null ? s.tank_level_pct.toFixed(0) : '--';
+  document.getElementById('battery-val').textContent =
+    s.battery_voltage != null ? s.battery_voltage.toFixed(1) : '--';
+
+  // GPS
+  if (s.position && s.position.valid) {
+    document.getElementById('pos-val').textContent =
+      `${s.position.lat.toFixed(4)}°, ${s.position.lon.toFixed(4)}°`;
+    document.getElementById('fix-quality').textContent =
+      fixQualityText(s.position.valid);
+    trackPoints.push({lat: s.position.lat, lon: s.position.lon});
+    if (trackPoints.length > MAX_TRACK_POINTS) trackPoints.shift();
+    drawChart();
+  }
+
+  // Intensity
+  const musical = s.musical || {};
+  document.getElementById('intensity-bar').style.width =
+    ((musical.intensity || 0) * 100) + '%';
+
+  // Musical params
+  document.getElementById('music-bpm').textContent =
+    (musical.tempo_bpm || 60).toFixed(0);
+  document.getElementById('music-mood').textContent =
+    musical.mood || 'neutral';
+  document.getElementById('music-harmony').textContent =
+    musical.harmony_label || 'Root drone';
+  document.getElementById('music-pan').textContent =
+    musical.pan || 64;
+  document.getElementById('music-density').textContent =
+    ((musical.rhythm_density || 0.25) * 100).toFixed(0) + '%';
+  document.getElementById('music-intensity').textContent =
+    ((musical.intensity || 0) * 100).toFixed(0) + '%';
+}
+
+function fixQualityText(valid) {
+  if (!valid) return 'No fix';
+  return 'GPS fix';
+}
+
+function updateEventStream(events) {
+  const stream = document.getElementById('event-stream');
+  stream.innerHTML = '';
+
+  for (const e of events.slice(-MAX_EVENTS)) {
+    const line = document.createElement('div');
+    line.className = 'event-line';
+
+    const typeSpan = document.createElement('span');
+    typeSpan.className = 'event-type';
+    typeSpan.textContent = e.status_name || 'UNKNOWN';
+
+    const dataSpan = document.createElement('span');
+    dataSpan.textContent = `pitch=${e.pitch} vel=${e.velocity} tick=${e.tick}`;
+
+    const errSpan = document.createElement('span');
+    if (e.error_mask > 0 && e.error_flags && e.error_flags.length > 0) {
+      errSpan.className = 'event-errors';
+      errSpan.textContent = '⚠ ' + e.error_flags.join(',');
+    } else {
+      errSpan.className = 'event-flow';
+      errSpan.textContent = '✓ FLOW';
+    }
+
+    line.appendChild(typeSpan);
+    line.appendChild(dataSpan);
+    line.appendChild(errSpan);
+    stream.appendChild(line);
+  }
+}
+
+// ─── Chart ──────────────────────────────────────────────────────────────
+function drawChart() {
+  const canvas = document.getElementById('chart-canvas');
+  const ctx = canvas.getContext('2d');
+
+  // Resize canvas
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  ctx.clearRect(0, 0, rect.width, rect.height);
+
+  // Background grid
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 0.5;
+  for (let x = 0; x < rect.width; x += 40) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, rect.height); ctx.stroke();
+  }
+  for (let y = 0; y < rect.height; y += 40) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(rect.width, y); ctx.stroke();
+  }
+
+  if (trackPoints.length < 2) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Waiting for GPS track...', rect.width / 2, rect.height / 2);
+    return;
+  }
+
+  // Compute bounds
+  let minLat = 90, maxLat = -90, minLon = 180, maxLon = -180;
+  for (const p of trackPoints) {
+    minLat = Math.min(minLat, p.lat);
+    maxLat = Math.max(maxLat, p.lat);
+    minLon = Math.min(minLon, p.lon);
+    maxLon = Math.max(maxLon, p.lon);
+  }
+  // Add padding
+  const padLat = Math.max(0.01, (maxLat - minLat) * 0.1);
+  const padLon = Math.max(0.01, (maxLon - minLon) * 0.1);
+  minLat -= padLat; maxLat += padLat;
+  minLon -= padLon; maxLon += padLon;
+
+  const toX = (lon) => ((lon - minLon) / (maxLon - minLon)) * rect.width;
+  const toY = (lat) => rect.height - ((lat - minLat) / (maxLat - minLat)) * rect.height;
+
+  // Draw track
+  ctx.strokeStyle = '#06b6d4';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i < trackPoints.length; i++) {
+    const x = toX(trackPoints[i].lon);
+    const y = toY(trackPoints[i].lat);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Draw current position
+  const last = trackPoints[trackPoints.length - 1];
+  ctx.fillStyle = '#ef4444';
+  ctx.beginPath();
+  ctx.arc(toX(last.lon), toY(last.lat), 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Labels
+  ctx.fillStyle = '#64748b';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(minLon.toFixed(3) + '°W', 4, rect.height - 4);
+  ctx.textAlign = 'right';
+  ctx.fillText(maxLon.toFixed(3) + '°W', rect.width - 4, rect.height - 4);
+}
+
+// ─── Init ───────────────────────────────────────────────────────────────
+drawChart();
+window.addEventListener('resize', drawChart);
+</script>
+
+</body>
+</html>
