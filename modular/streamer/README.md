@@ -1,10 +1,14 @@
-# @superinstance/streamer
+# 🎵 Streamer
 
-**Audio streaming muxer — takes audio files and creates a continuous stream.**
+*Audio streaming muxer with time-of-day scheduling*
 
-Crossfades, normalization, HLS segments, time-of-day scheduling, and coherence anchoring. Works with any audio source directory.
+![🎵 Streamer](docs/images/streamer.jpg)
 
-> "A 24/7 stream is a days-long Markov chain in latent space. Temporal coherence drift is the systemic risk." — Nemotron
+## What It Is
+
+The Streamer takes audio files and turns them into a continuous broadcast. Crossfades, normalization, time-of-day scheduling, HLS output. It's the radio station's transmitter.
+
+Morning shows in the morning. Night shows at night. The right content at the right time, automatically.
 
 ## Install
 
@@ -12,95 +16,28 @@ Crossfades, normalization, HLS segments, time-of-day scheduling, and coherence a
 pip install superinstance-streamer
 ```
 
-**System requirement:** `ffmpeg` must be installed and on your PATH.
+## Features
+
+- Playlist management with quality-weighted scoring
+- Time-of-day scheduling (morning/midday/evening/night)
+- Crossfade and normalization via FFmpeg
+- HLS segment output for web streaming
+- Standalone HTTP streaming server included
 
 ## Quick Start
 
-### Run a streaming server
-
-```bash
-python -m streamer.stream_server --audio-dir /path/to/audio --port 8420
-```
-
-Then open `http://localhost:8420` in your browser.
-
-### Use programmatically
-
 ```python
-from streamer import Playlist, Scheduler, Muxer
+from superinstance import streamer
 
-# Load tracks
-playlist = Playlist(audio_dir="/path/to/audio")
-print(f"Loaded {playlist.size} tracks")
-
-# Schedule based on time of day
-scheduler = Scheduler(playlist=playlist)
-queue = scheduler.now_playing_queue(size=5)
-
-# Mux into a continuous stream
-muxer = Muxer()
-output = muxer.concatenate_streaming(queue, "output.mp3")
+# See docs/api/streamer-api.md for full documentation
 ```
 
-## Components
+## Use It For
 
-### Playlist
-- Loads audio files from a directory
-- Weighted scoring (quality, recency, mood, play count)
-- No-repeat windows to prevent over-rotation
-- Coherence anchors — high-quality tracks inserted periodically to prevent drift
+**Internet radio station that schedules different content throughout the day**
 
-### Scheduler
-- Time-of-day programming (Morning Watch, Midday Essays, Afternoon Theater, Evening Tap, Overnight Dispatch)
-- Mood-aware track selection
-- Coherence anchor insertion every N tracks
+Or anything else. This module is independently useful and Apache-2.0 licensed. Grow it for your industry. Send improvements back.
 
-### Muxer
-- Crossfade between tracks (configurable duration)
-- Loudness normalization (target dBFS)
-- HLS segmentation (.m3u8 + .ts files)
-- Silent gap insertion between segments
+---
 
-### Stream Server
-- HLS streaming HTTP server
-- Now-playing status endpoint (`/status`)
-- Minimal embedded player at `/`
-- Threaded for multiple listeners
-
-## Dependencies
-
-**Required:** `pydub` (audio manipulation)
-
-**System:** `ffmpeg`
-
-**Optional:**
-- `pyyaml` — for YAML config files
-- `superinstance/conductor` — for agent-aware scheduling
-- `superinstance/sonic-shape` — for confidence-driven music generation
-
-## Configuration
-
-```yaml
-# config.yaml
-audio_dir: /path/to/audio
-output_dir: ./output
-
-crossfade:
-  duration_seconds: 3.0
-
-normalization:
-  enabled: true
-  target_lufs: -23.0
-
-hls:
-  segment_duration_seconds: 10
-  playlist_entries: 15
-
-server:
-  host: 0.0.0.0
-  port: 8420
-```
-
-## License
-
-MIT
+*Part of [LucidDreamer.AI](https://github.com/SuperInstance/luciddreamer-prototype) — built by [SuperInstance](https://github.com/SuperInstance).*

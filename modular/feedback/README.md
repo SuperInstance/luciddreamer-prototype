@@ -1,78 +1,44 @@
-# @superinstance/feedback
+# 💬 Feedback
 
-**Feedback processing and now-playing API for LucidDreamer.AI.**
+*Feedback processing and recommendation engine*
 
-Two Cloudflare Workers that handle listener feedback collection and real-time now-playing metadata.
+![💬 Feedback](docs/images/feedback.jpg)
 
-## Components
+## What It Is
 
-### Feedback Worker (`feedback-worker.js`)
-Receives listener feedback from the web player, stores in KV with 30-day TTL.
+Turn listener feedback into creative direction. Process sentiment, extract themes, build taste profiles, and generate recommendations.
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/feedback` | POST | Submit feedback `{ feedback, track, trackId, timestamp }` |
-| `/api/feedback` | GET | Recent feedback (admin/debug) |
+The for-you station that learns what each listener loves — and tells the fleet what to make next.
 
-### Now-Playing Worker (`now-playing-worker.js`)
-Returns current track info, calculates elapsed time, advances to next track when current ends.
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/now-playing` | GET | Current track + up next + listener count |
-| `/api/now-playing` | PUT | Update now-playing (scheduler only, API key required) |
-
-## Deploy
-
-### Feedback Worker
-
-```toml
-# wrangler.toml
-name = "luciddreamer-feedback"
-main = "feedback-worker.js"
-compatibility_date = "2024-12-01"
-
-[[kv_namespaces]]
-binding = "FEEDBACK_KV"
-id = "REPLACE_WITH_YOUR_KV_ID"
-```
+## Install
 
 ```bash
-wrangler deploy
+pip install superinstance-feedback
 ```
 
-### Now-Playing Worker
+## Features
 
-```toml
-# wrangler.toml
-name = "luciddreamer-now-playing"
-main = "now-playing-worker.js"
-compatibility_date = "2024-12-01"
+- Sentiment extraction from free-text feedback
+- Theme tagging (what listeners want more/less of)
+- Taste profile vectors for personalized recommendations
+- Collaborative filtering (listeners who liked X also liked Y)
+- Cold start handling for new listeners
+- Feedback-to-brief pipeline (trending requests → creative prompts)
 
-[[kv_namespaces]]
-binding = "NOW_PLAYING_KV"
-id = "REPLACE_WITH_YOUR_KV_ID"
+## Quick Start
 
-[vars]
-SCHEDULER_API_KEY = "your-secret-key"
+```python
+from superinstance import feedback
+
+# See docs/api/feedback-api.md for full documentation
 ```
 
-```bash
-wrangler deploy
-```
+## Use It For
 
-## Recommendation Engine (Future)
+**Content platform that turns audience feedback into editorial direction**
 
-The feedback module will eventually include a recommendation engine that:
-- Analyzes feedback sentiment and themes
-- Correlates feedback with track characteristics (mood, model, time of day)
-- Suggests track reordering and scheduling improvements
-- Feeds back into the streamer's playlist weighting
+Or anything else. This module is independently useful and Apache-2.0 licensed. Grow it for your industry. Send improvements back.
 
-## Dependencies
+---
 
-- Cloudflare Workers + KV
-
-## License
-
-MIT
+*Part of [LucidDreamer.AI](https://github.com/SuperInstance/luciddreamer-prototype) — built by [SuperInstance](https://github.com/SuperInstance).*
