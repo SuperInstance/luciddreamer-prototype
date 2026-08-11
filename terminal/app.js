@@ -205,6 +205,9 @@
     // Show prompt panel
     showPromptPanel(prompt, wizChar);
 
+    // Update side panel preview
+    showSidePanelPreview(wizChar);
+
     // Update connect bar
     showReturnBar(wizChar);
 
@@ -221,6 +224,76 @@
     term.writeln('');
     term.writeln(C.yellow('  ✨ ') + C.dim('Your crab trap is ready! Copy the prompt and paste it into your chatbot.'));
     term.writeln(C.dim('     Or click "Connect to MUD" to enter the simulation.'));
+  }
+
+  // ---- Side Panel Preview ----
+  function showSidePanelPreview(char) {
+    const empty = el('panelEmpty');
+    const preview = el('panelPreview');
+    if (empty) empty.style.display = 'none';
+    if (preview) {
+      preview.style.display = 'flex';
+      preview.innerHTML = '';
+
+      // Main card
+      const card = document.createElement('div');
+      card.className = 'preview-card';
+
+      const p = char.personality_sliders || {};
+
+      card.innerHTML = `
+        <div class="preview-header">
+          <span class="preview-avatar">${char.avatarEmoji || '🦀'}</span>
+          <div>
+            <div class="preview-name">${escapeHtml(char.name)}</div>
+            <div class="preview-meta">${char.platform.toUpperCase()} · ${char.destinationName || 'The Tap'}</div>
+          </div>
+        </div>
+        <div class="preview-section">
+          <div class="preview-label">Traits</div>
+          <div class="preview-tags">
+            ${char.personality_traits.map(t => `<span class="preview-tag">${escapeHtml(t)}</span>`).join('')}
+          </div>
+        </div>
+        <div class="preview-section">
+          <div class="preview-label">Interests</div>
+          <div class="preview-tags">
+            ${char.interests.map(t => `<span class="preview-tag">${escapeHtml(t)}</span>`).join('')}
+          </div>
+        </div>
+        ${p.analytical != null ? `
+        <div class="preview-section">
+          <div class="preview-label">Personality</div>
+          <div class="preview-bar-group">
+            <span class="preview-bar-label">Creative</span>
+            <div class="preview-bar-track"><div class="preview-bar-fill" style="width:${p.analytical}%"></div></div>
+          </div>
+          <div class="preview-bar-group">
+            <span class="preview-bar-label">Playful</span>
+            <div class="preview-bar-track"><div class="preview-bar-fill" style="width:${p.serious}%"></div></div>
+          </div>
+          <div class="preview-bar-group">
+            <span class="preview-bar-label">Talkative</span>
+            <div class="preview-bar-track"><div class="preview-bar-fill" style="width:${p.quiet}%"></div></div>
+          </div>
+        </div>` : ''}
+        <div class="preview-section">
+          <div class="preview-dest">${char.destinationName ? getDestEmoji(char.destination) + ' ' + escapeHtml(char.destinationName) : '🍺 The Tap'}</div>
+        </div>
+      `;
+      preview.appendChild(card);
+    }
+  }
+
+  function getDestEmoji(id) {
+    const map = { 'the-tap': '🍺', 'the-harbor': '⚓', 'the-boat': '⛵' };
+    return map[id] || '🍺';
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   // ---- Show prompt panel ----
@@ -724,6 +797,14 @@
 
     // Wizard completion
     window.addEventListener('wizard:complete', onWizardComplete);
+
+    // Side panel launch button
+    const sideBtn = el('launchWizardSideBtn');
+    if (sideBtn) {
+      sideBtn.addEventListener('click', () => {
+        if (window.CrabWizard) window.CrabWizard.open();
+      });
+    }
 
     // Connect button (delegated since button changes)
     connectBtn.addEventListener('click', handleConnect);
