@@ -21,12 +21,20 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional
 
-from living_schema.living_schema import (
-    Alignment,
-    MusicalSignature,
-    PersonalityWrap,
-    generate_signature_from_personality,
-)
+try:
+    from .core import (
+        Alignment,
+        MusicalSignature,
+        PersonalityWrap,
+        generate_signature_from_personality,
+    )
+except ImportError:
+    from core import (
+        Alignment,
+        MusicalSignature,
+        PersonalityWrap,
+        generate_signature_from_personality,
+    )
 
 
 # ─── Musical Key Mapping ─────────────────────────────────────────────────────

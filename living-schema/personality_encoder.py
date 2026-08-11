@@ -22,10 +22,16 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 
-from living_schema.living_schema import (
-    Alignment,
-    PersonalityWrap,
-)
+try:
+    from .core import (
+        Alignment,
+        PersonalityWrap,
+    )
+except ImportError:
+    from core import (
+        Alignment,
+        PersonalityWrap,
+    )
 
 
 # ─── Behavior Sample ─────────────────────────────────────────────────────────

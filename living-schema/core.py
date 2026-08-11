@@ -281,7 +281,7 @@ class LivingTile:
             f"LivingTile [{self.tile_id[:8]}] "
             f"agent={self.agent_name} "
             f"turn={self.turn_index}\n"
-            f"  {self.personalty.summary()}\n"
+            f"  {self.personality.summary()}\n"
             f"  {self.signature.summary()}"
         )
 
