@@ -31,23 +31,6 @@ from pydub.effects import normalize as pydub_normalize
 
 
 @dataclass
-class CrossfadeSettings:
-    """Configuration for crossfading between tracks."""
-    duration_seconds: float = 3.0
-    fade_out_curve: str = "linear"
-    fade_in_curve: str = "linear"
-
-    @property
-    duration_ms(self) -> int:
-        return int(self.duration_seconds * 1000)
-
-
-# Fix: can't use property with @dataclass easily this way — use method
-# Actually, @property works on dataclass instances, but the decorator
-# syntax inside a dataclass body doesn't work well. Let's fix.
-
-
-@dataclass
 class MuxerConfig:
     """Configuration for the audio muxer."""
     crossfade_duration_seconds: float = 3.0
