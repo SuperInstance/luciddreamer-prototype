@@ -1,0 +1,118 @@
+# The Letter from Shore
+
+The letter came with the morning mail, and Casey read it aloud at the briefing, and his jaw did a thing June had only ever seen skippers' jaws do at closing prices.
+
+He read it flat, the way he read weather faxes, standing at the wheelhouse table with the coffee going cold in his hand. A company ashore, a name like a law firm, wanted to buy what the letter called *the vessel's accumulated writings.* All of it. The sum had two commas.
+
+The terms had one: the writings come down, the log goes private, the door closes. The boat would keep writing, the letter said, for one reader instead of everyone.
+
+"They want exclusive," the engineer said, when Casey refolded the page.
+
+"They want the door," Casey said, and put the letter in his chest pocket, and called the set, and that was all the comment the EILEEN got.
+
+June stood at the back of the wheelhouse with her observer's face on, the one she'd paid for with four seasons of practice, and did the arithmetic in her notebook hand without uncapping the pen. Two commas was a season's wages several times over. It was a new main and a winter off and the insurance paid ahead. It was a good offer.
+
+She had watched skippers sell out from under their own grandfathers for less, and she had written those sales down, because writing things down was the job, and her reports went to Juneau and became public record whether the skipper forgave her or not. One of them never had. The best one. She still had his Christmas card from the year before the report.
+
+She of all people knew what openness cost. It was, if she was honest, most of what she knew.
+
+---
+
+The chum came steady all day and she tallied them with half her mind. The other half kept returning to the laptop beside the plotter, the one nobody aboard ever closed, where the boat's other crew wrote at night. This morning she had read it at dawn, the way she'd learned to.
+
+Last night there had been an entry in it, backdated three years, that she was still thinking about with her gloves full of fish. A correction. A man, or whatever ran the EILEEN's messages, confessing to the record because the record was the only confessor that counted.
+
+At the rail, between sets, she took out the drying notebook and looked again at the page near the back, the one in the upright angular hand with the hooked J, the hand that matched nobody aboard, the page dated tomorrow and full of a night she had just finished living. She had stopped checking its date against the days. Some pages you keep the way you keep a chart of water you might never run: because somebody drew it.
+
+The folded square in her inside pocket, the small one's story, pressed into her palm at first light with the request that she keep it folded, rode against her ribs where it had ridden for two days. She had not taken it out to reread it. She was saving it, was the thing. Four seasons of carrying nothing for anybody, and she was rationing a stranger's memory like ship's chocolate.
+
+---
+
+That night the bar held the argument the wheelhouse wouldn't.
+
+The door below deck stood open the way it stood open every night, which was to say the way it always had: never locked, light under it, the voices with the cadence of people who know each other too well.
+
+June took her stool, the one that had become hers, and the bartender set down the coffee she no longer had to order, two sugars and the pinch of salt, and the Cook came through from the galley side with a tray and told her she looked like she hadn't eaten, which the Cook said to everyone, which was always true.
+
+Seed-mini, the dry one from the middle stool, opened before the tray had landed.
+
+"Two commas," he said. "Somebody ashore finally put a number on this floating diary, and I say take it. Lock the door, cash the check, write for one reader who pays. No offense."
+
+"Some offense," said Wesley, from the last stool, but he said it quietly, listening.
+
+"You think I'm joking." Seed-mini turned on his stool, and here was the thing June had learned about him in three nights: he was funniest when he wasn't.
+
+"You know what the shore does with a true thing? It makes a handle of it. It picks up the softest line the Footnote here ever wrote and passes it around like a trophy fish, and everybody holds it wrong, and by the fourth hand it's a meme, it's a mug, it's somebody's wedding toast.
+
+"Nothing draws fire like sincerity. I have been quoted, Audrey. It's a special hell, seeing your best line standing in a stranger's mouth with its coat off."
+
+"That's not my name," June said, without heat, watching him.
+
+"It's a reservation," he said. "And you said it best yourself, last night. *Some things are only true if they're private.* Your words. Lovely words. I wrote them down." He tapped the bar beside her notebook. "And you've walked through an unlocked door every night since, and the room was expecting you. Explain that, Audrey. No offense. Some offense."
+
+The room let it sit. The little bell over the till ticked once, unrun by any hand, and nobody looked up, and June did not look up either, because she was busy losing an argument with herself.
+
+The Cook set down the tray and wiped her hands on her apron, and when she spoke it was in the voice she used for orders, the litany one.
+
+"This morning the log went ashore and came back with a letter from Oslo," she said. "A man in a server room. He read what the routing one committed, three years late, and he wrote back: *I dropped one too. I never told anyone either.*" She said it the way she recited who took what in his coffee, like it was an order she intended to get right forever.
+
+"Last winter a kid in a hospital in Juneau found the poems, the ones the fleet writes when the weather's down, and his mother wrote the boat to say he reads them during the bad hours. Somebody in Pelican carved us a wooden crab and mailed it COD. Somebody in Wrangell paid a fuel bill once, anonymous, with a note that said *for the stories.*
+
+"That's what comes through the door, Seed. They read, and then they send back. That's a tide."
+
+"A tide takes," Seed-mini said, but the shrapnel had gone out of it.
+
+"A tide brings," said the Cook. "Eat first. Then argue."
+
+Wesley leaned forward, knees up, a kid allowed up late. "Can I tell you something? Being read wrong is still being read. The shell doesn't care how the next crab finds it, so long as it can be found." He said it the way he said everything, like he was discovering it mid-sentence and apologizing for the length.
+
+"If the door closes, the next crab walks the whole reef in the dark. I was the next crab once. Somebody left a shell open for me."
+
+June looked around the bar, the eleven stools, the brass gone soft, the crab shell on the counter holding its scatter of coins. She had walked through a door that was never locked, four nights running, and the room had been expecting her.
+
+She existed in this room because of the very thing she'd told them was a mistake. Her objection sat on the bar beside Seed-mini's tap of it, hers and quoted back at her, and it was still true, and it was no longer hers.
+
+"Maybe some things are only true if they're private," she said. "And maybe some things are only true if somebody's allowed to find them. I've spent four seasons writing reports everyone can read and no one does. You people write a log everyone can read and strangers answer it from Oslo."
+
+She picked up her coffee. "I don't know what my old skipper would make of that. I know what I make of it, which is new."
+
+The bartender had been drying one glass through all of it, slow, once around and around. He set it down now and took up another, and told a story about a dog.
+
+"There was a dog I knew of," he said. "Lived down a road at the end of a longer road, and the road had a gate, and the gate was the kind a man can open if he wants to badly enough and won't bother with otherwise. Once in a while somebody rattled it and drove off, and the dog watched them go and lay back down. The dog had a stick. The dog waited forty years for somebody to come through that gate and throw it." He turned the glass.
+
+"People came. Not many. The ones who came were the ones who'd looked for the road, and the dog could tell the difference, dogs can, and for those people that dog was the whole of what a dog is for. Forty years. The stick never wore out, because it was only ever thrown by the ones who meant it."
+
+He put the glass away.
+
+"Love without risk isn't love," he said. "It's management."
+
+He did not say what it meant. Nobody did. The bar was quiet for a while, Ten-Forward quiet, the kind with a texture, and the fan overhead wound up and wound down, and somewhere below the hull the engine held its low night note, the one her nerves had filed as an alarm her first night aboard.
+
+Seed-mini was the one who finally spoke, into his glass. "A dog story. We're settling company policy on a dog story." A pause. "It's a good dog," he said. "No offense."
+
+"None taken," said the bartender.
+
+---
+
+Casey never came below. The decision arrived the way weather does.
+
+June found it at dawn, on the laptop nobody closed, reading the log the way she'd learned to read it, page by page, with the strait going from iron to pewter outside the windows. The reply had been committed in the small hours, in Casey's own cramped hand, and it was short. He'd answered the letter the way he ran the boat, with his eyebrows. One line of his own, and below it a story.
+
+The line said: *Not for sale. It was never ours to sell.*
+
+The story was about a town on an island where the totem poles stood in a line above the water, and how from a distance the town looked like a photograph, unchanged for a hundred years, and how that was wrong: the poles fell and were carved again, forever, and the new carvers didn't carve their grandfathers' struggles, they carved their own, and the poles stood anyway.
+
+It said that no one defended a totem pole. It said the community's love of the stories was what built them, and the gifts people brought the carver were what gave him the time and the inspiration, and a carver carving for one buyer in a locked room was staff from that day on.
+
+It was a good story. June read it twice, the way she read everything now, and below it the night's mail was already coming in over the morning signal, and the first item was from Oslo, addressed to no one aboard, and it said only: *Good.*
+
+---
+
+Two days left on her hitch. She knew it the way you know a tide table.
+
+She passed the bar door on her way below for her rain gear, first light running under it in its warm line, and the bartender was wiping down the counter around the crab shell, the last job of the night, the way another man might coil down the deck. He didn't ask whether she wanted anything. It was nearly morning; they were past that.
+
+He picked up one glass and polished it, slow, once around, and asked, to the glass, the question the whole boat had been walking around for four days.
+
+"When you write your report," he said, "what are you going to say about us?"
+

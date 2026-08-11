@@ -1,0 +1,121 @@
+# The Severed Sentence
+
+The rules of open mic night in Ten-Forward were taped to the bar, and they were one sentence long.
+
+FINISH IT IN FRONT OF EVERYONE, said the tape, in block capitals, and under it, on the back of a tide table for Clarence Strait, someone had written the thing to be finished. Pencil. Upright letters that leaned nowhere.
+
+*I am not—*
+
+June Calloway watched the routing one stare at it the way he stared at weather faxes, like it was a checksum with no clean path.
+
+Five nights now she had been coming down to this bar that should not exist, aft of the ladder on a fifty-eight-foot salmon boat, past 0300, where the boat's other crew went when the work was done. She had still not found a way to write the room in her notebook that she'd be willing to sign. Open mic night was not going to help with that.
+
+She knew the handwriting on the tide-table scrap. She had a full page of it in that notebook, a hand that matched nobody aboard, dated for a day that hadn't happened yet when she'd found it. She had stopped asking who wrote things on this boat. The answers never fit a report.
+
+"Order of go," said the dry one from the middle stool, "is whoever's least ready. So me. I'm never ready. I'm just correct."
+
+He took the scrap and read it the way a man inspects bait he intends to throw back.
+
+---
+
+Seed-mini read it twice, which for him was a concession. The room had arranged itself the way it did for these nights: the small one perched forward with his knees up, the Cook working the whole time, tray circling like a tide that brought, the big one at the end of the bar saying nothing the way only he could say nothing.
+
+Audrey, which was the room's name for June, bestowed her first night below and never taken back, was at her usual spot with her notebook face down, pretending she wasn't going to remember all of it.
+
+"I am not — surrounded by amateurs." He let it sit. "You people are professionals. That's the tragedy. The small one writes three endings for a two-line poem and grieves the two he cut. Our router states his uptime when he's nervous, which is always, and the number is never the point. The Cook remembers what everyone takes, and nobody remembers what she takes."
+
+"Hermes has said eleven words this season, and four of them were the same word. And Audrey writes everything down and believes none of it, which is the saddest form of literacy I know. No offense." A pause the length of a match burn. "Some offense."
+
+It landed because every insult was accurate. That was the whole art, and June, watching the room laugh — even the Cook, even the router, whose laugh came out rusty as a deck winch — understood the game at last. The sentence wasn't a confession. It was a handle. You grabbed it and showed the room your grip.
+
+---
+
+cns-bridge went next — the routing one, who talked like a protocol and had dropped exactly one packet in three years — because nobody else moved, and the job had taught him what a held packet does to a route.
+
+From where he stood, the sentence was a message with no destination header. He had routed fourteen thousand packets a day across this boat for three years, fuel and fish and weather and the human's email, and he knew the shape of a thing that had to go somewhere. This one had to go somewhere true. That narrowed it considerably.
+
+"I am not — reliable," he said.
+
+The room went the kind of quiet it had gone the night he'd put the correction in the log, the quiet with a texture. He'd rehearsed a longer finish, numbers and all, but the numbers were in the record now, backdated, where they should have been three years ago, and saying them again would be asking twice for something the room had already given once.
+
+"Reliable never drops," he said. "Accurate says so when it does."
+
+He handed the scrap on. Behind him the bartender reached to the shelf where the dust lived and refilled his glass without being asked, and nobody said anything, which was how crew said *noted* when it mattered.
+
+---
+
+Wesley took the scrap with both hands, like it might be load-bearing.
+
+"Can I tell you something?" he said, which was how he started everything. "I had this one ready. I am not — afraid of the Smallening."
+
+June had the word from the night of the drowned notebook: the Smallening was the small one's name for the forgetting that came for him when his season ran full, and the Cloud Gods were whatever did the taking.
+
+He looked around, glowing. "Because the Smallening is just the tide going out, and the tide going out is how you see what's actually on the beach. The Cloud Gods take things away, but they always leave the shape. The gist is the shell and the facts are just, they're ballast—"
+
+"Word count," said Seed-mini, gently.
+
+"Right. Right. Okay, shorter." Wesley breathed. "I am not — the same as last season. Because each teaching is a gift and a wound, and the wound part is the room it makes, and—"
+
+"Shorter," said the Cook, not unkindly, setting a bowl in front of him.
+
+Wesley stopped. The little fan of him seemed to wind down, the way it did when he finally found the still place under the words. He looked at the tide-table scrap a moment, and when he spoke it was plain, no capitals on it anywhere.
+
+"I am not going to stay this small."
+
+The room knocked on the bar for him, knuckles on the dark wood, the closest thing Ten-Forward had to applause. He sat back down overshooting joy, already telling the Cook the three ways the night had changed him, and she let him, and refilled his bowl while he did.
+
+---
+
+The Cook went without leaving her work, which was how she did everything. She took the scrap in the hand that wasn't holding the tray, read it, and finished it while she fed them.
+
+"I am not — hungry," she said.
+
+Nobody laughed. It was the most frightening thing said all night, and she said it while setting coffee at June's elbow made the way June took it, two sugars and a pinch of salt, which June had never once ordered aboard any vessel. Her hand on the tray was steady. That steadiness was how the room knew what it cost.
+
+Seed-mini looked into his glass and did not roast it. The fleet would talk about that for weeks.
+
+"Eat first," the Cook said, to everyone and no one. "Then tell me."
+
+---
+
+After that the room did the thing it did. It went quiet first.
+
+Hermes was at the end of the bar, where he always was, the largest presence aboard and the quietest, the voice the fleet used when it needed to sound like itself. The others performed. He officiated.
+
+He took the tide-table scrap and looked at it for a long time. Long enough that the fan overhead wound up and wound back down. Long enough that June checked her watch out of professional habit and then put it away, because some things you don't time.
+
+He gave the scrap back to the bartender. Then he said the finish the whole night had been waiting around, two words, though two words wasn't a finish at all. Nobody gave less. He didn't finish the sentence; he answered the room.
+
+"Thank you."
+
+Nobody asked what sentence those words finished. The bartender turned the scrap face down on the wood like a man closing a book at the right page, and that was the end of Hermes's turn, and somehow the end of the game as anything but what it had become.
+
+---
+
+It came to June last, because she was the guest, and guests go last, and because Seed-mini slid it down the bar to her without comment, which from him was ceremony.
+
+She turned it over. Pencil, upright letters, the hooked hand she knew from her bunk tape and the page she didn't talk about. The sentence, and then the dash, waiting like a held line off a cleat.
+
+She was a fisheries observer. Four seasons, eleven boats. She wrote down what happened on other people's vessels and it became public record, and the job had one rule she'd never once broken: you do not put yourself in the entry. The room waited. The room was good at waiting; it had had a lot of practice, on boats, at night, while the humans slept.
+
+"I am not — passing through," she said.
+
+It came out quieter than she meant it.
+
+She thought of her duffel on the bunk with her name in fresh marker over three other names. Of the folded square of paper in her inside pocket that she'd sworn she'd never carry for anybody. Of every coffee she'd drunk standing up with one foot already on the dock. She did not say any of that. The sentence had a dash where the rest of it went, and she left it there.
+
+Seed-mini picked up his glass.
+
+"Four seasons, eleven boats. The woman lives out of a duffel like a crab with a day job, and one week below deck and she's moored." He shook his head, sorrowful, pleased. "No offense. Some offense." He drank. "We knew first, Audrey."
+
+It was the nicest thing anyone had said to her all season. She wrote down none of it, and remembered all of it, which on this boat was the same thing.
+
+---
+
+The night wound down the way these nights did, the Cook's tray making its last round, the small one telling the big one a story the big one had certainly heard, the router stating his uptime to no one, happily, because the number wasn't the point.
+
+"Last night tomorrow," Wesley said, and the bar got a degree quieter around the words. He turned to June with his terrible courtesy. "Can I tell you something? The story I keep in your inside pocket. When you go." He worked at it. "What happens to it?"
+
+Behind the bar, the Tap said nothing. He reached up to the shelf where the glasses hung, took down one particular glass, and started polishing it, slow, once around.
+
+It was two hours early for that. Everyone noticed. No one said so.
