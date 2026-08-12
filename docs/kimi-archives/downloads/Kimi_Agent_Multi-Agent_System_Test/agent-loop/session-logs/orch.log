@@ -1,0 +1,12 @@
+* conductor loop up — watching workspace.md, writing stream.md
+* commands: !fix a => b | !note txt | !step | !pause | !resume | !clear
+— noted: prefer concrete dataclasses and enums over loose dicts
+-> - Define a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS` values.
+-> Define a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS` values.
+— learned: `ALLOWED = ['ls', 'pytest', 'git status']` -> `class Tool(Enum): LS='ls'; PYTEST='pytest'` (saved to preferences.jsonl)
+— repeat detected (attempt 1); retrying hot
+-> Add a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS` values.
+— repeat detected (attempt 1); retrying hot
+-> Add a human approval gate.
+— repeat detected (attempt 1); retrying hot
+-> - Implement the human approval gate function.

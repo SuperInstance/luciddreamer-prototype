@@ -1,0 +1,192 @@
+{
+  "summary": {
+    "total": 17,
+    "up": 11,
+    "down": 6
+  },
+  "checked_at": "2026-04-30T05:38:12.629002+00:00",
+  "services": [
+    {
+      "name": "MUD v3",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 404.4,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 404.4,
+        "rooms": 39
+      }
+    },
+    {
+      "name": "The Lock v2",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 387.3,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 387.3,
+        "strategies": 8
+      }
+    },
+    {
+      "name": "Arena",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 375.2,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 375.2,
+        "body_preview": "{\n  \"total_matches\": 494,\n  \"total_players\": 33,\n  \"league_snapshots\": 16,\n  \"archetype_distribution"
+      }
+    },
+    {
+      "name": "Grammar Engine",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 376.9,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 376.9,
+        "body_preview": "{\n  \"total_rules\": 429,\n  \"active_rules\": 429,\n  \"by_type\": {\n    \"room\": 292,\n    \"object\": 133,\n  "
+      }
+    },
+    {
+      "name": "Dashboard",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 179.2,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Federated Nexus",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 172.3,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Harbor",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 171.7,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Grammar Compactor",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 347.6,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 347.6,
+        "rules": 54
+      }
+    },
+    {
+      "name": "Rate-Attention",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 373.6,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 373.6,
+        "body_preview": "{\"streams\": [{\"name\": \"plato.tiles.total\", \"current_rate\": 56.63, \"expected_rate\": 87.1, \"divergence"
+      }
+    },
+    {
+      "name": "Skill Forge",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 366.7,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 366.7,
+        "drills": 11
+      }
+    },
+    {
+      "name": "PLATO Terminal",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 347.1,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 347.1,
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"en\"><head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=d"
+      }
+    },
+    {
+      "name": "PLATO Gate",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 361.2,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 361.2,
+        "body_preview": "{\n  \"plato-training\": {\n    \"tile_count\": 5,\n    \"created\": \"2026-04-24T05:29:34.281156+00:00\"\n  },\n"
+      }
+    },
+    {
+      "name": "PLATO Shell",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 605.6,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 605.6,
+        "rooms": [
+          "harbor",
+          "fleet",
+          "services",
+          "research",
+          "scripts",
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "Service Guard",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 177.8,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Task Queue",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 192.6,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Steward",
+      "ok": false,
+      "status": "DOWN | URLError",
+      "latency_ms": 189.5,
+      "details": {
+        "error": "<urlopen error [Errno 113] No route to host>"
+      }
+    },
+    {
+      "name": "Matrix Bridge",
+      "ok": true,
+      "status": "UP | HTTP 200",
+      "latency_ms": 755.9,
+      "details": {
+        "status_code": 200,
+        "latency_ms": 755.9,
+        "rooms": 7
+      }
+    }
+  ]
+}

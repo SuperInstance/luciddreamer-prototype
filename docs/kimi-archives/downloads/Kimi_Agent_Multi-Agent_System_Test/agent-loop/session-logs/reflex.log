@@ -1,0 +1,6 @@
+* reflex engine hot — watching stream.md
+reflex completing: - Define a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS`
+reflex completing: Define a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS` v
+reflex completing: Add a `Tool` enum with `LS`, `PYTEST`, and `GIT_STATUS` valu
+reflex completing: Add a human approval gate.
+reflex completing: - Implement the human approval gate function.

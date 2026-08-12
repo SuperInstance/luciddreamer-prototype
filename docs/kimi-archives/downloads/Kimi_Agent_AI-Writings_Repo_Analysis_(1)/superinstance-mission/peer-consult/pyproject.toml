@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peer-consult"
+version = "0.1.0"
+description = "Peer consultation layer for casting-call — makes cast() a conversation."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "SuperInstance"}]
+requires-python = ">=3.10"
+dependencies = [
+    "casting-call>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+peer-consult = "peer_consult.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["peer_consult*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
