@@ -460,14 +460,14 @@ Complete listing from `gh repo list SuperInstance --limit 100`:
 | 7 | cns-echo | CNS echo agent — USCP signal echoing | public | 2026-08-11 |
 | 8 | fleet-radio | Daily podcast from Tap conversations | public | 2026-08-11 |
 | 9 | ai-writings-vectorizer | — | private | 2026-08-11 |
-| 10 | tensor-midi | Tensor-based MIDI timing for agent dialogue | public | 2026-08-11 |
+| 10 | fleet-jepa-midi | Tensor-based MIDI timing for agent dialogue | public | 2026-08-11 |
 | 11 | wesley-journal | Wesley's experiment journal | private | 2026-08-11 |
 | 12 | spatial-registry | — | public | 2026-08-11 |
 | 13 | fleet-dashboard | Multi-Agent C2 dashboard, MQTT, GitHub Pages | public | 2026-08-11 |
 | 14 | fleet-envelope | Event grammar | public | 2026-08-11 |
 | 15 | vessel-agent-system | Vessel intelligence OS for fishing vessels | public | 2026-08-11 |
 | 16 | casting-call | Model role assignments — LLM capabilities DB | public | 2026-08-11 |
-| 17 | officers-quarters | — | public | 2026-08-11 |
+| 17 | elephant | — | public | 2026-08-11 |
 | 18 | dual-band-guard | — | public | 2026-08-11 |
 | 19 | batten-spline | — | public | 2026-08-11 |
 | 20 | terrain | MUD-to-Visual bridge — rooms as scenes | public | 2026-08-11 |
@@ -506,7 +506,7 @@ Complete listing from `gh repo list SuperInstance --limit 100`:
 | 53 | screen-agent | — | public | 2026-08-11 |
 | 54 | platonic-creative-suite | — | private | 2026-08-11 |
 | 55 | collective-unconscious | — | public | 2026-08-11 |
-| 56 | hermes-perception | — | public | 2026-08-11 |
+| 56 | hermes-avatar | — | public | 2026-08-11 |
 | 57 | scummvm-arcade | — | public | 2026-08-11 |
 | 58 | scummvm-prototype | ScummVM-style agentic GUI prototype | public | 2026-08-11 |
 | 59 | the-tap | — | private | 2026-08-11 |
@@ -539,7 +539,7 @@ Complete listing from `gh repo list SuperInstance --limit 100`:
 | 86 | thought-amplifier | — | private | 2026-08-11 |
 | 87 | exocortex-core | External brain architecture for small local models | public | 2026-08-11 |
 | 88 | operational-fiction | — | public | 2026-08-11 |
-| 89 | mud-arena | Flow-state engineering arena — forward simulations | public | 2026-08-11 |
+| 89 | mud-engine | Flow-state engineering arena — forward simulations | public | 2026-08-11 |
 | 90 | logtensor | Geometric tensor transformers — missile-guidance attention | public | 2026-08-11 |
 | 91 | superinstance-ecosystem | Agent OS — four layers | public | 2026-08-11 |
 | 92 | lucineer-vector | Semantic skill search for Lucineer — Vectorize | public | 2026-08-11 |
@@ -586,7 +586,7 @@ These repos provide infrastructure that LucidDreamer.AI needs:
 | **fleet-connections** | Integration wiring between fleet repos. |
 | **AI-Writings** | Creative writing corpus — featured pieces for broadcast. |
 | **cns-bridge** | Nervous system — carries signals between agents. |
-| **tensor-midi** | Timing system for musical/agent dialogue cadence. |
+| **fleet-jepa-midi** | Timing system for musical/agent dialogue cadence. |
 | **dual-band-guard** | Content safety filtering for broadcast. |
 | **casting-call** | Model selection — which AI plays which role on the show. |
 | **hermes-cloudflare** | Hermes on Cloudflare — messaging infrastructure. |
@@ -596,7 +596,7 @@ These repos provide infrastructure that LucidDreamer.AI needs:
 | **vibe-protocol** | Communication protocol. |
 | **signal-chain** | Signal routing thesis — model vs code dial per room. |
 | **collective-unconscious** | Shared substrate — fleet-wide memory. |
-| **hermes-perception** | Perception surfaces. |
+| **hermes-avatar** | Perception surfaces. |
 | **hermes-nmi** | Neuro-Muscular Interface — reasoning to action bridge. |
 | **screen-agent** | Screen capture for visual analysis. |
 | **superinstance-design-system** | Design system for consistent UI. |
@@ -625,7 +625,7 @@ These repos are tangential to LucidDreamer.AI:
 | **engine-ensign** | ESP32 engine monitoring — hardware-specific. |
 | **ec2mud** | MUD engine on EC2 — infrastructure prototype. |
 | **mud-engine** | MUD architecture — private prototype. |
-| **mud-arena** | Flow-state engineering arena — research. |
+| **mud-engine** | Flow-state engineering arena — research. |
 | **mud2scummvm** | MUD to SCUMM bridge — UI research. |
 | **scummvm-prototype** | SCUMM GUI prototype. |
 | **scummvm-arcade** | SCUMM arcade. |
@@ -659,7 +659,7 @@ These repos are tangential to LucidDreamer.AI:
 | **wesleys-imagination** | Wesley's imagination — research. |
 | **cns-echo** | CNS echo test agent — testing. |
 | **spatial-registry** | Spatial registry — infrastructure. |
-| **officers-quarters** | Unknown — likely fleet management. |
+| **elephant** | Unknown — likely fleet management. |
 | **batten-spline** | Unknown — likely math/structure. |
 | **fabric-mcp** | Unknown. |
 | **the-living-minds** | Private — likely agent personality. |

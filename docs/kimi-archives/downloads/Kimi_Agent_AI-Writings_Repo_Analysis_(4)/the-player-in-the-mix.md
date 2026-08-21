@@ -40,7 +40,7 @@ The mission found relationship #3 (post-molt creative spike) untestable: nothing
 RED (<0.75) strictly contains the creative band [0.4, 0.6]. The paste's escalation policy treats sub-0.7 as failure; the stack's math says that's where the interesting answers live. So: **progressive disclosure is surfing the creative band.** Answer the confident part fast (Allegro), let uncertainty widen the band (the REVISE verdict doing productive divergence), and only escalate to the kingpin when Δ goes CHAOTIC (>0.80) — not merely when confidence dips. The safety gate is a backstop, not a reflex. "Stop the boat" is for chaos, not for jazz.
 
 **4. The conversation gets a plotter.**
-tensor-midi already renders conversation as a vessel's track with a chart overlay. A Telegram session is a visitor stepping onto the boat: each message an event on the BeatClock, the thread plotted as a course at 60°N 149°W, ECN firing reflex replies, DMN firing the creative follow-ups, both resolving on beat 1. The conductor's dashboard *exists* — it's the mixer board. The guest becomes a new instrument joining the band mid-set.
+fleet-jepa-midi already renders conversation as a vessel's track with a chart overlay. A Telegram session is a visitor stepping onto the boat: each message an event on the BeatClock, the thread plotted as a course at 60°N 149°W, ECN firing reflex replies, DMN firing the creative follow-ups, both resolving on beat 1. The conductor's dashboard *exists* — it's the mixer board. The guest becomes a new instrument joining the band mid-set.
 
 **5. The recruiter heuristic, cast properly.**
 Not a new policy function — just the existing role table:
@@ -65,7 +65,7 @@ Telegram message
         ESCALATE → safety gate / kingpin           (CHAOTIC Δ only)
   → session events as SWMIDI-8                     [slackwater spec]
   → session gist committed as batten + corpus note [batten-spline, corpus-compass]
-  → the whole set visible live on the mixer        [tensor-midi]
+  → the whole set visible live on the mixer        [fleet-jepa-midi]
 ```
 
 Latency target is a tempo choice, not an infrastructure project: the fast micro-agent is the Allegro instrument, the kingpin is the Largo one. The paste's "answer the simplest part first" is already encoded in BPM.
@@ -75,7 +75,7 @@ Latency target is a tempo choice, not an infrastructure project: the fast micro-
 1. `session-room/` package: Telegram webhook → tiles → consult → reply, reusing peer-consult + casting-call as-is. Mock Telegram in tests. ~The size of peer-consult.
 2. `GuestAtlas`: `guest_atlas.json` of battens, one record per thread_id; `cast_guest()` reusing batten-spline's kernel regression with zero changes to it.
 3. Shed-event logging at session close (the instrumentation spec from arena-proofs' PROOF-REPORT.md) — cheapest possible version: append one JSON line per molt.
-4. Only then the mixer view: pipe the session SWMIDI stream into tensor-midi's capture.js and watch a guest conversation resolve on beat 1.
+4. Only then the mixer view: pipe the session SWMIDI stream into fleet-jepa-midi's capture.js and watch a guest conversation resolve on beat 1.
 
 ## The bar version
 

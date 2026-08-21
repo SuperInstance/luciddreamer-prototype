@@ -4,7 +4,7 @@
 Deep research across the SuperInstance org; find missed connections; build working prototypes with tests targeting: (1) peer-consultation layer for casting-call, (2) corpus retrieval/indexing for AI-Writings, (3) novel math proofs from study-zeroclaw-arena experiment data. Hardware targets: 24 cores, 8 Ollama models, DeepInfra/DeepSeek APIs.
 
 ## Stage 0 — Acquire (Orchestrator, direct)
-- Clone: SuperInstance (org root), zeroclaw, confidence-cascade, batten-spline, study-zeroclaw-arena. Already local: casting-call, tensor-midi, slackwater-rust, AI-Writings (716-file sample + full tree list).
+- Clone: SuperInstance (org root), zeroclaw, confidence-cascade, batten-spline, study-zeroclaw-arena. Already local: casting-call, fleet-jepa-midi, slackwater-rust, AI-Writings (716-file sample + full tree list).
 - Load skill: vibecoding-general-swarm (coding orchestration).
 
 ## Stage 1 — Research swarm (explore agents, parallel)

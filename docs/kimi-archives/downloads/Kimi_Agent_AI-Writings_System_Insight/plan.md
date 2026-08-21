@@ -1,14 +1,14 @@
 # Plan: Digest the ai-writings / SuperInstance repo constellation
 
 ## Goal
-Digest the user's `ai-writings` repo plus related SuperInstance repos (casting-call, the-tap, tensor-midi, and siblings), then produce a higher-abstraction synthesis: what the system is *shaping into* when you step back — especially in the context of the user's boat-as-a-robot build (sounder, nav charts, autopilot, underwater cameras, radar) and their model-picker/cascade that behaves like a team asking "what would you do if you were me."
+Digest the user's `ai-writings` repo plus related SuperInstance repos (casting-call, the-tap, fleet-jepa-midi, and siblings), then produce a higher-abstraction synthesis: what the system is *shaping into* when you step back — especially in the context of the user's boat-as-a-robot build (sounder, nav charts, autopilot, underwater cameras, radar) and their model-picker/cascade that behaves like a team asking "what would you do if you were me."
 
 ## Stage 0 — Acquire the source material
 - git clone (shallow) the repos into /mnt/agents/repos/:
   - superinstance/ai-writings (locate exact URL; try SuperInstance org)
   - superinstance/casting-call
   - SuperInstance/the-tap
-  - SuperInstance/tensor-midi
+  - SuperInstance/fleet-jepa-midi
   - Enumerate the SuperInstance org for other related repos and clone the relevant ones.
 - Fallback: fetch via GitHub web/API if clone fails.
 

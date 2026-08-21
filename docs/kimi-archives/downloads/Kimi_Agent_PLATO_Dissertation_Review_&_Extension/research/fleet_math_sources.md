@@ -249,7 +249,7 @@ assign infer_clk_en = infer_clk_en_req & ~violation_latched;
 
 ## 2. FM'S CONSTRAINT THEORY PAPER
 
-**Source:** `https://github.com/SuperInstance/forgemaster/blob/main/papers/constraint-theory-paper.md`  
+**Source:** `https://github.com/SuperInstance/forgemaster/blob/main/papers/constraint-theory-paper.md (dead)`  
 **Title:** "Constraint Theory: Trading Continuous Precision for Discrete Exactness in AI Knowledge Substrates"  
 **Authors:** Casey Digennaro¹, Forgemaster²  
 **Length:** 248 lines (151 loc) · 11.4 KB
@@ -1131,7 +1131,7 @@ pub struct WireMetrics {
 All sources analyzed:
 
 1. `https://github.com/SuperInstance/flux-papers/blob/main/papers/emsoft-flux-final.md`
-2. `https://github.com/SuperInstance/forgemaster/blob/main/papers/constraint-theory-paper.md`
+2. `https://github.com/SuperInstance/forgemaster/blob/main/papers/constraint-theory-paper.md (dead)`
 3. `https://github.com/SuperInstance/holonomy-consensus/blob/main/src/consensus.rs`
 4. `https://github.com/SuperInstance/holonomy-consensus/blob/main/src/cohomology.rs`
 5. `https://github.com/SuperInstance/holonomy-consensus/blob/main/src/encoding.rs`

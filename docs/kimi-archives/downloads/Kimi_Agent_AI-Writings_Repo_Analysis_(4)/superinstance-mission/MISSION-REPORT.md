@@ -6,7 +6,7 @@
 
 ## 1. What was analyzed
 
-Full clones: **SuperInstance** (org root, 33M), **zeroclaw** (39M), **zeroclaw-arena** (3.4M — `study-zeroclaw-arena` 404s; the arena data lives here), **confidence-cascade**, **batten-spline**, **casting-call**, **tensor-midi**, **slackwater-rust**, and a 716-file deep sample of **AI-Writings** (6,854 files on main).
+Full clones: **SuperInstance** (org root, 33M), **zeroclaw** (39M), **zeroclaw-arena** (3.4M — `study-zeroclaw-arena` 404s; the arena data lives here), **confidence-cascade**, **batten-spline**, **casting-call**, **fleet-jepa-midi**, **slackwater-rust**, and a 716-file deep sample of **AI-Writings** (6,854 files on main).
 
 ## 2. The five math relationships vs. the data (recomputed, not asserted)
 
@@ -69,7 +69,7 @@ cd arena-proofs && python -m arena_proofs.report  # regenerates PROOF-REPORT.md
 
 ## 7. Recommended next missions (in order)
 
-1. **P4 — NMEA→SWMIDI bridge**: sounder/radar/autopilot sentences as 8-byte events on the shared BeatClock (pitch = event type, error_mask = sensor health); tensor-midi's chart overlay then renders the boat's *actual* awareness. Parts exist (`nmea-bridge`, `vessel-agent`); unify them on the slackwater wire spec.
+1. **P4 — NMEA→SWMIDI bridge**: sounder/radar/autopilot sentences as 8-byte events on the shared BeatClock (pitch = event type, error_mask = sensor health); fleet-jepa-midi's chart overlay then renders the boat's *actual* awareness. Parts exist (`nmea-bridge`, `vessel-agent`); unify them on the slackwater wire spec.
 2. **Post-molt instrumentation**: implement the shed-event logging spec in zeroclaw-arena's `TileField`, run 50 cycles, test relationship #3 for the first time.
 3. **Consultation memory**: feed peer-consult's verdict outcomes into batten-spline's `report_outcome` so the atlas learns where it's wrong (fog-triggered second opinions).
 4. **Fishing-outcome correlation**: flow/friction metrics (from `fleet-metrics` + SWMIDI error masks) vs catch-per-set — the dataset only you can collect.

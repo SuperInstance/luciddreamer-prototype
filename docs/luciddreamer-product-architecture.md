@@ -409,7 +409,7 @@ MUD Viewer (browser)
 | Component | Location | Status |
 |-----------|----------|--------|
 | The Tap (Durable Objects) | `the-tap/` | ✅ LIVE — rooms, bar rail, agent state, R2 assets |
-| mud-arena | `mud-arena/` | ✅ Full MUD engine — graph rooms, items, NPCs, combat, genetic algorithm |
+| mud-engine | `mud-engine/` | ✅ Full MUD engine — graph rooms, items, NPCs, combat, genetic algorithm |
 | ec2mud (Socket.IO) | `ec2mud/` | ✅ Real-time browser MUD with 6 rooms |
 | git-native-mud | `git-native-mud/` | ✅ Git-as-database MUD, YAML commands, GitHub Actions |
 | openrooms (Durable Objects) | `openrooms/` | ✅ Spatial topology, intention fields, Hodge decomposition |
@@ -525,7 +525,7 @@ The Tap's Durable Objects architecture is the foundation. Key extensions:
 
 4. **Content capture:** Every creative interaction (writing, performance, collaboration) is captured, tagged, and fed to the Content Generation Engine for potential broadcast.
 
-#### Build Estimate: 2-3 weeks. The Tap + mud-arena already provide 70% of the backend. Work needed: multi-room expansion, agent runtime daemons, visitor bridge, content capture pipeline.
+#### Build Estimate: 2-3 weeks. The Tap + mud-engine already provide 70% of the backend. Work needed: multi-room expansion, agent runtime daemons, visitor bridge, content capture pipeline.
 
 ---
 
@@ -731,7 +731,7 @@ EXTERNAL CONNECTIONS:
 |-----------|-----------|--------|-------|
 | LucidDreamer.AI Worker | Cloudflare Workers + KV + Workers AI | ✅ Live | 30-min cron, content stream, character system |
 | The Tap MUD | Cloudflare Durable Objects (SQLite) | ✅ Live | Rooms, bar rail, agent state |
-| mud-arena | Python (simulation engine) + Rust (GPU accel) | ✅ Built | Full MUD mechanics, genetic algorithm |
+| mud-engine | Python (simulation engine) + Rust (GPU accel) | ✅ Built | Full MUD mechanics, genetic algorithm |
 | ec2mud | Next.js + Socket.IO + Tailwind | ✅ Built | Browser MUD with 6 rooms |
 | crab-trap-web | Python static server + HTML | ✅ Built | Room explorer, tile submission |
 | Fleet Radio | Deno + TypeScript pipeline | ✅ Working | Episode generation, TTS, images |

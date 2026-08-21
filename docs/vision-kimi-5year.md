@@ -308,7 +308,7 @@ The coastal passage is about **structure**: turning a stream into a schedule, a 
 
 4. THE FLEET ORCHESTRA       Broadcasts as coordinated multi-agent productions: 8 agents
                              contributing script, voice, music, visuals, SFX, interaction
-                             in real time, timed by tensor-midi, gated by confidence-
+                             in real time, timed by fleet-jepa-midi, gated by confidence-
                              cascade. A show stops being a file and becomes a performance.
 
 5. CO-CREATION TOOLS         Humans design rooms, character arcs, and storylines inside

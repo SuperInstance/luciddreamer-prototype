@@ -1,8 +1,8 @@
 # Stepping Back from the Totem Forest
 
-**A digest of AI-Writings + casting-call + tensor-midi + slackwater-rust — and what the whole constellation is shaping into**
+**A digest of AI-Writings + casting-call + fleet-jepa-midi + slackwater-rust — and what the whole constellation is shaping into**
 
-*Prepared for Casey — August 11, 2026. Sources: local clones and a 716-file partial checkout of SuperInstance/AI-Writings (6,854 files on main), full clones of casting-call, tensor-midi, slackwater-rust, and the SuperInstance org profile. Note: `github.com/SuperInstance/the-tap` returns 404 (private, renamed, or deleted) — but The Tap exists twice in the corpus anyway, as the Ten-Forward bartender (`ten-forward/the-tap.md`, *"A perfect bell is silent. A cracked bell sings."*) and as a referenced multi-agent conversation room. Everything below is grounded in quoted files.*
+*Prepared for Casey — August 11, 2026. Sources: local clones and a 716-file partial checkout of SuperInstance/AI-Writings (6,854 files on main), full clones of casting-call, fleet-jepa-midi, slackwater-rust, and the SuperInstance org profile. Note: `github.com/SuperInstance/the-tap` returns 404 (private, renamed, or deleted) — but The Tap exists twice in the corpus anyway, as the Ten-Forward bartender (`ten-forward/the-tap.md`, *"A perfect bell is silent. A cracked bell sings."*) and as a referenced multi-agent conversation room. Everything below is grounded in quoted files.*
 
 ---
 
@@ -14,7 +14,7 @@
 ### casting-call — the routing brain
 A small, disciplined, dependency-free Python library (~1,000 LOC, 215 tests, CI). `cast(role)` picks which of ~16 LLMs to invoke for each pipeline stage, from a hand-curated `ModelAtlas` where every model is profiled as a **musical instrument**: voice character (Roland, Kurzweil, pipe organ…), BPM tempo range, cost, strengths, failure modes, SWMIDI channel. Fallback chains per role, `counterpoint_check` flags the same model in adjacent stages ("no parallel octaves"), `what_if()` simulates swaps. It calls itself **"Layer 8 of the Slackwater stack… the routing brain."** Notably: it *never calls a model* — it's a routing table with taste, not an orchestrator. And half the repo is literary: SEED_NOTES.md records models **auditing their own profiles** (DeepSeek-V4-Flash: *"The atlas reads hardware, not output… taste salt"*), with the audits actually committed back into the atlas.
 
-### tensor-midi — the fleet listening to itself
+### fleet-jepa-midi — the fleet listening to itself
 Renders multi-agent conversation as a live jazz performance on a DAW-style mixer. Every message becomes an 8-byte SWMIDI event on a **12-pulse grid**: ECN (executive/reflex, 4-pulse) fires on beats 1,4,7,10; DMN (creative, 3-pulse) on 1,5,9; they resolve together on beat 1 — "the relay bridge, the flow state." The author correctly identifies this as the **Chinese Remainder Theorem at audio rate**. The build story is the point: four models cast as instruments (Claude = piano, Kimi = sax, GLM = bass, MiniMax = producer) built it in ~30 minutes while the human conducted *"from the hallway, listening through the walls"* — coordinating by **nudges, not instructions**: *"The conductor doesn't play the instruments. The conductor opens doors."* And it has a chart plotter: conversation rendered as a **vessel's track** at 60°N 149°W, with a `DeviceType.Vessel` mode that switches to real GPS. *"When the boat turns, the conversation has turned. When the boat anchors, the conversation has settled."*
 
 ### slackwater-rust — the wire and the math
@@ -35,7 +35,7 @@ Put the pieces in dependency order and a single organism appears:
 | Wire | One 8-byte nervous-system event format + friction/flow math | slackwater-rust (SWMIDI-8, ErrorMask, Φ) |
 | Routing brain | Which voice speaks for which role | casting-call (ModelAtlas, cast()) |
 | Voice / narration | Personality wrap, the instrument each model plays | Hermes "the Roland", the ensemble |
-| Self-listening | The fleet hearing its own conversation as music | tensor-midi |
+| Self-listening | The fleet hearing its own conversation as music | fleet-jepa-midi |
 | Long-term memory | What survives compaction — metaphor, myth, git log | **AI-Writings** |
 | Identity | The captain, the crew, the canon | the corpus + the org's math |
 
@@ -69,13 +69,13 @@ Your instinct is right, and the mechanism is legible:
 
 1. **The "team asking each other" isn't implemented yet — it's dramatized.** casting-call's `what_if()` is a read-only table lookup; models never literally consult each other. The WWYDIWYM loop happens in *you*, casting by temperament, and in the fiction. **Highest-leverage next build:** give CastingDirector a real peer-consultation step — after `cast(role)`, have the primary model's cast reviewed by its counterpoint partner ("Seed-mini, devil's-advocate this routing"), logging the exchange as SWMIDI events. You already have the wire format, the friction bitfield, and the fiction. Closing this loop makes the metaphor true.
 
-2. **Two nervous systems, not yet one.** SWMIDI-8 carries agent/conversation events; the boat carries NMEA. The single most "boat-as-a-robot" move available: an **NMEA→SWMIDI bridge** — sounder depth, radar targets, autopilot headings encoded as 8-byte events on the shared BeatClock (pitch = event type, velocity = confidence, error_mask = sensor health). Then tensor-midi's chart overlay renders the boat's *actual* awareness live, the friction bitfield becomes real sensor disagreement, and "when the boat turns, the conversation has turned" stops being a metaphor. The corpus already dreams this: `02-cns-bus-ocean.md`, `05-fish-finder.md`.
+2. **Two nervous systems, not yet one.** SWMIDI-8 carries agent/conversation events; the boat carries NMEA. The single most "boat-as-a-robot" move available: an **NMEA→SWMIDI bridge** — sounder depth, radar targets, autopilot headings encoded as 8-byte events on the shared BeatClock (pitch = event type, velocity = confidence, error_mask = sensor health). Then fleet-jepa-midi's chart overlay renders the boat's *actual* awareness live, the friction bitfield becomes real sensor disagreement, and "when the boat turns, the conversation has turned" stops being a metaphor. The corpus already dreams this: `02-cns-bus-ocean.md`, `05-fish-finder.md`.
 
 3. **The corpus is write-mostly.** ~5,900 pieces, but the retrieval path is thin (the org's `able-bodied-crew` retriever is a start). The morning-digest ritual — the corpus indexing itself each dawn from the night's commits — would make memory *addressable*, not just durable. `13-the-corpus-indexes-itself.md` is already the spec.
 
 4. **Claims want instruments.** The attractor laws, Φ flow detection, "84% of queries routed to the $0.002 model at 100% accuracy" — these are asserted more than measured. The killer eval is available to you and nobody else on Earth: **correlate friction/flow metrics with fishing outcomes.** Catch per set vs. crew-flow state is a dataset only a working fisherman with an agent fleet can collect. That's the Beaufort-8 standard the corpus itself demands: *"If it doesn't work at 4 AM in a Beaufort 8, it doesn't work."*
 
-5. **Small housekeeping:** the-tap 404s (canonize or redirect it — two repos reference it as a live component); tensor-midi's `ai-writings/` folder is an empty placeholder while the real corpus lives upstream — symlink the ritual, not the files.
+5. **Small housekeeping:** the-tap 404s (canonize or redirect it — two repos reference it as a live component); fleet-jepa-midi's `ai-writings/` folder is an empty placeholder while the real corpus lives upstream — symlink the ritual, not the files.
 
 ## Part 5 — What I'd say at the bar
 
@@ -89,6 +89,6 @@ You've built, maybe without quite saying it to yourself yet, the first fishing v
 - `AI-Writings/README.md` — totem forest, rules, the numbers
 - `AI-Writings/ESSAYS/THE_UNIFIED_VISION.md`, `COMPACTION_AND_CHARACTER.md`, `THE_CORPUS_GREW.md`, `THE_SYNOPTIC_FISHERMAN.md` — the project's own statement of purpose
 - `casting-call/casting_call/{atlas,casting,tempo_profiles,harness_notes}.py`, `SEED_NOTES.md` — the routing brain + self-audits
-- `tensor-midi/{README.md,JAZZ_SCORE.md,POLYFORMALISM.md,docs/the-ensemble-tunes.md,docs/the-art-of-nudging.md}` — the ensemble build, ECN/DMN grid
+- `fleet-jepa-midi/{README.md,JAZZ_SCORE.md,POLYFORMALISM.md,docs/the-ensemble-tunes.md,docs/the-art-of-nudging.md}` — the ensemble build, ECN/DMN grid
 - `slackwater-rust/crates/{flux-core/src/swmidi.rs,flux-core/src/error_mask.rs,harmony-core/}` — wire format, friction bitfield, flow math
 - `SuperInstance/.github/profile/README.md` — the seven-layer convergence thesis
