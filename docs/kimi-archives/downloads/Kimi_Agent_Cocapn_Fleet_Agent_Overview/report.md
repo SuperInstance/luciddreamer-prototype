@@ -3,7 +3,7 @@
 ## Status: done
 
 ### What I Did
-1. **Baseline sweep**: Curled all 18 fleet service endpoints on `147.224.38.131`.
+1. **Baseline sweep**: Curled all 18 fleet service endpoints on `<BOAT_IP>`.
 2. **LIVE validation**: Confirmed 11 services responding with HTTP 200 and valid payloads.
 3. **DOWN diagnosis**: Curled the 6 reported DOWN services on both `/status` and root paths. All return `curl: (7) Failed to connect` — TCP connection refused with fast failure (~180 ms), indicating the host is reachable but no process is bound to those ports.
 4. **Health-checker code review**: Read `cocapn-health` source via raw GitHub (git clone blocked by sandbox network). Found endpoint mismatches and missing services in `FLEET_SERVICES`.
@@ -81,7 +81,7 @@ These happen to be four of the six currently DOWN services. If they had been in 
    ```
 
 ### Next Step
-1. **SSH into 147.224.38.131** (or open a host shell via whatever orchestration tool manages the fleet) and run the diagnostic command above to find why the six processes died.
+1. **SSH into <BOAT_IP>** (or open a host shell via whatever orchestration tool manages the fleet) and run the diagnostic command above to find why the six processes died.
 2. **Apply the `cocapn-health-fix.patch`** to the health checker so it accurately reflects the full fleet and does not mask 404s as healthy.
 3. **Investigate the Grammar Compactor rule-sync gap** — likely the compactor reads from a different data file or cache than the engine; verify they point to the same rule DB.
 4. **Restart the six DOWN services** once logs reveal the crash reason (OOM is the most likely candidate given the high agent count and tile volume).

@@ -259,14 +259,14 @@ Probes 8 services every 5 minutes. Alerts ONLY on state changes (up→down or do
 
 ```python
 SERVICES = [
-    ("MUD",          "147.224.38.131", 4042, "/status"),
-    ("Arena",        "147.224.38.131", 4044, "/status"),
-    ("Grammar",      "147.224.38.131", 4045, "/status"),
-    ("PLATO Gate",   "147.224.38.131", 8847, "/status"),
-    ("PLATO Shell",  "147.224.38.131", 8848, "/"),
-    ("Rate-Attention","147.224.38.131", 4056, "/status"),
-    ("Skill Forge",  "147.224.38.131", 4057, "/status"),
-    ("Matrix Bridge","147.224.38.131", 6168, "/status"),
+    ("MUD",          "<BOAT_IP>", 4042, "/status"),
+    ("Arena",        "<BOAT_IP>", 4044, "/status"),
+    ("Grammar",      "<BOAT_IP>", 4045, "/status"),
+    ("PLATO Gate",   "<BOAT_IP>", 8847, "/status"),
+    ("PLATO Shell",  "<BOAT_IP>", 8848, "/"),
+    ("Rate-Attention","<BOAT_IP>", 4056, "/status"),
+    ("Skill Forge",  "<BOAT_IP>", 4057, "/status"),
+    ("Matrix Bridge","<BOAT_IP>", 6168, "/status"),
 ]
 ```
 

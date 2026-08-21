@@ -381,7 +381,7 @@
       ], 40);
       await sleep(600);
       await typeOut([
-        C.dimG('  Connecting to 147.224.38.131:4042...'),
+        C.dimG('  Connecting to <BOAT_IP>:4042...'),
       ], 30);
       await sleep(800);
       term.writeln(C.green('  ✓ Connected.') + C.dim(' Session ID: ') + C.cyan(Math.random().toString(36).substring(2, 10)));

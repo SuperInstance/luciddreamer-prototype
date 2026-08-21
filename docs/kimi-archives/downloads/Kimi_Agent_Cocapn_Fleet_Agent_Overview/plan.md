@@ -6,7 +6,7 @@ Run a full health audit of the Cocapn fleet, identify why 6 services are DOWN, a
 ## Stage 1 — Discovery & Baseline
 - Clone `cocapn-health` repository
 - Read README and understand how the health checker works
-- Run `python -m cocapn_health --host 147.224.38.131 --ports all` to get baseline
+- Run `python -m cocapn_health --host <BOAT_IP> --ports all` to get baseline
 
 ## Stage 2 — LIVE Service Validation
 - Manually curl each of the 6 LIVE endpoints to confirm they respond
